@@ -37,13 +37,16 @@ public class Article {
 		super();
 	}
 
-	public Article(int id, String title, String content, String image, LocalDateTime createDate) {
+	public Article(int id, String title, String content, String image, LocalDateTime createDate, Profile author,
+			List<Comment> comments) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.content = content;
 		this.image = image;
 		this.createDate = createDate;
+		this.author = author;
+		this.comments = comments;
 	}
 
 	public int getId() {
@@ -86,6 +89,22 @@ public class Article {
 		this.createDate = createDate;
 	}
 
+	public Profile getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(Profile author) {
+		this.author = author;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -111,12 +130,20 @@ public class Article {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Article [id=").append(id).append(", title=").append(title).append(", content=").append(content)
-				.append(", image=").append(image).append(", createDate=").append(createDate).append("]");
+		builder.append("Article [id=");
+		builder.append(id);
+		builder.append(", title=");
+		builder.append(title);
+		builder.append(", content=");
+		builder.append(content);
+		builder.append(", image=");
+		builder.append(image);
+		builder.append(", createDate=");
+		builder.append(createDate);
+		builder.append(", author=");
+		builder.append(author);
+		builder.append("]");
 		return builder.toString();
 	}
-	
-	
-
 	
 }
