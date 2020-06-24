@@ -1,10 +1,13 @@
 package com.skilldistillery.esn.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Profile {
@@ -19,6 +22,10 @@ public class Profile {
 	private String email;
 	@Column(name="avatar_url")
 	private String avatar;
+	@OneToMany(mappedBy = "author")
+	private List<Article> articles;
+	@OneToMany(mappedBy = "profile")
+	private List<Comment> comments;
 	
 	public Profile() {
 		
