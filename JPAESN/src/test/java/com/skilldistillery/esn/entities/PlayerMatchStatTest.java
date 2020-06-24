@@ -30,7 +30,7 @@ class PlayerMatchStatTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		pms = em.find(PlayerMatchStat.class, 1);
+		pms = em.find(PlayerMatchStat.class, 3);
 	}
 
 	@AfterEach
@@ -42,7 +42,9 @@ class PlayerMatchStatTest {
 	@Test
 	void test() {
 		assertNotNull(pms);
-		assertEquals(5, pms.getValue());
+		assertEquals(4, pms.getValue());
+		assertEquals("Jo", pms.getPlayer().getFirstName());
+		assertEquals("Match 1", pms.getMatch().getTitle());
 	}
 
 }

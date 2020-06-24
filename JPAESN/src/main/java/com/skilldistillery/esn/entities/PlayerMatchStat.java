@@ -5,11 +5,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "player_match_stats")
+@Table(name = "player_match_stat")
 public class PlayerMatchStat {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +19,12 @@ public class PlayerMatchStat {
 	@ManyToOne
 	@JoinColumn(name = "game_stat_id")
 	private GameStat stat;
+	@ManyToOne
+	@JoinColumn(name="player_match_player_id")
+	private Player player;
+	@ManyToOne
+	@JoinColumn(name="player_match_series_match_id")
+	private SeriesMatch match;
 	
 	public PlayerMatchStat() {}
 
@@ -41,6 +48,30 @@ public class PlayerMatchStat {
 
 	public void setValue(double value) {
 		this.value = value;
+	}
+
+	public GameStat getStat() {
+		return stat;
+	}
+
+	public void setStat(GameStat stat) {
+		this.stat = stat;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+	public SeriesMatch getMatch() {
+		return match;
+	}
+
+	public void setMatch(SeriesMatch match) {
+		this.match = match;
 	}
 
 	@Override
