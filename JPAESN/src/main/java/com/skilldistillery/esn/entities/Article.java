@@ -1,10 +1,14 @@
 package com.skilldistillery.esn.entities;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class Article {
@@ -16,14 +20,15 @@ public class Article {
 	private String content;
 	@Column(name="img_url")
 	private String image;
+	@CreationTimestamp
 	@Column(name="create_date")
-	private String createDate;
+	private LocalDateTime createDate;
 	
 	public Article() {
 		super();
 	}
 
-	public Article(int id, String title, String content, String image, String createDate) {
+	public Article(int id, String title, String content, String image, LocalDateTime createDate) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -64,11 +69,11 @@ public class Article {
 		this.image = image;
 	}
 
-	public String getCreateDate() {
+	public LocalDateTime getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(String createDate) {
+	public void setCreateDate(LocalDateTime createDate) {
 		this.createDate = createDate;
 	}
 
