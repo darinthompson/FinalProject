@@ -45,5 +45,11 @@ class PlayerTest {
 		assertEquals("Robert", player.getFirstName());
 		assertEquals("Huang", player.getLastName());
 	}
+	
+	@Test
+	void teamsTest() {
+		assertNotNull(player.getTeams());
+		assertTrue(player.getTeams().size() > 0);
+	}
 
 }

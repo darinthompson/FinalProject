@@ -10,6 +10,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class TeamTest {
@@ -43,8 +44,13 @@ class TeamTest {
 	@Test
 	void test() {
 		assertNotNull(team);
-		assertEquals("https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/8/88/Cloud9logo_square.png/1200px-Cloud9logo_square.png", team.getImage());
-		
-		
+		assertEquals("https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/8/88/Cloud9logo_square.png/1200px-Cloud9logo_square.png", team.getImage());	
+	}
+	
+	@Test
+	@DisplayName("Testing list of player for team")
+	void playersTest() {
+		assertNotNull(team.getPlayers());
+		assertTrue(team.getPlayers().size() > 0);
 	}
 }
