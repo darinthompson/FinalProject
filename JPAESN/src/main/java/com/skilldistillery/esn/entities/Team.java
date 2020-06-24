@@ -1,11 +1,14 @@
 package com.skilldistillery.esn.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -19,6 +22,33 @@ public class Team {
 	@ManyToOne
 	@JoinColumn(name = "game_id")
 	private Game game;
+	
+	public Game getGame() {
+		return game;
+	}
+
+	public Team(int id, String image, Game game, List<Player> players) {
+		super();
+		this.id = id;
+		this.image = image;
+		this.game = game;
+		this.players = players;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
+	public List<Player> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(List<Player> players) {
+		this.players = players;
+	}
+
+	@ManyToMany(mappedBy="teams")
+	private List<Player> players;
 
 	public Team() {
 		super();
@@ -50,7 +80,10 @@ public class Team {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((game == null) ? 0 : game.hashCode());
 		result = prime * result + id;
+		result = prime * result + ((image == null) ? 0 : image.hashCode());
+		result = prime * result + ((players == null) ? 0 : players.hashCode());
 		return result;
 	}
 
@@ -63,7 +96,22 @@ public class Team {
 		if (getClass() != obj.getClass())
 			return false;
 		Team other = (Team) obj;
+		if (game == null) {
+			if (other.game != null)
+				return false;
+		} else if (!game.equals(other.game))
+			return false;
 		if (id != other.id)
+			return false;
+		if (image == null) {
+			if (other.image != null)
+				return false;
+		} else if (!image.equals(other.image))
+			return false;
+		if (players == null) {
+			if (other.players != null)
+				return false;
+		} else if (!players.equals(other.players))
 			return false;
 		return true;
 	}
@@ -71,7 +119,15 @@ public class Team {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Team [id=").append(id).append(", image=").append(image).append("]");
+		builder.append("Team [id=");
+		builder.append(id);
+		builder.append(", image=");
+		builder.append(image);
+		builder.append(", game=");
+		builder.append(game);
+		builder.append(", players=");
+		builder.append(players);
+		builder.append("]");
 		return builder.toString();
 	}
 
