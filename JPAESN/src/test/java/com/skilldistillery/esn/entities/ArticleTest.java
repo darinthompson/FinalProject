@@ -45,8 +45,6 @@ class ArticleTest {
 		assertEquals("test", article.getTitle());
 		assertEquals("test article", article.getContent());
 		assertEquals("https://specials-images.forbesimg.com/imageserve/5e0f8f19db7a9600065d7cec/960x0.jpg?fit=scale", article.getImage());
-		
-		
 	}
 
 }
