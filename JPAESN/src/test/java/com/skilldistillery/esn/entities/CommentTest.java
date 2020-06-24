@@ -40,7 +40,8 @@ class CommentTest {
 
 	@Test
 	void test() {
-		fail("Not yet implemented");
+		assertNotNull(comment);
+		assertEquals("awesome", comment.getContent());
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.skilldistillery.esn.entities;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import javax.persistence.EntityManager;
@@ -19,8 +21,7 @@ class RegionTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		emf = Persistence.createEntityManagerFactory("EsportsPU");
-	}
+		emf = Persistence.createEntityManagerFactory("EsportsPU");	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
@@ -36,11 +37,13 @@ class RegionTest {
 	@AfterEach
 	void tearDown() throws Exception {
 		region = null;
+		em.close();
 	}
 
 	@Test
 	void test() {
-		fail("Not yet implemented");
+		assertNotNull(region);
+		assertEquals("North America", region.getName());
 	}
 
 }
