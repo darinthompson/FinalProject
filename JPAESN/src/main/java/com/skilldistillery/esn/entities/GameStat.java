@@ -23,8 +23,6 @@ public class GameStat {
 	@ManyToOne
 	@JoinColumn(name="game_id")
 	private Game game;
-	@OneToMany(mappedBy = "stat")
-	private PlayerMatchStat statValue;
 	
 	public GameStat() {
 		
