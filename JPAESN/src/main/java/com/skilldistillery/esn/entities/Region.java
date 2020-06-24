@@ -1,9 +1,12 @@
 package com.skilldistillery.esn.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Region {
@@ -12,8 +15,16 @@ public class Region {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;	
 	private String name;
-
 	
+	@OneToMany(mappedBy = "region")
+	private List<Organization> organizations;
+	
+	public List<Organization> getOrganizations() {
+		return organizations;
+	}
+	public void setOrganizations(List<Organization> organizations) {
+		this.organizations = organizations;
+	}
 	public Region() {}
 	public Region(int id, String name) {
 		super();
@@ -44,6 +55,8 @@ public class Region {
 		builder.append(id);
 		builder.append(", name=");
 		builder.append(name);
+		builder.append(", organizations=");
+		builder.append(organizations);
 		builder.append("]");
 		return builder.toString();
 	}
@@ -54,6 +67,7 @@ public class Region {
 		int result = 1;
 		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((organizations == null) ? 0 : organizations.hashCode());
 		return result;
 	}
 
@@ -72,6 +86,11 @@ public class Region {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
+			return false;
+		if (organizations == null) {
+			if (other.organizations != null)
+				return false;
+		} else if (!organizations.equals(other.organizations))
 			return false;
 		return true;
 	}

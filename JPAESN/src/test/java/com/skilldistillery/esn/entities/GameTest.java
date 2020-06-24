@@ -44,5 +44,8 @@ class GameTest {
 		assertEquals("League of Legends", game.getTitle());
 		assertEquals("MOBA", game.getGenre());
 	}
+	
+
+	
 
 }

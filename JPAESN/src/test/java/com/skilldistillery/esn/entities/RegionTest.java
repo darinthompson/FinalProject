@@ -2,6 +2,7 @@ package com.skilldistillery.esn.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import javax.persistence.EntityManager;
@@ -48,6 +49,13 @@ class RegionTest {
 	void test() {
 		assertNotNull(region);
 		assertEquals("North America", region.getName());
+	}
+	
+	@Test
+	@DisplayName("TESTING REGION LIST OF ORGANIZATIONS")
+	void Organization_test() {
+		assertNotNull(region.getOrganizations());
+		assertTrue(region.getOrganizations().size() > 0);
 	}
 
 }
