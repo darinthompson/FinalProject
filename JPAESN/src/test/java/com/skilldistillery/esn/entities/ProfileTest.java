@@ -12,11 +12,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
-	
+class ProfileTest {
+
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private Profile profile;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -31,22 +31,23 @@ class UserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(User.class, 1);
+		profile = em.find(Profile.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		user = null;
+		profile = null;
 	}
 
 	@Test
 	void test() {
-		assertNotNull(user);
-		assertEquals("dobby", user.getUserName());
-		assertEquals("password", user.getPassword());
-		assertEquals(true, user.isEnabled());
-		assertEquals("User", user.getRole());
+		assertNotNull(profile);
+		assertEquals("bobby", profile.getFirstName());
+		assertEquals("dobbs", profile.getLastName());
+		assertEquals("bobdobbs@esports.com", profile.getEmail());
+		assertEquals("https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/8/88/Cloud9logo_square.png/1200px-Cloud9logo_square.png", profile.getAvatar());
+		
 	}
 
 }
