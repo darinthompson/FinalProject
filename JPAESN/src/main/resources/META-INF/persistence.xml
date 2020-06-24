@@ -9,7 +9,13 @@
     </provider>
 	
 	<class>com.skilldistillery.esn.entities.User</class>
-	<class>com.skilldistillery.todoapp.entities.User</class>
+	<class>com.skilldistillery.esn.entities.Comment</class>
+	<class>com.skilldistillery.esn.entities.Region</class>
+<!-- 	<class>com.skilldistillery.esn.entities.User</class>
+	<class>com.skilldistillery.esn.entities.User</class>
+	<class>com.skilldistillery.esn.entities.User</class>
+	<class>com.skilldistillery.esn.entities.User</class>
+	<class>com.skilldistillery.esn.entities.User</class> -->
 
 
 	
