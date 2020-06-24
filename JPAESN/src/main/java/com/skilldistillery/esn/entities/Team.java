@@ -5,19 +5,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Team {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name="img_url")
+	@Column(name = "img_url")
 	private String image;
+	@ManyToOne
+	@JoinColumn(name = "game_id")
+	private Game game;
+
 	public Team() {
 		super();
 	}
-	
+
 	public Team(int id, String image) {
 		super();
 		this.id = id;
@@ -68,7 +74,5 @@ public class Team {
 		builder.append("Team [id=").append(id).append(", image=").append(image).append("]");
 		return builder.toString();
 	}
-	
-	
-	
+
 }
