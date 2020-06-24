@@ -22,6 +22,8 @@ public class Game {
 	private String websiteURL;
 	@OneToMany(mappedBy = "game")
 	private List<GameStat> gameStat;
+	@OneToMany(mappedBy = "game")
+	private List<Team> teams;
 	
 	public Game() {}
 
