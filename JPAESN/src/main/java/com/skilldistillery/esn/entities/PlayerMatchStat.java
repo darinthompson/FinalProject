@@ -20,13 +20,15 @@ public class PlayerMatchStat {
 	@JoinColumn(name = "game_stat_id")
 	private GameStat stat;
 	@ManyToOne
-	@JoinColumn(name="player_match_player_id")
+	@JoinColumn(name = "player_match_player_id")
 	private Player player;
 	@ManyToOne
-	@JoinColumn(name="player_match_series_match_id")
+	@JoinColumn(name = "player_match_series_match_id")
 	private SeriesMatch match;
-	
-	public PlayerMatchStat() {}
+
+	public PlayerMatchStat() {
+
+	}
 
 	public PlayerMatchStat(int id, double value) {
 		super();
@@ -106,5 +108,5 @@ public class PlayerMatchStat {
 		builder.append("]");
 		return builder.toString();
 	}
-	
+
 }
