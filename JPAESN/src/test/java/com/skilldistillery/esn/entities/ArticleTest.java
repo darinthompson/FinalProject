@@ -10,6 +10,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class ArticleTest {
@@ -47,4 +48,19 @@ class ArticleTest {
 		assertEquals("https://specials-images.forbesimg.com/imageserve/5e0f8f19db7a9600065d7cec/960x0.jpg?fit=scale", article.getImage());
 	}
 
+	@Test
+	@DisplayName("testing relational mapping to Profile")
+	void test2() {
+		assertNotNull(article.getAuthor());
+		assertEquals("bobby", article.getAuthor().getFirstName());
+		assertEquals("dobbs", article.getAuthor().getLastName());
+	}
+	
+	@Test
+	@DisplayName("testing relational mapping to Comment")
+	void test3() {
+		assertNotNull(article.getComments());
+		assertTrue(article.getComments().size() > 0);
+		assertEquals("awesome", article.getComments().get(0).getContent());
+	}
 }
