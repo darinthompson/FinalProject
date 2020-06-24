@@ -7,7 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Profile {
@@ -22,22 +24,46 @@ public class Profile {
 	private String email;
 	@Column(name="avatar_url")
 	private String avatar;
+	@OneToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 	@OneToMany(mappedBy = "author")
 	private List<Article> articles;
 	@OneToMany(mappedBy = "profile")
 	private List<Comment> comments;
+	@OneToMany
+	@JoinColumn(name = "id")
+	private List<Organization> favoriteOrganizations;
+	@OneToMany
+	@JoinColumn(name = "id")
+	private List<Team> favoriteTeams;
+	@OneToMany
+	@JoinColumn(name = "id")
+	private List<Player> favoritePlayers;
+	@OneToMany
+	@JoinColumn(name = "id")
+	private List<Game> favoriteGames;
 	
 	public Profile() {
 		
 	}
 
-	public Profile(int id, String firstName, String lastName, String email, String avatar) {
+	public Profile(int id, String firstName, String lastName, String email, String avatar, User user,
+			List<Article> articles, List<Comment> comments, List<Organization> favoriteOrganizations,
+			List<Team> favoriteTeams, List<Player> favoritePlayers, List<Game> favoriteGames) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.avatar = avatar;
+		this.user = user;
+		this.articles = articles;
+		this.comments = comments;
+		this.favoriteOrganizations = favoriteOrganizations;
+		this.favoriteTeams = favoriteTeams;
+		this.favoritePlayers = favoritePlayers;
+		this.favoriteGames = favoriteGames;
 	}
 
 	public int getId() {
@@ -78,6 +104,62 @@ public class Profile {
 
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public List<Article> getArticles() {
+		return articles;
+	}
+
+	public void setArticles(List<Article> articles) {
+		this.articles = articles;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public List<Organization> getFavoriteOrganizations() {
+		return favoriteOrganizations;
+	}
+
+	public void setFavoriteOrganizations(List<Organization> favoriteOrganizations) {
+		this.favoriteOrganizations = favoriteOrganizations;
+	}
+
+	public List<Team> getFavoriteTeams() {
+		return favoriteTeams;
+	}
+
+	public void setFavoriteTeams(List<Team> favoriteTeams) {
+		this.favoriteTeams = favoriteTeams;
+	}
+
+	public List<Player> getFavoritePlayers() {
+		return favoritePlayers;
+	}
+
+	public void setFavoritePlayers(List<Player> favoritePlayers) {
+		this.favoritePlayers = favoritePlayers;
+	}
+
+	public List<Game> getFavoriteGames() {
+		return favoriteGames;
+	}
+
+	public void setFavoriteGames(List<Game> favoriteGames) {
+		this.favoriteGames = favoriteGames;
 	}
 
 	@Override
@@ -126,15 +208,24 @@ public class Profile {
 		return true;
 	}
 
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Profile [id=").append(id).append(", firstName=").append(firstName).append(", lastName=")
-				.append(lastName).append(", email=").append(email).append(", avatar=").append(avatar).append("]");
+		builder.append("Profile [id=");
+		builder.append(id);
+		builder.append(", firstName=");
+		builder.append(firstName);
+		builder.append(", lastName=");
+		builder.append(lastName);
+		builder.append(", email=");
+		builder.append(email);
+		builder.append(", avatar=");
+		builder.append(avatar);
+		builder.append(", user=");
+		builder.append(user);
+		builder.append("]");
 		return builder.toString();
 	}
-	
-	
 
-	
 }
