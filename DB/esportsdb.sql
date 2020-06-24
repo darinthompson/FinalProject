@@ -292,18 +292,18 @@ CREATE TABLE IF NOT EXISTS `player_match_stat` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `player_match_player_id` INT NOT NULL,
   `player_match_series_match_id` INT NOT NULL,
-  `game_stats_id` INT NOT NULL,
+  `game_stat_id` INT NOT NULL,
   `value` DOUBLE NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_player_match_stats_player_match1_idx` (`player_match_player_id` ASC, `player_match_series_match_id` ASC),
-  INDEX `fk_player_match_stats_game_stats1_idx` (`game_stats_id` ASC),
+  INDEX `fk_player_match_stats_game_stats1_idx` (`game_stat_id` ASC),
   CONSTRAINT `fk_player_match_stats_player_match1`
     FOREIGN KEY (`player_match_player_id` , `player_match_series_match_id`)
     REFERENCES `player_match` (`player_id` , `series_match_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_player_match_stats_game_stats1`
-    FOREIGN KEY (`game_stats_id`)
+    FOREIGN KEY (`game_stat_id`)
     REFERENCES `game_stat` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -587,10 +587,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `esportsdb`;
-INSERT INTO `player_match_stat` (`id`, `player_match_player_id`, `player_match_series_match_id`, `game_stats_id`, `value`) VALUES (1, 1, 1, 1, 5);
-INSERT INTO `player_match_stat` (`id`, `player_match_player_id`, `player_match_series_match_id`, `game_stats_id`, `value`) VALUES (2, 1, 1, 2, 1);
-INSERT INTO `player_match_stat` (`id`, `player_match_player_id`, `player_match_series_match_id`, `game_stats_id`, `value`) VALUES (3, 2, 1, 1, 4);
-INSERT INTO `player_match_stat` (`id`, `player_match_player_id`, `player_match_series_match_id`, `game_stats_id`, `value`) VALUES (4, 2, 1, 2, 3);
+INSERT INTO `player_match_stat` (`id`, `player_match_player_id`, `player_match_series_match_id`, `game_stat_id`, `value`) VALUES (1, 1, 1, 1, 5);
+INSERT INTO `player_match_stat` (`id`, `player_match_player_id`, `player_match_series_match_id`, `game_stat_id`, `value`) VALUES (2, 1, 1, 2, 1);
+INSERT INTO `player_match_stat` (`id`, `player_match_player_id`, `player_match_series_match_id`, `game_stat_id`, `value`) VALUES (3, 2, 1, 1, 4);
+INSERT INTO `player_match_stat` (`id`, `player_match_player_id`, `player_match_series_match_id`, `game_stat_id`, `value`) VALUES (4, 2, 1, 2, 3);
 
 COMMIT;
 
