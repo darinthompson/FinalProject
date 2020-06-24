@@ -130,7 +130,7 @@ DROP TABLE IF EXISTS `team` ;
 
 CREATE TABLE IF NOT EXISTS `team` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `img_url` VARCHAR(45) NULL,
+  `img_url` VARCHAR(5000) NULL,
   `organization_id` INT NOT NULL,
   `game_id` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -449,6 +449,198 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 START TRANSACTION;
 USE `esportsdb`;
 INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`) VALUES (1, 'dobby', 'password', 1, 'user');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `profile`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `esportsdb`;
+INSERT INTO `profile` (`id`, `user_id`, `first_name`, `last_name`, `email`, `avatar_url`) VALUES (1, 1, 'bobby', 'dobbs', 'bobdobbs@esports.com', 'https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/8/88/Cloud9logo_square.png/1200px-Cloud9logo_square.png');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `article`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `esportsdb`;
+INSERT INTO `article` (`id`, `title`, `content`, `img_url`, `profile_id`, `create_date`) VALUES (1, 'test', 'test article', 'https://specials-images.forbesimg.com/imageserve/5e0f8f19db7a9600065d7cec/960x0.jpg?fit=scale', 1, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `region`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `esportsdb`;
+INSERT INTO `region` (`id`, `name`) VALUES (1, 'North America');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `organization`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `esportsdb`;
+INSERT INTO `organization` (`id`, `name`, `region_id`, `logo_url`, `description`) VALUES (1, 'Cloud 9', 1, 'https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/8/88/Cloud9logo_square.png/1200px-Cloud9logo_square.png', 'Multi game E-sports team');
+INSERT INTO `organization` (`id`, `name`, `region_id`, `logo_url`, `description`) VALUES (2, 'Team Liquid', 1, 'https://gamepedia.cursecdn.com/lolesports_gamepedia_en/f/f4/Team_Liquidlogo_square.png', 'Multi game E-sports team');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `game`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `esportsdb`;
+INSERT INTO `game` (`id`, `title`, `genre`, `img_url`, `website_url`) VALUES (1, 'League of Legends', 'MOBA', 'https://gamepedia.cursecdn.com/lolesports_gamepedia_en/c/c8/LCS_2020_Logo.png', 'www.lolesports.com');
+INSERT INTO `game` (`id`, `title`, `genre`, `img_url`, `website_url`) VALUES (2, 'Counterstrike: Global Offensive', 'FPS', NULL, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `team`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `esportsdb`;
+INSERT INTO `team` (`id`, `img_url`, `organization_id`, `game_id`) VALUES (1, 'https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/8/88/Cloud9logo_square.png/1200px-Cloud9logo_square.png', 1, 1);
+INSERT INTO `team` (`id`, `img_url`, `organization_id`, `game_id`) VALUES (2, 'https://gamepedia.cursecdn.com/lolesports_gamepedia_en/f/f4/Team_Liquidlogo_square.png', 2, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `player`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `esportsdb`;
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (1, 'Robert', 'Huang', 'Blaber', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (2, 'Jo', 'Yong-in', 'CoreJJ', NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `team_join_player`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `esportsdb`;
+INSERT INTO `team_join_player` (`team_id`, `player_id`) VALUES (1, 1);
+INSERT INTO `team_join_player` (`team_id`, `player_id`) VALUES (2, 2);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `series`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `esportsdb`;
+INSERT INTO `series` (`id`, `name`, `description`, `img_url`) VALUES (1, 'LCS Sumer Split', 'North America League of Legends pro circuit', 'https://gamepedia.cursecdn.com/lolesports_gamepedia_en/c/c8/LCS_2020_Logo.png');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `series_match`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `esportsdb`;
+INSERT INTO `series_match` (`id`, `series_id`, `team1_id`, `team2_id`, `team1_title`, `team2_title`, `start_date`, `start_time`, `title`) VALUES (1, 1, 1, 2, NULL, NULL, NULL, NULL, 'Match 1');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `game_stats`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `esportsdb`;
+INSERT INTO `game_stats` (`id`, `game_id`, `stat_name`, `stat_description`) VALUES (1, 1, 'Kills', 'Total number of kills in a match');
+INSERT INTO `game_stats` (`id`, `game_id`, `stat_name`, `stat_description`) VALUES (2, 1, 'Deaths', 'Total number of deaths in a match');
+INSERT INTO `game_stats` (`id`, `game_id`, `stat_name`, `stat_description`) VALUES (3, 2, 'Kills', 'Total number of kills in a match');
+INSERT INTO `game_stats` (`id`, `game_id`, `stat_name`, `stat_description`) VALUES (4, 2, 'Deaths', 'Total number of deaths in a match');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `player_match`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `esportsdb`;
+INSERT INTO `player_match` (`player_id`, `series_match_id`) VALUES (1, 1);
+INSERT INTO `player_match` (`player_id`, `series_match_id`) VALUES (2, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `player_match_stats`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `esportsdb`;
+INSERT INTO `player_match_stats` (`id`, `player_match_player_id`, `player_match_series_match_id`, `game_stats_id`, `value`) VALUES (1, 1, 1, 1, 5);
+INSERT INTO `player_match_stats` (`id`, `player_match_player_id`, `player_match_series_match_id`, `game_stats_id`, `value`) VALUES (2, 1, 1, 2, 1);
+INSERT INTO `player_match_stats` (`id`, `player_match_player_id`, `player_match_series_match_id`, `game_stats_id`, `value`) VALUES (3, 2, 1, 1, 4);
+INSERT INTO `player_match_stats` (`id`, `player_match_player_id`, `player_match_series_match_id`, `game_stats_id`, `value`) VALUES (4, 2, 1, 2, 3);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `comment`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `esportsdb`;
+INSERT INTO `comment` (`id`, `content`, `article_id`, `profile_id`, `create_date`) VALUES (1, 'awesome', 1, 1, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `favorite_organization`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `esportsdb`;
+INSERT INTO `favorite_organization` (`profile_id`, `organization_id`) VALUES (1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `favorite_team`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `esportsdb`;
+INSERT INTO `favorite_team` (`profile_id`, `team_id`) VALUES (1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `favorite_game`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `esportsdb`;
+INSERT INTO `favorite_game` (`profile_id`, `game_id`) VALUES (1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `favorite_player`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `esportsdb`;
+INSERT INTO `favorite_player` (`profile_id`, `player_id`) VALUES (1, 1);
 
 COMMIT;
 
