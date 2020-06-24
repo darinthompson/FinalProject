@@ -8,15 +8,15 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "player_match_stats")
-public class PlayerMatchStats {
+public class PlayerMatchStat {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private double value;
 	
-	public PlayerMatchStats() {}
+	public PlayerMatchStat() {}
 
-	public PlayerMatchStats(int id, double value) {
+	public PlayerMatchStat(int id, double value) {
 		super();
 		this.id = id;
 		this.value = value;
@@ -54,7 +54,7 @@ public class PlayerMatchStats {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PlayerMatchStats other = (PlayerMatchStats) obj;
+		PlayerMatchStat other = (PlayerMatchStat) obj;
 		if (id != other.id)
 			return false;
 		return true;
@@ -63,7 +63,7 @@ public class PlayerMatchStats {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("PlayerMatchStats [id=");
+		builder.append("PlayerMatchStat [id=");
 		builder.append(id);
 		builder.append(", value=");
 		builder.append(value);

@@ -1,10 +1,13 @@
 package com.skilldistillery.esn.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Game {
@@ -17,6 +20,8 @@ public class Game {
 	private String imgURL;
 	@Column(name = "website_url")
 	private String websiteURL;
+	@OneToMany(mappedBy = "game")
+	private List<GameStat> gameStat;
 	
 	public Game() {}
 

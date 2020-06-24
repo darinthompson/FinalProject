@@ -12,10 +12,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class PlayerMatchStatsTest {
+class PlayerMatchStatTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private PlayerMatchStats pms;
+	private PlayerMatchStat pms;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -30,7 +30,7 @@ class PlayerMatchStatsTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		pms = em.find(PlayerMatchStats.class, 1);
+		pms = em.find(PlayerMatchStat.class, 1);
 	}
 
 	@AfterEach

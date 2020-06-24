@@ -5,9 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-public class GameStats {
+@Table(name="game_stat")
+public class GameStat {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -15,10 +19,15 @@ public class GameStats {
 	private String statName;
 	@Column(name = "stat_description")
 	private String statDescription;
+	@ManyToOne
+	@JoinColumn(name="game_id")
+	private Game game;
 	
-	public GameStats() {}
+	public GameStat() {
+		
+	}
 
-	public GameStats(int id, String statName, String statDescription) {
+	public GameStat(int id, String statName, String statDescription) {
 		super();
 		this.id = id;
 		this.statName = statName;
@@ -65,7 +74,7 @@ public class GameStats {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		GameStats other = (GameStats) obj;
+		GameStat other = (GameStat) obj;
 		if (id != other.id)
 			return false;
 		return true;
@@ -74,7 +83,7 @@ public class GameStats {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("GameStats [id=");
+		builder.append("GameStat [id=");
 		builder.append(id);
 		builder.append(", statName=");
 		builder.append(statName);

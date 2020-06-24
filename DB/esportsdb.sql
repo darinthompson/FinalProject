@@ -240,11 +240,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `game_stats`
+-- Table `game_stat`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `game_stats` ;
+DROP TABLE IF EXISTS `game_stat` ;
 
-CREATE TABLE IF NOT EXISTS `game_stats` (
+CREATE TABLE IF NOT EXISTS `game_stat` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `game_id` INT NOT NULL,
   `stat_name` VARCHAR(200) NULL,
@@ -284,11 +284,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `player_match_stats`
+-- Table `player_match_stat`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `player_match_stats` ;
+DROP TABLE IF EXISTS `player_match_stat` ;
 
-CREATE TABLE IF NOT EXISTS `player_match_stats` (
+CREATE TABLE IF NOT EXISTS `player_match_stat` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `player_match_player_id` INT NOT NULL,
   `player_match_series_match_id` INT NOT NULL,
@@ -304,7 +304,7 @@ CREATE TABLE IF NOT EXISTS `player_match_stats` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_player_match_stats_game_stats1`
     FOREIGN KEY (`game_stats_id`)
-    REFERENCES `game_stats` (`id`)
+    REFERENCES `game_stat` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -559,14 +559,14 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `game_stats`
+-- Data for table `game_stat`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `esportsdb`;
-INSERT INTO `game_stats` (`id`, `game_id`, `stat_name`, `stat_description`) VALUES (1, 1, 'Kills', 'Total number of kills in a match');
-INSERT INTO `game_stats` (`id`, `game_id`, `stat_name`, `stat_description`) VALUES (2, 1, 'Deaths', 'Total number of deaths in a match');
-INSERT INTO `game_stats` (`id`, `game_id`, `stat_name`, `stat_description`) VALUES (3, 2, 'Kills', 'Total number of kills in a match');
-INSERT INTO `game_stats` (`id`, `game_id`, `stat_name`, `stat_description`) VALUES (4, 2, 'Deaths', 'Total number of deaths in a match');
+INSERT INTO `game_stat` (`id`, `game_id`, `stat_name`, `stat_description`) VALUES (1, 1, 'Kills', 'Total number of kills in a match');
+INSERT INTO `game_stat` (`id`, `game_id`, `stat_name`, `stat_description`) VALUES (2, 1, 'Deaths', 'Total number of deaths in a match');
+INSERT INTO `game_stat` (`id`, `game_id`, `stat_name`, `stat_description`) VALUES (3, 2, 'Kills', 'Total number of kills in a match');
+INSERT INTO `game_stat` (`id`, `game_id`, `stat_name`, `stat_description`) VALUES (4, 2, 'Deaths', 'Total number of deaths in a match');
 
 COMMIT;
 
@@ -583,14 +583,14 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `player_match_stats`
+-- Data for table `player_match_stat`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `esportsdb`;
-INSERT INTO `player_match_stats` (`id`, `player_match_player_id`, `player_match_series_match_id`, `game_stats_id`, `value`) VALUES (1, 1, 1, 1, 5);
-INSERT INTO `player_match_stats` (`id`, `player_match_player_id`, `player_match_series_match_id`, `game_stats_id`, `value`) VALUES (2, 1, 1, 2, 1);
-INSERT INTO `player_match_stats` (`id`, `player_match_player_id`, `player_match_series_match_id`, `game_stats_id`, `value`) VALUES (3, 2, 1, 1, 4);
-INSERT INTO `player_match_stats` (`id`, `player_match_player_id`, `player_match_series_match_id`, `game_stats_id`, `value`) VALUES (4, 2, 1, 2, 3);
+INSERT INTO `player_match_stat` (`id`, `player_match_player_id`, `player_match_series_match_id`, `game_stats_id`, `value`) VALUES (1, 1, 1, 1, 5);
+INSERT INTO `player_match_stat` (`id`, `player_match_player_id`, `player_match_series_match_id`, `game_stats_id`, `value`) VALUES (2, 1, 1, 2, 1);
+INSERT INTO `player_match_stat` (`id`, `player_match_player_id`, `player_match_series_match_id`, `game_stats_id`, `value`) VALUES (3, 2, 1, 1, 4);
+INSERT INTO `player_match_stat` (`id`, `player_match_player_id`, `player_match_series_match_id`, `game_stats_id`, `value`) VALUES (4, 2, 1, 2, 3);
 
 COMMIT;
 
