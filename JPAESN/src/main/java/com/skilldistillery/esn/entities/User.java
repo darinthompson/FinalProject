@@ -1,12 +1,15 @@
 package com.skilldistillery.esn.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.skilldistillery.esn.enums.Role;
 
 @Entity
 public class User {
@@ -16,7 +19,9 @@ public class User {
 	private String username;
 	private String password;
 	private boolean enabled;
-	private String role;
+	
+	@Enumerated(EnumType.STRING)
+	private Role role;
 	
 	@JsonBackReference
 	@OneToOne(mappedBy = "user")
@@ -26,7 +31,7 @@ public class User {
 
 	}
 
-	public User(int id, String username, String password, boolean enabled, String role) {
+	public User(int id, String username, String password, boolean enabled, Role role) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -67,11 +72,11 @@ public class User {
 		this.enabled = enabled;
 	}
 
-	public String getRole() {
+	public Role getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 
