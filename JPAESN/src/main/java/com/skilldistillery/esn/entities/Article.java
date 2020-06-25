@@ -24,16 +24,20 @@ public class Article {
 	private int id;
 	private String title;
 	private String content;
+	
 	@Column(name="img_url")
 	private String image;
+	
 	@CreationTimestamp
 	@Column(name="create_date")
 	private LocalDateTime createDate;
+	
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "profile_id")
 	private Profile author;
 	private boolean enabled;
+	
 	@OneToMany(mappedBy = "article")
 	private List<Comment> comments;
 	

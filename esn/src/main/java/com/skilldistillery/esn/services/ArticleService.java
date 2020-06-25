@@ -8,9 +8,10 @@ public interface ArticleService {
 
 	List<Article> getAllArticles();
 	List<Article> getAllEnabledArticles();
-	Article getArticleById(Integer id);
-	Article create(Article article, Integer profileId);
-	Article update(Article article, Integer articleId, Integer profileId);
-	boolean enable(Integer articleId, Integer profileId);
-	boolean disable(Integer articleId, Integer profileId);
+	List<Article> getAllAuthorEnabledArticles(String username);
+	Article show(Integer id);
+	Article create(Article article, String username);
+	Article update(Article article, Integer articleId, String username);
+	boolean enable(Integer articleId, String username);
+	boolean disable(Integer articleId, String username);
 }

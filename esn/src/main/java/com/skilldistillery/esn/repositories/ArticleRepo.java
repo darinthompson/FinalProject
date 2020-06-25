@@ -9,5 +9,6 @@ import com.skilldistillery.esn.entities.Article;
 public interface ArticleRepo extends JpaRepository<Article, Integer> {
 	
 	List<Article> findByEnabledTrue();
+	List<Article> findByAuthor_IdAndEnabledTrue(Integer profileId);
 	Article findByIdAndAuthor_Id(Integer articleId, Integer profileId);
 }
