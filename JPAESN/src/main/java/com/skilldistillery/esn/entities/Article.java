@@ -33,6 +33,7 @@ public class Article {
 	@ManyToOne
 	@JoinColumn(name = "profile_id")
 	private Profile author;
+	private boolean enabled;
 	@OneToMany(mappedBy = "article")
 	private List<Comment> comments;
 	
@@ -100,6 +101,14 @@ public class Article {
 		this.author = author;
 	}
 
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	public List<Comment> getComments() {
 		return comments;
 	}
@@ -145,6 +154,8 @@ public class Article {
 		builder.append(createDate);
 		builder.append(", author=");
 		builder.append(author);
+		builder.append(", enabled=");
+		builder.append(enabled);
 		builder.append("]");
 		return builder.toString();
 	}
