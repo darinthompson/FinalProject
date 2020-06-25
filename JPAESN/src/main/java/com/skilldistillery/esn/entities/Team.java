@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 @Entity
 public class Team {
@@ -34,6 +35,7 @@ public class Team {
 	@ManyToMany(mappedBy = "teams")
 	private List<Player> players;
 
+	@Transient
 	public List<SeriesMatch> getMatches() {
 		List<SeriesMatch> matches = new ArrayList<>();
 		matches.addAll(matchesTeam1);
