@@ -1,5 +1,6 @@
 package com.skilldistillery.esn.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -32,6 +33,13 @@ public class Team {
 	private Organization organization;
 	@ManyToMany(mappedBy = "teams")
 	private List<Player> players;
+
+	public List<SeriesMatch> getMatches() {
+		List<SeriesMatch> matches = new ArrayList<>();
+		matches.addAll(matchesTeam1);
+		matches.addAll(matchesTeam2);
+		return matches;
+	}
 
 	public Game getGame() {
 		return game;

@@ -252,6 +252,7 @@ CREATE TABLE IF NOT EXISTS `game_stat` (
   `stat_description` VARCHAR(500) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_game_stats_game1_idx` (`game_id` ASC),
+  UNIQUE INDEX `uq_game_stats_game_stat_name` (`game_id` ASC, `stat_name` ASC),
   CONSTRAINT `fk_game_stats_game1`
     FOREIGN KEY (`game_id`)
     REFERENCES `game` (`id`)
