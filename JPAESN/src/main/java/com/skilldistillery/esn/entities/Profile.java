@@ -31,6 +31,7 @@ public class Profile {
 	@OneToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+	@JsonManagedReference
 	@OneToMany(mappedBy = "author")
 	private List<Article> articles;
 	@OneToMany(mappedBy = "profile")
