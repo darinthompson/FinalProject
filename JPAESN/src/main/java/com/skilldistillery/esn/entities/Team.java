@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Team {
 
@@ -22,19 +25,27 @@ public class Team {
 	private int id;
 	@Column(name = "img_url")
 	private String image;
+	
 	@ManyToOne
 	@JoinColumn(name = "game_id")
 	private Game game;
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "team1")
 	private List<SeriesMatch> matchesTeam1;
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "team2")
 	private List<SeriesMatch> matchesTeam2;
+	
 	@ManyToOne
 	@JoinColumn(name = "organization_id")
 	private Organization organization;
+	
 	@ManyToMany(mappedBy = "teams")
 	private List<Player> players;
-
+	
+	@JsonIgnore
 	@Transient
 	public List<SeriesMatch> getMatches() {
 		List<SeriesMatch> matches = new ArrayList<>();
