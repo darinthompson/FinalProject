@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Player {
@@ -26,6 +27,8 @@ public class Player {
 	@ManyToMany
 	@JoinTable(name = "team_join_player", joinColumns = @JoinColumn(name = "player_id"), inverseJoinColumns = @JoinColumn(name = "team_id"))
 	private List<Team> teams;
+	@OneToMany(mappedBy = "player")
+	private List<PlayerMatchStat> stats;
 
 	public Player() {
 	}
@@ -95,6 +98,14 @@ public class Player {
 
 	public void setStreamURL(String streamURL) {
 		this.streamURL = streamURL;
+	}
+
+	public List<PlayerMatchStat> getStats() {
+		return stats;
+	}
+
+	public void setStats(List<PlayerMatchStat> stats) {
+		this.stats = stats;
 	}
 
 	@Override
