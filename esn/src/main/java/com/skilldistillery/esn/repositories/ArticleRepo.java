@@ -8,6 +8,6 @@ import com.skilldistillery.esn.entities.Article;
 
 public interface ArticleRepo extends JpaRepository<Article, Integer> {
 	
-	List<Article> findAllWhereEnabledTrue();
-	Article findByIdAndProfile_Id(Integer articleId, Integer profileId);
+	List<Article> findByEnabledTrue();
+	Article findByIdAndAuthor_Id(Integer articleId, Integer profileId);
 }
