@@ -46,7 +46,7 @@ class SeriesTest {
 		assertEquals("LCS Sumer Split", series.getName());
 		assertEquals("North America League of Legends pro circuit", series.getDescription());
 		assertEquals("https://gamepedia.cursecdn.com/lolesports_gamepedia_en/c/c8/LCS_2020_Logo.png", series.getImgURL());
-		assertEquals("", series.getSeriesMatch());
+		assertEquals(1, series.getSeriesMatch().get(0).getId());
 	}
 
 }
