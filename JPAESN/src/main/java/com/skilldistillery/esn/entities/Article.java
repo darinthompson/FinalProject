@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Article {
 	
@@ -27,6 +29,7 @@ public class Article {
 	@CreationTimestamp
 	@Column(name="create_date")
 	private LocalDateTime createDate;
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "profile_id")
 	private Profile author;
