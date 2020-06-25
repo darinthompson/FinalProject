@@ -65,6 +65,7 @@ CREATE TABLE IF NOT EXISTS `article` (
   `img_url` VARCHAR(5000) NULL,
   `profile_id` INT NOT NULL,
   `create_date` DATETIME NULL,
+  `enabled` TINYINT NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   INDEX `fk_article_profile1_idx` (`profile_id` ASC),
   CONSTRAINT `fk_article_profile1`
@@ -321,6 +322,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `article_id` INT NOT NULL,
   `profile_id` INT NOT NULL,
   `create_date` DATETIME NULL,
+  `enabled` TINYINT NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   INDEX `fk_comment_article1_idx` (`article_id` ASC),
   INDEX `fk_comment_profile1_idx` (`profile_id` ASC),
@@ -468,7 +470,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `esportsdb`;
-INSERT INTO `article` (`id`, `title`, `content`, `img_url`, `profile_id`, `create_date`) VALUES (1, 'test', 'test article', 'https://specials-images.forbesimg.com/imageserve/5e0f8f19db7a9600065d7cec/960x0.jpg?fit=scale', 1, NULL);
+INSERT INTO `article` (`id`, `title`, `content`, `img_url`, `profile_id`, `create_date`, `enabled`) VALUES (1, 'test', 'test article', 'https://specials-images.forbesimg.com/imageserve/5e0f8f19db7a9600065d7cec/960x0.jpg?fit=scale', 1, NULL, 1);
 
 COMMIT;
 
@@ -600,7 +602,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `esportsdb`;
-INSERT INTO `comment` (`id`, `content`, `article_id`, `profile_id`, `create_date`) VALUES (1, 'awesome', 1, 1, NULL);
+INSERT INTO `comment` (`id`, `content`, `article_id`, `profile_id`, `create_date`, `enabled`) VALUES (1, 'awesome', 1, 1, NULL, 1);
 
 COMMIT;
 
