@@ -8,14 +8,19 @@
     <provider>org.hibernate.jpa.HibernatePersistenceProvider
     </provider>
 	
-	<class>com.skilldistillery.esn.entities.User</class>
+	<class>com.skilldistillery.esn.entities.Article</class>
 	<class>com.skilldistillery.esn.entities.Comment</class>
+	<class>com.skilldistillery.esn.entities.Game</class>
+	<class>com.skilldistillery.esn.entities.GameStat</class>
+	<class>com.skilldistillery.esn.entities.Organization</class>
+	<class>com.skilldistillery.esn.entities.Player</class>
+	<class>com.skilldistillery.esn.entities.PlayerMatchStat</class>
+	<class>com.skilldistillery.esn.entities.Profile</class>
 	<class>com.skilldistillery.esn.entities.Region</class>
-<!-- 	<class>com.skilldistillery.esn.entities.User</class>
+	<class>com.skilldistillery.esn.entities.Series</class>
+	<class>com.skilldistillery.esn.entities.SeriesMatch</class>
+	<class>com.skilldistillery.esn.entities.Team</class>
 	<class>com.skilldistillery.esn.entities.User</class>
-	<class>com.skilldistillery.esn.entities.User</class>
-	<class>com.skilldistillery.esn.entities.User</class>
-	<class>com.skilldistillery.esn.entities.User</class> -->
 
 
 	
