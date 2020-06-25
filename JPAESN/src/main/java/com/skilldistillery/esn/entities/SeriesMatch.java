@@ -13,6 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="series_match")
 public class SeriesMatch {
@@ -28,12 +31,18 @@ public class SeriesMatch {
 	private LocalDate startDate;
 	@Column(name = "start_time")
 	private LocalTime startTime;
+	
+	@JsonIgnoreProperties({"seriesMatch"})
 	@ManyToOne
 	@JoinColumn(name="series_id")
 	private Series series;
+	
 	@ManyToOne
+	@JsonIgnoreProperties({"matches"})
 	@JoinColumn(name="team1_id")
 	private Team team1;
+
+	@JsonIgnoreProperties({"matches"})
 	@ManyToOne
 	@JoinColumn(name="team2_id")
 	private Team team2;
