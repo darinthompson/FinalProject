@@ -23,13 +23,12 @@ public class Player {
 	private String handle;
 	@Column(name = "stream_url")
 	private String streamURL;
-	
 	@ManyToMany
-	@JoinTable(name = "team_join_player", joinColumns = @JoinColumn(name="player_id"), inverseJoinColumns = @JoinColumn(name="team_id"))
+	@JoinTable(name = "team_join_player", joinColumns = @JoinColumn(name = "player_id"), inverseJoinColumns = @JoinColumn(name = "team_id"))
 	private List<Team> teams;
-	
-	
-	public Player() {}
+
+	public Player() {
+	}
 
 	public Player(int id, String firstName, String lastName, String handle, String streamURL) {
 		super();
@@ -168,5 +167,5 @@ public class Player {
 		builder.append("]");
 		return builder.toString();
 	}
-	
+
 }

@@ -52,5 +52,7 @@ class TeamTest {
 	void playersTest() {
 		assertNotNull(team.getPlayers());
 		assertTrue(team.getPlayers().size() > 0);
+//		assertEquals("", team.getMatchesTeam1());
+		assertEquals("Blaber", team.getPlayers().get(0).getHandle());
 	}
 }

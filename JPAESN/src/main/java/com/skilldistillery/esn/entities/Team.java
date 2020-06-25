@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Team {
@@ -22,7 +23,16 @@ public class Team {
 	@ManyToOne
 	@JoinColumn(name = "game_id")
 	private Game game;
-	
+	@OneToMany(mappedBy = "team1")
+	private List<SeriesMatch> matchesTeam1;
+	@OneToMany(mappedBy = "team2")
+	private List<SeriesMatch> matchesTeam2;
+	@ManyToOne
+	@JoinColumn(name = "organization_id")
+	private Organization organization;
+	@ManyToMany(mappedBy = "teams")
+	private List<Player> players;
+
 	public Game getGame() {
 		return game;
 	}
@@ -46,9 +56,6 @@ public class Team {
 	public void setPlayers(List<Player> players) {
 		this.players = players;
 	}
-
-	@ManyToMany(mappedBy="teams")
-	private List<Player> players;
 
 	public Team() {
 		super();
@@ -76,14 +83,27 @@ public class Team {
 		this.image = image;
 	}
 
+	public List<SeriesMatch> getMatchesTeam1() {
+		return matchesTeam1;
+	}
+
+	public void setMatchesTeam1(List<SeriesMatch> matchesTeam1) {
+		this.matchesTeam1 = matchesTeam1;
+	}
+
+	public List<SeriesMatch> getMatchesTeam2() {
+		return matchesTeam2;
+	}
+
+	public void setMatchesTeam2(List<SeriesMatch> matchesTeam2) {
+		this.matchesTeam2 = matchesTeam2;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((game == null) ? 0 : game.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((image == null) ? 0 : image.hashCode());
-		result = prime * result + ((players == null) ? 0 : players.hashCode());
 		return result;
 	}
 
@@ -96,22 +116,7 @@ public class Team {
 		if (getClass() != obj.getClass())
 			return false;
 		Team other = (Team) obj;
-		if (game == null) {
-			if (other.game != null)
-				return false;
-		} else if (!game.equals(other.game))
-			return false;
 		if (id != other.id)
-			return false;
-		if (image == null) {
-			if (other.image != null)
-				return false;
-		} else if (!image.equals(other.image))
-			return false;
-		if (players == null) {
-			if (other.players != null)
-				return false;
-		} else if (!players.equals(other.players))
 			return false;
 		return true;
 	}
@@ -125,8 +130,8 @@ public class Team {
 		builder.append(image);
 		builder.append(", game=");
 		builder.append(game);
-		builder.append(", players=");
-		builder.append(players);
+//		builder.append(", players=");
+//		builder.append(players);
 		builder.append("]");
 		return builder.toString();
 	}

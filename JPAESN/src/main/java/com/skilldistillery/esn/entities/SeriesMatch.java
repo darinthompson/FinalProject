@@ -2,12 +2,15 @@ package com.skilldistillery.esn.entities;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,6 +28,15 @@ public class SeriesMatch {
 	private LocalDate startDate;
 	@Column(name = "start_time")
 	private LocalTime startTime;
+	@ManyToOne
+	@JoinColumn(name="series_id")
+	private Series series;
+	@ManyToOne
+	@JoinColumn(name="team1_id")
+	private Team team1;
+	@ManyToOne
+	@JoinColumn(name="team2_id")
+	private Team team2;
 	
 	public SeriesMatch() {}
 
@@ -85,6 +97,30 @@ public class SeriesMatch {
 
 	public void setStartTime(LocalTime startTime) {
 		this.startTime = startTime;
+	}
+
+	public Series getSeries() {
+		return series;
+	}
+
+	public void setSeries(Series series) {
+		this.series = series;
+	}
+
+	public Team getTeam1() {
+		return team1;
+	}
+
+	public void setTeam1(Team team1) {
+		this.team1 = team1;
+	}
+
+	public Team getTeam2() {
+		return team2;
+	}
+
+	public void setTeam2(Team team2) {
+		this.team2 = team2;
 	}
 
 	@Override

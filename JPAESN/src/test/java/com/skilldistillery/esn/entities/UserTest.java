@@ -47,6 +47,7 @@ class UserTest {
 		assertEquals("password", user.getPassword());
 		assertEquals(true, user.isEnabled());
 		assertEquals("User", user.getRole());
+		assertEquals("bobby", user.getProfile().getFirstName());
 	}
 
 }
