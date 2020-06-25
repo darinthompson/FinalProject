@@ -27,10 +27,13 @@ public class Player {
 	private String handle;
 	@Column(name = "stream_url")
 	private String streamURL;
+
 	@JsonIgnoreProperties({ "players" })
 	@ManyToMany
 	@JoinTable(name = "team_join_player", joinColumns = @JoinColumn(name = "player_id"), inverseJoinColumns = @JoinColumn(name = "team_id"))
 	private List<Team> teams;
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "player")
 	private List<PlayerMatchStat> stats;
 

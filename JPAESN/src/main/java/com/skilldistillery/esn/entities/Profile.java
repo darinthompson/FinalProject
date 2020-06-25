@@ -20,11 +20,14 @@ public class Profile {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
 	@Column(name="first_name")
 	private String firstName;
+	
 	@Column(name="last_name")
 	private String lastName;
 	private String email;
+	
 	@Column(name="avatar_url")
 	private String avatar;
 	
@@ -32,19 +35,25 @@ public class Profile {
 	@OneToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+	
 	@OneToMany(mappedBy = "author")
 	private List<Article> articles;
+	
 	@OneToMany(mappedBy = "profile")
 	private List<Comment> comments;
+	
 	@OneToMany
 	@JoinColumn(name = "id")
 	private List<Organization> favoriteOrganizations;
+	
 	@OneToMany
 	@JoinColumn(name = "id")
 	private List<Team> favoriteTeams;
+	
 	@OneToMany
 	@JoinColumn(name = "id")
 	private List<Player> favoritePlayers;
+	
 	@OneToMany
 	@JoinColumn(name = "id")
 	private List<Game> favoriteGames;
