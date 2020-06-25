@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+
 @Entity
 @Table(name="series_match")
 public class SeriesMatch {
@@ -34,11 +35,12 @@ public class SeriesMatch {
 	
 	@JsonIgnoreProperties({"seriesMatch"})
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="series_id")
 	private Series series;
 	
-	@ManyToOne
 	@JsonIgnoreProperties({"matches"})
+	@ManyToOne
 	@JoinColumn(name="team1_id")
 	private Team team1;
 

@@ -15,7 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
 public class Team {
@@ -30,12 +32,14 @@ public class Team {
 	@JoinColumn(name = "game_id")
 	private Game game;
 	
-	@JsonIgnore
+	
 	@OneToMany(mappedBy = "team1")
+	@JsonIgnore
 	private List<SeriesMatch> matchesTeam1;
 
-	@JsonIgnore
+	
 	@OneToMany(mappedBy = "team2")
+	@JsonIgnore
 	private List<SeriesMatch> matchesTeam2;
 	
 	@ManyToOne
