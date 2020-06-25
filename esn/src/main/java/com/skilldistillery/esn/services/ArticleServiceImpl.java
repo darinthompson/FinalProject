@@ -13,10 +13,10 @@ import com.skilldistillery.esn.repositories.ProfileRepo;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
-	
+
 	@Autowired
 	private ArticleRepo articleRepo;
-	
+
 	@Autowired
 	private ProfileRepo profileRepo;
 
@@ -24,14 +24,20 @@ public class ArticleServiceImpl implements ArticleService {
 	public List<Article> getAllArticles() {
 		return articleRepo.findAll();
 	}
-	
+
 	@Override
 	public List<Article> getAllEnabledArticles() {
 		return articleRepo.findByEnabledTrue();
 	}
+	
+	@Override
+	public List<Article> getAllAuthorEnabledArticles(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
-	public Article getArticleById(Integer id) {
+	public Article show(Integer id) {
 		try {
 			Optional<Article> opt = articleRepo.findById(id);
 			if (opt.isPresent()) {
@@ -47,43 +53,61 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public Article create(Article article, Integer profileId) {
-		Optional<Profile> opt = profileRepo.findById(profileId);
-		if (opt.isPresent()) {
-			Profile profile = opt.get();
-			if (profile != null) {
-				article.setAuthor(profile);
-				try {
-					articleRepo.saveAndFlush(article);
-					return article;
-				} catch (Exception e) {
-					e.printStackTrace();
-					return null;
-				} 
-			} else {
-				return null;
-			}
+	public Article create(Article article, String username) {
+		Profile profile = profileRepo.findByUser_Username(username);
+
+		if (profile != null) {
+			article.setAuthor(profile);
+			articleRepo.saveAndFlush(article);
+			return article;
+		} else {
+			article = null;
 		}
-		return null;
+
+		return article;
 	}
 
 	@Override
-	public Article update(Article article, Integer articleId, Integer profileId) {
-		Article updated = articleRepo.findByIdAndAuthor_Id(articleId, profileId);
-		
-		return null;
+	public Article update(Article article, Integer articleId, String username) {
+		Profile profile = profileRepo.findByUser_Username(username);
+		Article updated = articleRepo.findByIdAndAuthor_Id(articleId, profile.getId());
+
+		if (updated != null) {
+			updated.setTitle(article.getTitle());
+			updated.setContent(article.getContent());
+			updated.setImage(article.getImage());
+			articleRepo.saveAndFlush(updated);
+		}
+
+		return updated;
 	}
 
 	@Override
-	public boolean enable(Integer articleId, Integer profileId) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean enable(Integer articleId, String username) {
+		Profile profile = profileRepo.findByUser_Username(username);
+		Article toEnable = articleRepo.findByIdAndAuthor_Id(articleId, profile.getId());
+
+		if (toEnable != null) {
+			toEnable.setEnabled(true);
+			articleRepo.saveAndFlush(toEnable);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
-	public boolean disable(Integer articleId, Integer profileId) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean disable(Integer articleId, String username) {
+		Profile profile = profileRepo.findByUser_Username(username);
+		Article toDisable = articleRepo.findByIdAndAuthor_Id(articleId, profile.getId());
+
+		if (toDisable != null) {
+			toDisable.setEnabled(false);
+			articleRepo.saveAndFlush(toDisable);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }
