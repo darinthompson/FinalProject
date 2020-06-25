@@ -6,15 +6,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String userName;
+	private String username;
 	private String password;
 	private boolean enabled;
 	private String role;
+	
+	@JsonBackReference
 	@OneToOne(mappedBy = "user")
 	private Profile profile;
 
@@ -22,10 +26,10 @@ public class User {
 
 	}
 
-	public User(int id, String userName, String password, boolean enabled, String role) {
+	public User(int id, String username, String password, boolean enabled, String role) {
 		super();
 		this.id = id;
-		this.userName = userName;
+		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
 		this.role = role;
@@ -40,11 +44,11 @@ public class User {
 	}
 
 	public String getUserName() {
-		return userName;
+		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserName(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -87,7 +91,7 @@ public class User {
 		result = prime * result + id;
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
-		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
 
@@ -114,10 +118,10 @@ public class User {
 				return false;
 		} else if (!role.equals(other.role))
 			return false;
-		if (userName == null) {
-			if (other.userName != null)
+		if (username == null) {
+			if (other.username != null)
 				return false;
-		} else if (!userName.equals(other.userName))
+		} else if (!username.equals(other.username))
 			return false;
 		return true;
 	}
@@ -125,7 +129,7 @@ public class User {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("User [id=").append(id).append(", userName=").append(userName).append(", password=")
+		builder.append("User [id=").append(id).append(", userName=").append(username).append(", password=")
 				.append(password).append(", enabled=").append(enabled).append(", role=").append(role).append("]");
 		return builder.toString();
 	}
