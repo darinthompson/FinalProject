@@ -27,7 +27,7 @@ public class ArticleServiceImpl implements ArticleService {
 	
 	@Override
 	public List<Article> getAllEnabledArticles() {
-		return articleRepo.findAllWhereEnabledTrue();
+		return articleRepo.findByEnabledTrue();
 	}
 
 	@Override
@@ -64,11 +64,12 @@ public class ArticleServiceImpl implements ArticleService {
 				return null;
 			}
 		}
+		return null;
 	}
 
 	@Override
 	public Article update(Article article, Integer articleId, Integer profileId) {
-		Article updated = articleRepo.findByIdAndProfile_Id(articleId, profileId);
+		Article updated = articleRepo.findByIdAndAuthor_Id(articleId, profileId);
 		
 		return null;
 	}
