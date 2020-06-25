@@ -31,7 +31,12 @@ public class ProfileServiceImpl implements ProfileService {
 
 	@Override
 	public Profile show(int id) {
-		return profileRepo.getOne(id);
+		Optional optionalProfile = profileRepo.findById(id);
+		if(optionalProfile.isPresent()) {
+			Profile profile = (Profile) optionalProfile.get();
+			return profile;
+		}
+		 return null;
 	}
 
 	@Override
@@ -66,12 +71,6 @@ public class ProfileServiceImpl implements ProfileService {
 			}
 		}
 		return null;
-	}
-
-	@Override
-	public boolean delete(int profileId) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override

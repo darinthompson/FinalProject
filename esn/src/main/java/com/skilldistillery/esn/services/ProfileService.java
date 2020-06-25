@@ -18,8 +18,6 @@ public interface ProfileService {
 
 	public Profile update(int profileId, Profile profile);
 
-	public boolean delete(int profileId);
-
 	public List<Team> addTeam(int profileId, Team team);
 
 	public List<Player> addPlayer(int profileId, Player player);

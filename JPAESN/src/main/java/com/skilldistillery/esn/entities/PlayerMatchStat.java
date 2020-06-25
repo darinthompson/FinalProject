@@ -10,6 +10,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "player_match_stat")
 public class PlayerMatchStat {
@@ -21,6 +23,7 @@ public class PlayerMatchStat {
 	@JoinColumn(name = "game_stat_id")
 	private GameStat stat;
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "player_match_player_id")
 	private Player player;
 	@ManyToOne

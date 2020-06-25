@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -31,7 +32,6 @@ public class Profile {
 	@OneToOne
 	@JoinColumn(name = "user_id")
 	private User user;
-	@JsonManagedReference
 	@OneToMany(mappedBy = "author")
 	private List<Article> articles;
 	@OneToMany(mappedBy = "profile")
