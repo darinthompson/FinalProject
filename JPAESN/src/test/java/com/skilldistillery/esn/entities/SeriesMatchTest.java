@@ -44,6 +44,7 @@ class SeriesMatchTest {
 	void test() {
 		assertNotNull(series);
 		assertEquals("Match 1", series.getTitle());
+		assertEquals(1, series.getTeam1().getId());
 	}
 
 

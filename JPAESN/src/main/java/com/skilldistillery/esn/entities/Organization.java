@@ -1,5 +1,7 @@
 package com.skilldistillery.esn.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,6 +26,8 @@ public class Organization {
 	@ManyToOne
 	@JoinColumn(name = "region_id")
 	private Region region;
+	@OneToMany(mappedBy = "organization")
+	private List<Team> teams;
 	
 	public Organization() {}
 

@@ -1,10 +1,13 @@
 package com.skilldistillery.esn.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Series {
@@ -15,15 +18,20 @@ public class Series {
 	private String description;
 	@Column(name = "img_url")
 	private String imgURL;
-	
-	public Series() {}
+	@OneToMany(mappedBy = "series")
+	private List<SeriesMatch> seriesMatch;
 
-	public Series(int id, String name, String description, String imgURL) {
+	public Series() {
+
+	}
+
+	public Series(int id, String name, String description, String imgURL, List<SeriesMatch> seriesMatch) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.imgURL = imgURL;
+		this.seriesMatch = seriesMatch;
 	}
 
 	public int getId() {
@@ -56,6 +64,14 @@ public class Series {
 
 	public void setImgURL(String imgURL) {
 		this.imgURL = imgURL;
+	}
+
+	public List<SeriesMatch> getSeriesMatch() {
+		return seriesMatch;
+	}
+
+	public void setSeriesMatch(List<SeriesMatch> seriesMatch) {
+		this.seriesMatch = seriesMatch;
 	}
 
 	@Override
@@ -94,5 +110,5 @@ public class Series {
 		builder.append("]");
 		return builder.toString();
 	}
-	
+
 }
