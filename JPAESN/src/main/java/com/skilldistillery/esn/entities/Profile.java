@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Profile {
 	
@@ -24,6 +26,8 @@ public class Profile {
 	private String email;
 	@Column(name="avatar_url")
 	private String avatar;
+	
+	@JsonManagedReference
 	@OneToOne
 	@JoinColumn(name = "user_id")
 	private User user;
