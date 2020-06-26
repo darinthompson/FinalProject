@@ -88,7 +88,7 @@ public class ProfileServiceImpl implements ProfileService {
 
 		if (profile != null) {
 			profile.addPlayer(player);
-			return profileRepo.saveAndFlush(profile);
+			return profile;
 		}
 		return null;
 	}
@@ -132,7 +132,7 @@ public class ProfileServiceImpl implements ProfileService {
 		
 		if (profile != null) {
 			profile.removePlayer(player);
-			return profileRepo.saveAndFlush(profile);
+			return profile;
 		}
 		return null;
 	}
