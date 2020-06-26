@@ -8,5 +8,5 @@ import com.skilldistillery.esn.entities.Organization;
 
 public interface OrganizationRepo extends JpaRepository<Organization, Integer> {
 
-	List<Organization> findByRegion_RegionId(Integer rid);
+	List<Organization> findByRegion_Id(Integer rid);
 }

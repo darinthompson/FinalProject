@@ -22,7 +22,7 @@ public class OrganizationServiceImpl implements OrganizationService {
 
 	@Override
 	public List<Organization> getOrgsByRegion(Integer rid) {
-		return repo.findByRegion_RegionId(rid);
+		return repo.findByRegion_Id(rid);
 	}
 
 	@Override
