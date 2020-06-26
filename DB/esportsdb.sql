@@ -451,7 +451,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `esportsdb`;
-INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`) VALUES (1, 'dobby', 'password', 1, 'user');
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`) VALUES (1, 'admin', '$2a$10$VGLMyEKzMsCtE4F3avV.dOH6oih0SlVJLLbf95eCJFy8XCOo.jNAO', 1, 'admin');
 
 COMMIT;
 

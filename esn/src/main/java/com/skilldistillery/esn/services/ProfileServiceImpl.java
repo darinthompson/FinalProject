@@ -24,17 +24,16 @@ public class ProfileServiceImpl implements ProfileService {
 	private UserRepository userRepo;
 
 	@Override
-	public List<Profile> index() {
-		return profileRepo.findAll();
+	public List<Profile> index(String username) {
+		return profileRepo.findAllByUser_Username(username);
 
 	}
 
 	@Override
-	public Profile show(int id) {
-		Optional optionalProfile = profileRepo.findById(id);
-		if (optionalProfile.isPresent()) {
-			Profile profile = (Profile) optionalProfile.get();
-			return profile;
+	public Profile show(String username) {
+		Profile optionalProfile = profileRepo.findByUser_Username(username);
+		if (optionalProfile != null) {
+			return optionalProfile;
 		}
 		return null;
 	}

@@ -29,13 +29,13 @@ public class ProfileController {
 	private ProfileService profileService;
 
 	@GetMapping("profiles")
-	public List<Profile> index(HttpServletRequest req, HttpServletResponse res) {
-		return profileService.index();
+	public List<Profile> index(HttpServletRequest req, HttpServletResponse res, Principal principal) {
+		return profileService.index(principal.getName());
 	}
 
 	@GetMapping("profiles/{pid}")
-	public Profile getById(HttpServletRequest req, HttpServletResponse res, @PathVariable int pid) {
-		return profileService.show(pid);
+	public Profile getById(HttpServletRequest req, HttpServletResponse res, Principal principal) {
+		return profileService.show(principal.getName());
 	}
 
 	@PutMapping("profiles/{pid}")

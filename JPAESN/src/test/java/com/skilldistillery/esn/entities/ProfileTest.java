@@ -54,7 +54,7 @@ class ProfileTest {
 	@DisplayName("testing relational mapping to User")
 	void test2() {
 		assertNotNull(profile.getUser());
-		assertEquals("dobby", profile.getUser().getUserName());
+		assertEquals("dobby", profile.getUser().getUsername());
 		assertEquals("password", profile.getUser().getPassword());
 	}
 	
