@@ -1,5 +1,6 @@
 package com.skilldistillery.esn.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -16,50 +17,50 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Profile {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name="first_name")
+
+	@Column(name = "first_name")
 	private String firstName;
-	
-	@Column(name="last_name")
+
+	@Column(name = "last_name")
 	private String lastName;
 	private String email;
-	
-	@Column(name="avatar_url")
+
+	@Column(name = "avatar_url")
 	private String avatar;
-	
+
 	@JsonManagedReference
 	@OneToOne
 	@JoinColumn(name = "user_id")
 	private User user;
-	
+
 	@OneToMany(mappedBy = "author")
 	private List<Article> articles;
-	
+
 	@OneToMany(mappedBy = "profile")
 	private List<Comment> comments;
-	
+
 	@OneToMany
 	@JoinColumn(name = "id")
 	private List<Organization> favoriteOrganizations;
-	
+
 	@OneToMany
 	@JoinColumn(name = "id")
 	private List<Team> favoriteTeams;
-	
+
 	@OneToMany
 	@JoinColumn(name = "id")
 	private List<Player> favoritePlayers;
-	
+
 	@OneToMany
 	@JoinColumn(name = "id")
 	private List<Game> favoriteGames;
-	
+
 	public Profile() {
-		
+
 	}
 
 	public Profile(int id, String firstName, String lastName, String email, String avatar, User user,
@@ -176,6 +177,66 @@ public class Profile {
 		this.favoriteGames = favoriteGames;
 	}
 
+	public void addTeam(Team team) {
+		if (favoriteTeams == null) {
+			favoriteTeams = new ArrayList<>();
+		}
+		if (!favoriteTeams.contains(team)) {
+			favoriteTeams.add(team);
+		}
+	}
+
+	public void removeTeam(Team team) {
+		if (favoriteTeams != null && favoriteTeams.contains(team)) {
+			favoriteTeams.remove(team);
+		}
+	}
+
+	public void addOrganization(Organization organization) {
+		if (favoriteOrganizations == null) {
+			favoriteOrganizations = new ArrayList<>();
+		}
+		if (!favoriteOrganizations.contains(organization)) {
+			favoriteOrganizations.add(organization);
+		}
+	}
+
+	public void removeOrganization(Organization organization) {
+		if (favoriteOrganizations != null && favoriteOrganizations.contains(organization)) {
+			favoriteTeams.remove(organization);
+		}
+	}
+
+	public void addGame(Game game) {
+		if (favoriteGames == null) {
+			favoriteGames = new ArrayList<>();
+		}
+		if (!favoriteGames.contains(game)) {
+			favoriteGames.add(game);
+		}
+	}
+
+	public void removeGame(Game game) {
+		if (favoriteGames != null && favoriteGames.contains(game)) {
+			favoriteGames.remove(game);
+		}
+	}
+
+	public void addPlayer(Player player) {
+		if (favoritePlayers == null) {
+			favoritePlayers = new ArrayList<>();
+		}
+		if (!favoritePlayers.contains(player)) {
+			favoritePlayers.add(player);
+		}
+	}
+
+	public void removePlayer(Player player) {
+		if (favoritePlayers != null && favoritePlayers.contains(player)) {
+			favoritePlayers.remove(player);
+		}
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -222,7 +283,6 @@ public class Profile {
 		return true;
 	}
 
-	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

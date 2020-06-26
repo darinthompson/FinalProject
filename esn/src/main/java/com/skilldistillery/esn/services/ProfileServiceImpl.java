@@ -32,11 +32,11 @@ public class ProfileServiceImpl implements ProfileService {
 	@Override
 	public Profile show(int id) {
 		Optional optionalProfile = profileRepo.findById(id);
-		if(optionalProfile.isPresent()) {
+		if (optionalProfile.isPresent()) {
 			Profile profile = (Profile) optionalProfile.get();
 			return profile;
 		}
-		 return null;
+		return null;
 	}
 
 	@Override
@@ -57,67 +57,106 @@ public class ProfileServiceImpl implements ProfileService {
 	}
 
 	@Override
-	public Profile update(int profileId, Profile profile) {
-		Optional<Profile> optionalProfile = profileRepo.findById(profileId);
-		if(optionalProfile.isPresent()) {
-			Profile managedProfile = optionalProfile.get();
-			if(managedProfile != null) {
-				managedProfile.setAvatar(profile.getAvatar());
-				managedProfile.setEmail(profile.getEmail());
-				managedProfile.setFirstName(profile.getFirstName());
-				managedProfile.setLastName(profile.getLastName());
-				
-				return profileRepo.saveAndFlush(managedProfile);
-			}
+	public Profile update(String username, Profile profile) {
+		Profile managedProfile = profileRepo.findByUser_Username(username);
+
+		if (managedProfile != null) {
+			managedProfile.setAvatar(profile.getAvatar());
+			managedProfile.setEmail(profile.getEmail());
+			managedProfile.setFirstName(profile.getFirstName());
+			managedProfile.setLastName(profile.getLastName());
+
+			return profileRepo.saveAndFlush(managedProfile);
+		}
+
+		return null;
+	}
+
+	@Override
+	public Profile addTeam(String username, Team team) {
+		Profile profile = profileRepo.findByUser_Username(username);
+
+		if (profile != null) {
+			profile.addTeam(team);
+			return profileRepo.saveAndFlush(profile);
 		}
 		return null;
 	}
 
 	@Override
-	public List<Team> addTeam(int profileId, Team team) {
-		// TODO Auto-generated method stub
+	public Profile addPlayer(String username, Player player) {
+		Profile profile = profileRepo.findByUser_Username(username);
+
+		if (profile != null) {
+			profile.addPlayer(player);
+			return profileRepo.saveAndFlush(profile);
+		}
 		return null;
 	}
 
 	@Override
-	public List<Player> addPlayer(int profileId, Player player) {
-		// TODO Auto-generated method stub
+	public Profile addOrg(String username, Organization organization) {
+		Profile profile = profileRepo.findByUser_Username(username);
+		
+		if(profile != null) {
+			profile.addOrganization(organization);
+			return profileRepo.saveAndFlush(profile);
+		}
 		return null;
 	}
 
 	@Override
-	public List<Organization> addOrg(int profileId, Organization organization) {
-		// TODO Auto-generated method stub
+	public Profile addGame(String username, Game game) {
+		Profile profile = profileRepo.findByUser_Username(username);
+		
+		if(profile != null) {
+			profile.addGame(game);
+			return profileRepo.saveAndFlush(profile);
+		}
 		return null;
 	}
 
 	@Override
-	public List<Game> addGame(int profileId, Game game) {
-		// TODO Auto-generated method stub
+	public Profile removeTeam(String username, Team team) {
+		Profile profile = profileRepo.findByUser_Username(username);
+		
+		if (profile != null) {
+			profile.removeTeam(team);
+			return profileRepo.saveAndFlush(profile);
+		}
 		return null;
 	}
 
 	@Override
-	public List<Team> removeTeam(int profileId, Team team) {
-		// TODO Auto-generated method stub
+	public Profile removePlayer(String username, Player player) {
+	Profile profile = profileRepo.findByUser_Username(username);
+		
+		if (profile != null) {
+			profile.removePlayer(player);
+			return profileRepo.saveAndFlush(profile);
+		}
 		return null;
 	}
 
 	@Override
-	public List<Player> removePlayer(int profileId, Player player) {
-		// TODO Auto-generated method stub
+	public Profile removeOrg(String username, Organization organization) {
+	Profile profile = profileRepo.findByUser_Username(username);
+		
+		if (profile != null) {
+			profile.removeOrganization(organization);
+			return profileRepo.saveAndFlush(profile);
+		}
 		return null;
 	}
 
 	@Override
-	public List<Organization> removeOrg(int profileId, Organization organization) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Game> removeGame(int profileId, Game game) {
-		// TODO Auto-generated method stub
+	public Profile removeGame(String username, Game game) {
+	Profile profile = profileRepo.findByUser_Username(username);
+		
+		if (profile != null) {
+			profile.removeGame(game);
+			return profileRepo.saveAndFlush(profile);
+		}
 		return null;
 	}
 
