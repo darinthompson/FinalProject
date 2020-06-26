@@ -1,5 +1,6 @@
 package com.skilldistillery.esn.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.esn.entities.Game;
+import com.skilldistillery.esn.entities.Organization;
+import com.skilldistillery.esn.entities.Player;
 import com.skilldistillery.esn.entities.Profile;
+import com.skilldistillery.esn.entities.Team;
 import com.skilldistillery.esn.services.ProfileService;
 
 @RestController
@@ -22,19 +27,68 @@ public class ProfileController {
 
 	@Autowired
 	private ProfileService profileService;
-	
+
 	@GetMapping("profiles")
-	public List<Profile> index(HttpServletRequest req, HttpServletResponse res){
+	public List<Profile> index(HttpServletRequest req, HttpServletResponse res) {
 		return profileService.index();
 	}
-	
+
 	@GetMapping("profiles/{pid}")
 	public Profile getById(HttpServletRequest req, HttpServletResponse res, @PathVariable int pid) {
 		return profileService.show(pid);
 	}
-	
+
 	@PutMapping("profiles/{pid}")
-	public Profile updateProfile(HttpServletRequest req, HttpServletResponse res, @PathVariable int pid, @RequestBody Profile profile) {
-		return profileService.update(pid, profile);
+	public Profile updateProfile(HttpServletRequest req, HttpServletResponse res, @RequestBody Profile profile,
+			Principal principal) {
+		return profileService.update(principal.getName(), profile);
+	}
+
+	@PutMapping("profiles/{id}/addTeam")
+	public Profile addTeam(HttpServletRequest req, HttpServletResponse res, @RequestBody Team team,
+			Principal principal) {
+		return profileService.addTeam(principal.getName(), team);
+	}
+
+	@PutMapping("profiles/{id}/addGame")
+	public Profile addGame(HttpServletRequest req, HttpServletResponse res, @RequestBody Game game,
+			Principal principal) {
+		return profileService.addGame(principal.getName(), game);
+	}
+
+	@PutMapping("profiles/{id}/addOrg")
+	public Profile addOrg(HttpServletRequest req, HttpServletResponse res, @RequestBody Organization organization,
+			Principal principal) {
+		return profileService.addOrg(principal.getName(), organization);
+	}
+
+	@PutMapping("profiles/{id}/addPlayer")
+	public Profile addPlayer(HttpServletRequest req, HttpServletResponse res, @RequestBody Player player,
+			Principal principal) {
+		return profileService.addPlayer(principal.getName(), player);
+	}
+
+	@PutMapping("profiles/{id}/removeTeam")
+	public Profile removeTeam(HttpServletRequest req, HttpServletResponse res, @RequestBody Team team,
+			Principal principal) {
+		return profileService.removeTeam(principal.getName(), team);
+	}
+
+	@PutMapping("profiles/{id}/removeGame")
+	public Profile removeGame(HttpServletRequest req, HttpServletResponse res, @RequestBody Game game,
+			Principal principal) {
+		return profileService.removeGame(principal.getName(), game);
+	}
+
+	@PutMapping("profiles/{id}/removeOrg")
+	public Profile removeOrg(HttpServletRequest req, HttpServletResponse res, @RequestBody Organization organization,
+			Principal principal) {
+		return profileService.removeOrg(principal.getName(), organization);
+	}
+
+	@PutMapping("profiles/{id}/removePlayer")
+	public Profile removePlayer(HttpServletRequest req, HttpServletResponse res, @RequestBody Player player,
+			Principal principal) {
+		return profileService.removePlayer(principal.getName(), player);
 	}
 }

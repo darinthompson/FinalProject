@@ -16,21 +16,21 @@ public interface ProfileService {
 
 	public Profile create(int userId, Profile profile);
 
-	public Profile update(int profileId, Profile profile);
+	public Profile update(String username, Profile profile);
 
-	public List<Team> addTeam(int profileId, Team team);
+	public Profile addTeam(String username, Team team);
 
-	public List<Player> addPlayer(int profileId, Player player);
+	public Profile addPlayer(String username, Player player);
 
-	public List<Organization> addOrg(int profileId, Organization organization);
+	public Profile addOrg(String username, Organization organization);
 
-	public List<Game> addGame(int profileId, Game game);
+	public Profile addGame(String username, Game game);
 
-	public List<Team> removeTeam(int profileId, Team team);
+	public Profile removeTeam(String username, Team team);
 
-	public List<Player> removePlayer(int profileId, Player player);
+	public Profile removePlayer(String username, Player player);
 
-	public List<Organization> removeOrg(int profileId, Organization organization);
+	public Profile removeOrg(String username, Organization organization);
 
-	public List<Game> removeGame(int profileId, Game game);
+	public Profile removeGame(String username, Game game);
 }
