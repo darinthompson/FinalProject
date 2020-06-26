@@ -24,12 +24,38 @@ public class SeriesController {
 
 	@GetMapping("series")
 	public List<Series> index(HttpServletRequest req, HttpServletResponse res, Principal principal) {
-		return seriesService.index(principal.getName());
+		List<Series> results;
+		try {
+			results = seriesService.index(principal.getName());
+			if (results.size() > 0) {
+				res.setStatus(200);
+			} else {
+				res.setStatus(400);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			results = null;
+		}
+		return results;
 	}
 
 	@GetMapping("series/{id}")
 	public Series show(HttpServletRequest req, HttpServletResponse res, Principal principal, @PathVariable int id) {
-		return seriesService.show(principal.getName(), id);
+		Series result;
+		try {
+			result = seriesService.show(principal.getName(), id);
+			if (result != null) {
+				res.setStatus(200);
+			} else {
+				res.setStatus(400);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			result = null;
+		}
+		return result;
 	}
 
 }
