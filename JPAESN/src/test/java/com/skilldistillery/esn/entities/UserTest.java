@@ -43,7 +43,7 @@ class UserTest {
 	@Test
 	void test() {
 		assertNotNull(user);
-		assertEquals("dobby", user.getUserName());
+		assertEquals("dobby", user.getUsername());
 		assertEquals("password", user.getPassword());
 		assertEquals(true, user.isEnabled());
 		assertEquals("User", user.getRole());

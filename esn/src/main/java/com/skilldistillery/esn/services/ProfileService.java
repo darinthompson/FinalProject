@@ -10,9 +10,9 @@ import com.skilldistillery.esn.entities.Team;
 
 public interface ProfileService {
 
-	public List<Profile> index();
+	public List<Profile> index(String username);
 
-	public Profile show(int id);
+	public Profile show(String username);
 
 	public Profile create(int userId, Profile profile);
 
