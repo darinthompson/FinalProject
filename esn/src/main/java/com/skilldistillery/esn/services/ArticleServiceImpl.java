@@ -38,18 +38,18 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	public Article show(Integer id) {
+		Article result = null;
+		
 		try {
 			Optional<Article> opt = articleRepo.findById(id);
 			if (opt.isPresent()) {
-				Article result = opt.get();
-				return result;
-			} else {
-				return null;
+				result = opt.get();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
 		}
+		
+		return result;
 	}
 
 	@Override

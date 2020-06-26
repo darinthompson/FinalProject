@@ -73,7 +73,7 @@ public class ArticleController {
 	}
 	
 	@GetMapping("articles/{aid}")
-	public Article getById(
+	public Article show(
 			@PathVariable Integer aid,
 			HttpServletResponse res,
 			Principal principal
