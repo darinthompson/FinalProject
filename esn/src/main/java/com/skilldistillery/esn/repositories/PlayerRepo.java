@@ -8,5 +8,5 @@ import com.skilldistillery.esn.entities.Player;
 
 public interface PlayerRepo extends JpaRepository<Player, Integer> {
 
-//	List<Player> findByTeam_TeamId(Integer tid);
+	List<Player> findByTeams_Id(Integer tid);
 }

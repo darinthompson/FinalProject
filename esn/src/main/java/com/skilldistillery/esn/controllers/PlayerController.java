@@ -45,28 +45,28 @@ public class PlayerController {
 		return results;
 	}
 	
-//	@GetMapping("{tid}/players")
-//	public List<Player> getPlayersByTeam(
-//			@PathVariable Integer tid,
-//			HttpServletResponse res,
-//			Principal principal)
-//	{
-//		List<Player> results;
-//		try {
-//			results = playerSvc.getPlayersByTeam(tid);
-//			if (results.size() > 0) {
-//				res.setStatus(200);
-//			} else {
-//				res.setStatus(404);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			res.setStatus(400);
-//			results = null;
-//		}
-//		
-//		return results;
-//	}
+	@GetMapping("players/team/{tid}")
+	public List<Player> getPlayersByTeam(
+			@PathVariable Integer tid,
+			HttpServletResponse res,
+			Principal principal)
+	{
+		List<Player> results;
+		try {
+			results = playerSvc.getPlayersByTeam(tid);
+			if (results.size() > 0) {
+				res.setStatus(200);
+			} else {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			results = null;
+		}
+		
+		return results;
+	}
 	
 	@GetMapping("players/{pid}")
 	public Player show(
