@@ -8,7 +8,7 @@ public interface PlayerService {
 
 	List<Player> index();
 	
-//	List<Player> getPlayersByTeam(Integer tid);
+	List<Player> getPlayersByTeam(Integer tid);
 	
 	Player show(Integer pid);
 }

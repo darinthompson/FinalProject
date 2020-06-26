@@ -20,10 +20,10 @@ public class PlayerServiceImpl implements PlayerService {
 		return repo.findAll();
 	}
 
-//	@Override
-//	public List<Player> getPlayersByTeam(Integer tid) {
-//		return repo.findByTeam_TeamId(tid);
-//	}
+	@Override
+	public List<Player> getPlayersByTeam(Integer tid) {
+		return repo.findByTeams_Id(tid);
+	}
 
 	@Override
 	public Player show(Integer pid) {
