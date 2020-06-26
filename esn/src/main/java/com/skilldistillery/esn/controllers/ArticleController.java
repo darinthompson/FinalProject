@@ -54,7 +54,6 @@ public class ArticleController {
 			HttpServletResponse res,
 			Principal principal)
 	{
-		System.out.println("----------"+principal.getName()+"----------");
 		List<Article> results;
 		try {
 			results = articleSvc.getAllAuthorEnabledArticles(principal.getName());

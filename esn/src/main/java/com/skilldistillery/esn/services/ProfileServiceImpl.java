@@ -31,9 +31,9 @@ public class ProfileServiceImpl implements ProfileService {
 
 	@Override
 	public Profile show(String username) {
-		Profile optionalProfile = profileRepo.findByUser_Username(username);
-		if (optionalProfile != null) {
-			return optionalProfile;
+		Profile profile = profileRepo.findByUser_Username(username);
+		if (profile != null) {
+			return profile;
 		}
 		return null;
 	}
