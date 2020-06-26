@@ -1,6 +1,6 @@
 package com.skilldistillery.esn.controllers;
 
-import java.awt.print.Book;
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,17 +27,17 @@ public class UserController {
 	UserService userService;
 	
 	@GetMapping("users")
-	public List<User> getUsers() {
+	public List<User> getUsers(Principal principal) {
 		return userService.getUsers();
 	}
 	
 	@GetMapping("users/{id}")
-	public User getUserById(@PathVariable int id) {
+	public User getUserById(@PathVariable int id, Principal principal) {
 		return userService.getUserByID(id);
 	}
 	
 	@PostMapping("users")
-	public User createUser(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) {
+	public User createUser(@RequestBody User user, HttpServletRequest request, HttpServletResponse response, Principal principal) {
 		User newUser = null;
 		try {
 			newUser = userService.create(user);
@@ -54,7 +54,7 @@ public class UserController {
 	}
 	
 	@DeleteMapping("users/{id}")
-	public boolean delete(@PathVariable int id, HttpServletRequest request, HttpServletResponse response) {
+	public boolean delete(@PathVariable int id, HttpServletRequest request, HttpServletResponse response, Principal principal) {
 		if(userService.delete(id)) {
 			response.setStatus(204);
 			return true;
@@ -65,7 +65,7 @@ public class UserController {
 	}
 	
 	@PutMapping("users/{id}")
-	public User update(@PathVariable int id, @RequestBody User user, HttpServletRequest request, HttpServletResponse response) {
+	public User update(@PathVariable int id, @RequestBody User user, HttpServletRequest request, HttpServletResponse response, Principal principal) {
 		return userService.update(user, id);
 	}
 	
