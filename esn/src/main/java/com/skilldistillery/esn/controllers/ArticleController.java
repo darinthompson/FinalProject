@@ -30,7 +30,8 @@ public class ArticleController {
 	
 	@GetMapping("articles")
 	public List<Article> index(
-			HttpServletResponse res)
+			HttpServletResponse res,
+			Principal principal)
 	{
 		List<Article> results;
 		try {
@@ -157,7 +158,7 @@ public class ArticleController {
 		}
 	}
 	
-	@DeleteMapping("articles/disable/{aid")
+	@DeleteMapping("articles/disable/{aid}")
 	public void disable(
 			@PathVariable Integer aid,
 			HttpServletResponse res,
