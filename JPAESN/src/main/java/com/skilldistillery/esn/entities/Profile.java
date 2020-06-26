@@ -241,11 +241,7 @@ public class Profile {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((avatar == null) ? 0 : avatar.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		return result;
 	}
 
@@ -258,27 +254,7 @@ public class Profile {
 		if (getClass() != obj.getClass())
 			return false;
 		Profile other = (Profile) obj;
-		if (avatar == null) {
-			if (other.avatar != null)
-				return false;
-		} else if (!avatar.equals(other.avatar))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
 		if (id != other.id)
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
 			return false;
 		return true;
 	}
