@@ -7,7 +7,6 @@ import com.skilldistillery.esn.entities.User;
 public interface UserService {
 	List<User> getUsers(String username);
 	User getUserByID(int id, String username);
-	User create(User user, String username);
 	User update(User user, int id, String username);
 	boolean disable(int id, String username);
 	boolean enable(int id, String username);

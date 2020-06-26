@@ -9,7 +9,7 @@ import com.skilldistillery.esn.services.ProfileService;
 import com.skilldistillery.esn.services.UserService;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/admin")
 @CrossOrigin({"*", "http:localhost:4209"})
 public class AdminController {
 
