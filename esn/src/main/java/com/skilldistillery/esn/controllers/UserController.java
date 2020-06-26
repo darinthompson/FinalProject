@@ -27,20 +27,55 @@ public class UserController {
 	UserService userService;
 	
 	@GetMapping("users")
-	public List<User> getUsers(Principal principal) {
-		return userService.getUsers();
+	public List<User> getUsers(
+			HttpServletResponse res,
+			Principal principal)
+	{
+		List<User> results;
+		try {
+			results = userService.getUsers(principal.getName());
+			if (results.size() > 0) {
+				res.setStatus(200);
+			} else {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			results = null;
+		}
+		
+		return results;
 	}
 	
 	@GetMapping("users/{id}")
-	public User getUserById(@PathVariable int id, Principal principal) {
-		return userService.getUserByID(id);
+	public User getUserById(
+			@PathVariable int id,
+			HttpServletResponse res,
+			Principal principal)
+	{
+		User result;
+		try {
+			result = userService.getUserByID(id, principal.getName());
+			if (result != null) {
+				res.setStatus(200);
+			} else {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			result = null;
+		}
+		
+		return result;
 	}
 	
 	@PostMapping("users")
 	public User createUser(@RequestBody User user, HttpServletRequest request, HttpServletResponse response, Principal principal) {
 		User newUser = null;
 		try {
-			newUser = userService.create(user);
+			newUser = userService.create(user, principal.getName());
 			response.setStatus(201);
 			StringBuffer url = request.getRequestURL();
 			url.append("/" + user.getId());
@@ -50,12 +85,37 @@ public class UserController {
 			response.setStatus(400);
 			newUser = null;
 		}
+		
 		return newUser;
+	}
+	
+	@PutMapping("users/{id}")
+	public User update(
+			@PathVariable int id,
+			@RequestBody User user,
+			HttpServletResponse res,
+			Principal principal)
+	{
+		User updated;
+		try {
+			updated = userService.update(user, id, principal.getName());
+			if (updated != null) {
+				res.setStatus(200);				
+			} else {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			updated = null;
+		}
+		
+		return updated;
 	}
 	
 	@DeleteMapping("users/{id}")
 	public boolean delete(@PathVariable int id, HttpServletRequest request, HttpServletResponse response, Principal principal) {
-		if(userService.delete(id)) {
+		if(userService.disable(id, principal.getName())) {
 			response.setStatus(204);
 			return true;
 		} else {
@@ -63,10 +123,5 @@ public class UserController {
 			return false;
 		}
 	}
-	
-	@PutMapping("users/{id}")
-	public User update(@PathVariable int id, @RequestBody User user, HttpServletRequest request, HttpServletResponse response, Principal principal) {
-		return userService.update(user, id);
-	}
-	
+		
 }

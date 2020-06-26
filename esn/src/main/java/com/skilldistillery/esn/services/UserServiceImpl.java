@@ -16,50 +16,107 @@ public class UserServiceImpl implements UserService {
 	UserRepository userRepo;
 	
 	@Override
-	public List<User> getUsers() {
-		return userRepo.findAll();
+	public List<User> getUsers(String username) {
+		if (username.equals("admin")) {
+			return userRepo.findAll();			
+		} else {
+			return null;
+		}
 	}
 	
 	@Override
-	public User getUserByID(int id) {
-		Optional<User> optUser = userRepo.findById(id);
-		User userActual = null;
-		if(optUser.isPresent()) {
-			userActual = optUser.get();
+	public User getUserByID(int id, String username) {
+		if (username.equals("admin")) {
+			Optional<User> optUser = userRepo.findById(id);
+			User userActual = null;
+			if(optUser.isPresent()) {
+				userActual = optUser.get();
+			}
+			return userActual;			
+		} else {
+			return null;
 		}
-		return userActual;
 	}
 
 	@Override
-	public User create(User user) {
+	public User create(User user, String username) {
+		user.setEnabled(true);
 		User newUser = userRepo.save(user);
 		return newUser;
 	}
 	
 	@Override
-	public boolean delete(int id) {
-		Optional<User> optUser = userRepo.findById(id);
-		if(optUser.isPresent()) {
-			userRepo.delete(optUser.get());
-			return true;
-		} else {
-			return false;
+	public User update(User user, int id, String username) {
+		if (username.equals("admin")) {
+			Optional<User> optUser = userRepo.findById(id);
+			User updateUser = null;
+			if(optUser.isPresent()) {
+				updateUser = optUser.get();
+				updateUser.setUsername(user.getUsername());
+				updateUser.setEnabled(user.isEnabled());
+				updateUser.setRole(user.getRole());
+				updateUser.setPassword(user.getPassword());
+				userRepo.saveAndFlush(updateUser);
+				return updateUser;
+			} else {
+				return null;
+			}
+		}
+		else {
+			User updateUser = userRepo.findByUsername(username);
+			if (updateUser != null) {
+				updateUser.setUsername(user.getUsername());
+				updateUser.setEnabled(user.isEnabled());
+				updateUser.setRole(user.getRole());
+				updateUser.setPassword(user.getPassword());
+				userRepo.saveAndFlush(updateUser);
+				return updateUser;
+			} else {
+				return null;
+			}
 		}
 	}
 	
 	@Override
-	public User update(User user, int id) {
-		Optional<User> optUser = userRepo.findById(id);
-		User updateUser = null;
-		if(optUser.isPresent()) {
-			updateUser = optUser.get();
-			updateUser.setUsername(user.getUsername());
-			updateUser.setEnabled(user.isEnabled());
-			updateUser.setRole(user.getRole());
-			updateUser.setPassword(user.getPassword());
-			userRepo.saveAndFlush(updateUser);
+	public boolean disable(int id, String username) {
+		if (username.equals("admin")) {
+			Optional<User> optUser = userRepo.findById(id);
+			if(optUser.isPresent()) {
+				User toDisable = optUser.get();
+				toDisable.setEnabled(false);
+				userRepo.saveAndFlush(toDisable);
+				return true;
+			} else {
+				return false;
+			}
 		}
-		return updateUser;
+		else {
+			User toDisable = userRepo.findByUsername(username);
+			if (toDisable != null) {
+				toDisable.setEnabled(false);
+				userRepo.saveAndFlush(toDisable);
+				return true;				
+			} else {
+				return false;
+			}
+		}
+	}
+
+	@Override
+	public boolean enable(int id, String username) {
+		if (username.equals("admin")) {
+			Optional<User> optUser = userRepo.findById(id);
+			if(optUser.isPresent()) {
+				User toEnable = optUser.get();
+				toEnable.setEnabled(true);
+				userRepo.saveAndFlush(toEnable);
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	}
 	
 }

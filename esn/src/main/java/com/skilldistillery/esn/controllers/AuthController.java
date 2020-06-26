@@ -23,11 +23,9 @@ public class AuthController {
 
 	@PostMapping("/register")
 	public User register(@RequestBody User user, HttpServletResponse res) {
-		System.out.println(user);
 		if (user == null) {
 			res.setStatus(400);
 		}
-
 		user = authService.register(user);
 
 		return user;

@@ -6,4 +6,5 @@ import com.skilldistillery.esn.entities.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
+	User findByUsername(String username);
 }
