@@ -16,8 +16,6 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 
 @Entity
 public class Team {
@@ -32,12 +30,10 @@ public class Team {
 	@JoinColumn(name = "game_id")
 	private Game game;
 	
-	
 	@OneToMany(mappedBy = "team1")
 	@JsonIgnore
 	private List<SeriesMatch> matchesTeam1;
 
-	
 	@OneToMany(mappedBy = "team2")
 	@JsonIgnore
 	private List<SeriesMatch> matchesTeam2;
@@ -57,10 +53,8 @@ public class Team {
 		matches.addAll(matchesTeam2);
 		return matches;
 	}
-
-	public Game getGame() {
-		return game;
-	}
+	
+	public Team() {}
 
 	public Team(int id, String image, Game game, List<Player> players) {
 		super();
@@ -69,29 +63,7 @@ public class Team {
 		this.game = game;
 		this.players = players;
 	}
-
-	public void setGame(Game game) {
-		this.game = game;
-	}
-
-	public List<Player> getPlayers() {
-		return players;
-	}
-
-	public void setPlayers(List<Player> players) {
-		this.players = players;
-	}
-
-	public Team() {
-		super();
-	}
-
-	public Team(int id, String image) {
-		super();
-		this.id = id;
-		this.image = image;
-	}
-
+	
 	public int getId() {
 		return id;
 	}
@@ -108,6 +80,14 @@ public class Team {
 		this.image = image;
 	}
 
+	public Game getGame() {
+		return game;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
 	public List<SeriesMatch> getMatchesTeam1() {
 		return matchesTeam1;
 	}
@@ -122,6 +102,22 @@ public class Team {
 
 	public void setMatchesTeam2(List<SeriesMatch> matchesTeam2) {
 		this.matchesTeam2 = matchesTeam2;
+	}
+
+	public Organization getOrganization() {
+		return organization;
+	}
+
+	public void setOrganization(Organization organization) {
+		this.organization = organization;
+	}
+
+	public List<Player> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(List<Player> players) {
+		this.players = players;
 	}
 
 	@Override
@@ -155,8 +151,12 @@ public class Team {
 		builder.append(image);
 		builder.append(", game=");
 		builder.append(game);
-//		builder.append(", players=");
-//		builder.append(players);
+		builder.append(", matchesTeam1=");
+		builder.append(matchesTeam1);
+		builder.append(", matchesTeam2=");
+		builder.append(matchesTeam2);
+		builder.append(", organization=");
+		builder.append(organization);
 		builder.append("]");
 		return builder.toString();
 	}

@@ -2,7 +2,6 @@ package com.skilldistillery.esn.entities;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
