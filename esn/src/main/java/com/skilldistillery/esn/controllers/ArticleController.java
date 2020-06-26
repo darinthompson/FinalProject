@@ -49,7 +49,30 @@ public class ArticleController {
 		return results;
 	}
 	
-	@GetMapping("articles/{articleId}")
+	@GetMapping("articles/author")
+	public List<Article> getAllAuthorArticlesEnabled(
+			HttpServletResponse res,
+			Principal principal)
+	{
+		System.out.println("----------"+principal.getName()+"----------");
+		List<Article> results;
+		try {
+			results = articleSvc.getAllAuthorEnabledArticles(principal.getName());
+			if (results.size() > 0) {
+				res.setStatus(200);
+			} else {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			results = null;
+		}
+		
+		return results;
+	}
+	
+	@GetMapping("articles/{aid}")
 	public Article getById(
 			@PathVariable Integer aid,
 			HttpServletResponse res,
@@ -95,15 +118,15 @@ public class ArticleController {
 		return article;
 	}
 	
-	@PutMapping("articles/{articleId}")
+	@PutMapping("articles/{aid}")
 	public Article update(
-			@PathVariable Integer articleId,
+			@PathVariable Integer aid,
 			@RequestBody Article article,
 			HttpServletResponse res,
 			Principal principal)
 	{
 		try {
-			article = articleSvc.update(article, articleId, principal.getName());
+			article = articleSvc.update(article, aid, principal.getName());
 			if (article == null) {
 				res.setStatus(404);
 			}
@@ -117,14 +140,14 @@ public class ArticleController {
 		return article;
 	}
 	
-	@PutMapping("articles/enable/{articleId}")
+	@PutMapping("articles/enable/{aid}")
 	public void enable(
-			@PathVariable Integer articleId,
+			@PathVariable Integer aid,
 			HttpServletResponse res,
 			Principal principal)
 	{
 		try {
-			if (articleSvc.enable(articleId, principal.getName())) {
+			if (articleSvc.enable(aid, principal.getName())) {
 				res.setStatus(200);
 			} else {
 				res.setStatus(404);
@@ -135,14 +158,14 @@ public class ArticleController {
 		}
 	}
 	
-	@DeleteMapping("articles/disable/{articleId")
+	@DeleteMapping("articles/disable/{aid")
 	public void disable(
-			@PathVariable Integer articleId,
+			@PathVariable Integer aid,
 			HttpServletResponse res,
 			Principal principal)
 	{
 		try {
-			if (articleSvc.disable(articleId, principal.getName())) {
+			if (articleSvc.disable(aid, principal.getName())) {
 				res.setStatus(204);
 			} else {
 				res.setStatus(404);

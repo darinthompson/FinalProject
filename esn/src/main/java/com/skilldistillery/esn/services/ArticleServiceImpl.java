@@ -32,8 +32,9 @@ public class ArticleServiceImpl implements ArticleService {
 	
 	@Override
 	public List<Article> getAllAuthorEnabledArticles(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		Profile profile = profileRepo.findByUser_Username(username);
+		System.out.println("--------------"+profile+"-------------");
+		return articleRepo.findByAuthor_IdAndEnabledTrue(profile.getId());
 	}
 
 	@Override
@@ -68,9 +69,9 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public Article update(Article article, Integer articleId, String username) {
+	public Article update(Article article, Integer aid, String username) {
 		Profile profile = profileRepo.findByUser_Username(username);
-		Article updated = articleRepo.findByIdAndAuthor_Id(articleId, profile.getId());
+		Article updated = articleRepo.findByIdAndAuthor_Id(aid, profile.getId());
 
 		if (updated != null) {
 			updated.setTitle(article.getTitle());
@@ -83,9 +84,9 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public boolean enable(Integer articleId, String username) {
+	public boolean enable(Integer aid, String username) {
 		Profile profile = profileRepo.findByUser_Username(username);
-		Article toEnable = articleRepo.findByIdAndAuthor_Id(articleId, profile.getId());
+		Article toEnable = articleRepo.findByIdAndAuthor_Id(aid, profile.getId());
 
 		if (toEnable != null) {
 			toEnable.setEnabled(true);
@@ -97,9 +98,9 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public boolean disable(Integer articleId, String username) {
+	public boolean disable(Integer aid, String username) {
 		Profile profile = profileRepo.findByUser_Username(username);
-		Article toDisable = articleRepo.findByIdAndAuthor_Id(articleId, profile.getId());
+		Article toDisable = articleRepo.findByIdAndAuthor_Id(aid, profile.getId());
 
 		if (toDisable != null) {
 			toDisable.setEnabled(false);
