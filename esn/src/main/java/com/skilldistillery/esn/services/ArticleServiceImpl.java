@@ -33,7 +33,6 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public List<Article> getAllAuthorEnabledArticles(String username) {
 		Profile profile = profileRepo.findByUser_Username(username);
-		System.out.println("--------------"+profile+"-------------");
 		return articleRepo.findByAuthor_IdAndEnabledTrue(profile.getId());
 	}
 

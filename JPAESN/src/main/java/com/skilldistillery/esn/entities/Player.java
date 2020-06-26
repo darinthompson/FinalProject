@@ -40,15 +40,6 @@ public class Player {
 	public Player() {
 	}
 
-	public Player(int id, String firstName, String lastName, String handle, String streamURL) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.handle = handle;
-		this.streamURL = streamURL;
-	}
-
 	public Player(int id, String firstName, String lastName, String handle, String streamURL, List<Team> teams) {
 		super();
 		this.id = id;
