@@ -12,7 +12,9 @@ import com.skilldistillery.esn.entities.Player;
 import com.skilldistillery.esn.entities.Profile;
 import com.skilldistillery.esn.entities.Team;
 import com.skilldistillery.esn.entities.User;
+import com.skilldistillery.esn.repositories.PlayerRepo;
 import com.skilldistillery.esn.repositories.ProfileRepo;
+import com.skilldistillery.esn.repositories.TeamRepo;
 import com.skilldistillery.esn.repositories.UserRepository;
 
 @Service
@@ -22,6 +24,10 @@ public class ProfileServiceImpl implements ProfileService {
 	private ProfileRepo profileRepo;
 	@Autowired
 	private UserRepository userRepo;
+	@Autowired
+	private PlayerRepo playerRepo;
+	@Autowired
+	private TeamRepo teamRepo;
 
 	@Override
 	public List<Profile> index(String username) {
@@ -73,10 +79,11 @@ public class ProfileServiceImpl implements ProfileService {
 
 	@Override
 	public Profile addTeam(String username, Team team) {
+		Optional<Team> optionalTeam = teamRepo.findById(team.getId());
 		Profile profile = profileRepo.findByUser_Username(username);
 
-		if (profile != null) {
-			profile.addTeam(team);
+		if (profile != null && optionalTeam.isPresent()) {
+			profile.addTeam(optionalTeam.get());
 			return profileRepo.saveAndFlush(profile);
 		}
 		return null;
@@ -84,10 +91,11 @@ public class ProfileServiceImpl implements ProfileService {
 
 	@Override
 	public Profile addPlayer(String username, Player player) {
+		Optional<Player> optionalPlayer = playerRepo.findById(player.getId());
 		Profile profile = profileRepo.findByUser_Username(username);
 
-		if (profile != null) {
-			profile.addPlayer(player);
+		if (profile != null && optionalPlayer.isPresent()) {
+			profile.addPlayer(optionalPlayer.get());
 			return profile;
 		}
 		return null;
