@@ -58,6 +58,7 @@ public class ArticleServiceImpl implements ArticleService {
 
 		if (profile != null) {
 			article.setAuthor(profile);
+			article.setEnabled(true);
 			articleRepo.saveAndFlush(article);
 			return article;
 		} else {
@@ -76,6 +77,7 @@ public class ArticleServiceImpl implements ArticleService {
 			updated.setTitle(article.getTitle());
 			updated.setContent(article.getContent());
 			updated.setImage(article.getImage());
+			updated.setEnabled(true);
 			articleRepo.saveAndFlush(updated);
 		}
 
