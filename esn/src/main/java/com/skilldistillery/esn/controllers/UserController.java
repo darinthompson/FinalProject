@@ -3,7 +3,6 @@ package com.skilldistillery.esn.controllers;
 import java.security.Principal;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +48,7 @@ public class UserController {
 	
 	@GetMapping("users/{id}")
 	public User getUserById(
-			@PathVariable int id,
+			@PathVariable Integer id,
 			HttpServletResponse res,
 			Principal principal)
 	{
@@ -70,9 +69,9 @@ public class UserController {
 		return result;
 	}
 	
-	@PutMapping("users/{id}")
+	@PutMapping("users/update/{id}")
 	public User update(
-			@PathVariable int id,
+			@PathVariable Integer id,
 			@RequestBody User user,
 			HttpServletResponse res,
 			Principal principal)
@@ -94,15 +93,14 @@ public class UserController {
 		return updated;
 	}
 	
-	@DeleteMapping("users/{id}")
+	@DeleteMapping("users/disable/{id}")
 	public boolean disable(
-			@PathVariable int id,
-			HttpServletRequest request,
+			@PathVariable Integer id,
 			HttpServletResponse response,
 			Principal principal)
 	{
 		try {
-			if(userService.disable(id, principal.getName())) {
+			if (userService.disable(id, principal.getName())) {
 				response.setStatus(204);
 				return true;
 			} else {
@@ -115,5 +113,25 @@ public class UserController {
 			return false;
 		}
 	}
-		
+	
+	@PutMapping("users/enable/{id}")
+	public boolean enable(
+			@PathVariable Integer id,
+			HttpServletResponse res,
+			Principal principal)
+	{
+		try {
+			if (userService.enable(id, principal.getName())) {
+				res.setStatus(200);
+				return true;
+			} else {
+				res.setStatus(404);
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			return false;
+		}
+	}
 }
