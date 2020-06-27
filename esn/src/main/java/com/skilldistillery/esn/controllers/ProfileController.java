@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +30,11 @@ public class ProfileController {
 	private ProfileService profileService;
 
 	@GetMapping("profiles")
-	public List<Profile> index(HttpServletRequest req, HttpServletResponse res, Principal principal) {
+	public List<Profile> index(
+			HttpServletRequest req,
+			HttpServletResponse res,
+			Principal principal)
+	{
 		List<Profile> results;
 		try {
 			results = profileService.index(principal.getName());
@@ -47,7 +52,11 @@ public class ProfileController {
 	}
 
 	@GetMapping("profiles/{pid}")
-	public Profile getById(HttpServletRequest req, HttpServletResponse res, Principal principal) {
+	public Profile getById(
+			HttpServletRequest req,
+			HttpServletResponse res,
+			Principal principal)
+	{
 		Profile result;
 		try {
 			result = profileService.show(principal.getName());
@@ -63,10 +72,36 @@ public class ProfileController {
 		}
 		return result;
 	}
+	
+	@PostMapping("profiles/{uid}")
+	public Profile create(
+			@RequestBody Profile profile,
+			@PathVariable Integer uid,
+			HttpServletResponse res,
+			HttpServletRequest req,
+			Principal principal)
+	{
+		try {
+			profile = profileService.create(uid, profile, principal.getName());
+			res.setStatus(201);
+			StringBuffer url = req.getRequestURL();
+			url.append("/").append(profile.getId());
+			res.setHeader("Location", url.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			profile = null;
+		}
+		
+		return profile;
+	}
 
 	@PutMapping("profiles/{pid}")
-	public Profile updateProfile(HttpServletRequest req, HttpServletResponse res, @RequestBody Profile profile,
-			Principal principal) {
+	public Profile updateProfile(
+			HttpServletResponse res,
+			@RequestBody Profile profile,
+			Principal principal)
+	{
 		try {
 			profile = profileService.update(principal.getName(), profile);
 			if (profile == null) {

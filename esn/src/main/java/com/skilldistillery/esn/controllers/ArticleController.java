@@ -30,8 +30,7 @@ public class ArticleController {
 	
 	@GetMapping("articles")
 	public List<Article> index(
-			HttpServletResponse res,
-			Principal principal)
+			HttpServletResponse res)
 	{
 		List<Article> results;
 		try {
@@ -75,9 +74,7 @@ public class ArticleController {
 	@GetMapping("articles/{aid}")
 	public Article show(
 			@PathVariable Integer aid,
-			HttpServletResponse res,
-			Principal principal
-			)
+			HttpServletResponse res)
 	{
 		Article result;
 		try {

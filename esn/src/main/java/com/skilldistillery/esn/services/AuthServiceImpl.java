@@ -22,7 +22,7 @@ public class AuthServiceImpl implements AuthService {
 		user.setPassword(encodedPW); // only persist encoded password
 		// set other fields to default values
 		user.setEnabled(true);
-		user.setRole(Role.Admin);
+		user.setRole(Role.User);
 		userRepo.saveAndFlush(user);
 		return user;
 	}

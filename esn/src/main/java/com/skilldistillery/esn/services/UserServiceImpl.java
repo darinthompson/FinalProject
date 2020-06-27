@@ -28,17 +28,16 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User getUserByID(int id, String username) {
-		User loggedInUser = userRepo.findByUsername(username);
-		if (loggedInUser.getRole().equals(Role.Admin)) {
+		User result = null;
+		
+		if (userRepo.findByUsername(username) != null) {
 			Optional<User> optUser = userRepo.findById(id);
-			User userActual = null;
 			if (optUser.isPresent()) {
-				userActual = optUser.get();
+				result = optUser.get();
 			}
-			return userActual;
-		} else {
-			return null;
 		}
+		
+		return result;			
 	}
 
 	@Override
@@ -61,7 +60,7 @@ public class UserServiceImpl implements UserService {
 			return null;
 		}
 	}
-
+	
 	@Override
 	public boolean disable(int id, String username) {
 		User loggedInUser = userRepo.findByUsername(username);

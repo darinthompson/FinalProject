@@ -12,6 +12,7 @@ import com.skilldistillery.esn.entities.Player;
 import com.skilldistillery.esn.entities.Profile;
 import com.skilldistillery.esn.entities.Team;
 import com.skilldistillery.esn.entities.User;
+import com.skilldistillery.esn.enums.Role;
 import com.skilldistillery.esn.repositories.PlayerRepo;
 import com.skilldistillery.esn.repositories.ProfileRepo;
 import com.skilldistillery.esn.repositories.TeamRepo;
@@ -31,8 +32,11 @@ public class ProfileServiceImpl implements ProfileService {
 
 	@Override
 	public List<Profile> index(String username) {
-		return profileRepo.findAllByUser_Username(username);
-
+		if (userRepo.findByUsername(username).getRole().equals(Role.Admin)) {
+			return profileRepo.findAll();
+		} else {
+			return profileRepo.findAllByUser_Username(username);
+		}
 	}
 
 	@Override
@@ -45,7 +49,7 @@ public class ProfileServiceImpl implements ProfileService {
 	}
 
 	@Override
-	public Profile create(int userId, Profile profile) {
+	public Profile create(int userId, Profile profile, String username) {
 		try {
 			Optional<User> optionalUser = userRepo.findById(userId);
 			User user = null;

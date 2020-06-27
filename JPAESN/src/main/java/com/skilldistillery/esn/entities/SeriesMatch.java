@@ -48,6 +48,10 @@ public class SeriesMatch {
 	@JoinColumn(name="team2_id")
 	private Team team2;
 	
+	@ManyToOne
+	@JoinColumn(name = "winner_id")
+	private Team winner;
+	
 	public SeriesMatch() {}
 
 	public SeriesMatch(int id, String title, String team1Title, String team2Title, LocalDate startDate,
@@ -131,6 +135,14 @@ public class SeriesMatch {
 
 	public void setTeam2(Team team2) {
 		this.team2 = team2;
+	}
+
+	public Team getWinner() {
+		return winner;
+	}
+
+	public void setWinner(Team winner) {
+		this.winner = winner;
 	}
 
 	@Override
