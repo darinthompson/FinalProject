@@ -6,6 +6,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { GameComponent } from './components/game/game.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { SeriesMatchComponent } from './components/series-match/series-match.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'game', component: GameComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'match', component: SeriesMatchComponent },
   { path: '**', component: NotFoundComponent }
 
 ];
