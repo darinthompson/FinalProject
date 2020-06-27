@@ -142,7 +142,7 @@ public class ArticleController {
 	}
 	
 	@PutMapping("articles/enable/{aid}")
-	public void enable(
+	public boolean enable(
 			@PathVariable Integer aid,
 			HttpServletResponse res,
 			Principal principal)
@@ -150,17 +150,20 @@ public class ArticleController {
 		try {
 			if (articleSvc.enable(aid, principal.getName())) {
 				res.setStatus(200);
+				return true;
 			} else {
 				res.setStatus(404);
+				return false;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			res.setStatus(400);
+			return false;
 		}
 	}
 	
 	@DeleteMapping("articles/disable/{aid}")
-	public void disable(
+	public boolean disable(
 			@PathVariable Integer aid,
 			HttpServletResponse res,
 			Principal principal)
@@ -168,12 +171,15 @@ public class ArticleController {
 		try {
 			if (articleSvc.disable(aid, principal.getName())) {
 				res.setStatus(204);
+				return true;
 			} else {
 				res.setStatus(404);
+				return false;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			res.setStatus(400);
+			return false;
 		}
 	}
 }

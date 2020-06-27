@@ -12,13 +12,17 @@ import javax.persistence.Table;
 @Entity
 @Table(name="game_stat")
 public class GameStat {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
 	@Column(name = "stat_name")
 	private String statName;
+	
 	@Column(name = "stat_description")
 	private String statDescription;
+	
 	@ManyToOne
 	@JoinColumn(name="game_id")
 	private Game game;

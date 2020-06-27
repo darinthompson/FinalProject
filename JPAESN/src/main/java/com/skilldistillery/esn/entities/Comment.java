@@ -17,7 +17,7 @@ public class Comment {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int Id;
+	private int id;
 	private String content;
 	
 	@JsonIgnore
@@ -32,11 +32,13 @@ public class Comment {
 	
 	@Column(name="create_date")
 	private LocalDateTime createAt;
+	private boolean enabled;
 	
 	public Comment() {}
+	
 	public Comment(int id, String content, Profile profile, Article article, LocalDateTime createAt) {
 		super();
-		Id = id;
+		this.id = id;
 		this.content = content;
 		this.profile = profile;
 		this.article = article;
@@ -44,11 +46,11 @@ public class Comment {
 	}
 
 	public int getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(int id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getContent() {
@@ -82,36 +84,23 @@ public class Comment {
 	public void setCreateAt(LocalDateTime createAt) {
 		this.createAt = createAt;
 	}
-	
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Comment [Id=");
-		builder.append(Id);
-		builder.append(", content=");
-		builder.append(content);
-		builder.append(", profile=");
-		builder.append(profile);
-		builder.append(", article=");
-		builder.append(article);
-		builder.append(", createAt=");
-		builder.append(createAt);
-		builder.append("]");
-		return builder.toString();
+
+	public boolean isEnabled() {
+		return enabled;
 	}
-	
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + Id;
-		result = prime * result + ((article == null) ? 0 : article.hashCode());
-		result = prime * result + ((content == null) ? 0 : content.hashCode());
-		result = prime * result + ((createAt == null) ? 0 : createAt.hashCode());
-		result = prime * result + ((profile == null) ? 0 : profile.hashCode());
+		result = prime * result + id;
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -121,33 +110,28 @@ public class Comment {
 		if (getClass() != obj.getClass())
 			return false;
 		Comment other = (Comment) obj;
-		if (Id != other.Id)
-			return false;
-		if (article == null) {
-			if (other.article != null)
-				return false;
-		} else if (!article.equals(other.article))
-			return false;
-		if (content == null) {
-			if (other.content != null)
-				return false;
-		} else if (!content.equals(other.content))
-			return false;
-		if (createAt == null) {
-			if (other.createAt != null)
-				return false;
-		} else if (!createAt.equals(other.createAt))
-			return false;
-		if (profile == null) {
-			if (other.profile != null)
-				return false;
-		} else if (!profile.equals(other.profile))
+		if (id != other.id)
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Comment [id=");
+		builder.append(id);
+		builder.append(", content=");
+		builder.append(content);
+		builder.append(", profile=");
+		builder.append(profile);
+		builder.append(", article=");
+		builder.append(article);
+		builder.append(", createAt=");
+		builder.append(createAt);
+		builder.append(", enabled=");
+		builder.append(enabled);
+		builder.append("]");
+		return builder.toString();
+	}
 	
 }
