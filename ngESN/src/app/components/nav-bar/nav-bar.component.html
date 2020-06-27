@@ -16,14 +16,14 @@
         <a class="nav-link" href="#" tabindex="-1">Register</a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Games
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">CS:GO</a>
-          <a class="dropdown-item" href="#">DOTA2</a>
-          <a class="dropdown-item" href="#">League of Legends</a>
-          <a class="dropdown-item" href="#">Rocket League</a>
+        <div ngbDropdown class="d-inline-block">
+          <a class="nav-link" id="dropdownBasic1" ngbDropdownToggle>Games</a>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button ngbDropdownItem>CS:GO</button>
+            <button ngbDropdownItem>DOTA2</button>
+            <button ngbDropdownItem>League of Legends</button>
+            <button ngbDropdownItem>Rocket League</button>
+          </div>
         </div>
       </li>
     </ul>
