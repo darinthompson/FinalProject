@@ -25,6 +25,5 @@ export class SeriesMatch {
     this.team1 = team1;
     this.team2 = team2;
     this.winner = winner;
-
   }
 }
