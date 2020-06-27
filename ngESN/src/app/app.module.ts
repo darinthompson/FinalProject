@@ -13,6 +13,13 @@ import { SeriesMatchComponent } from './components/series-match/series-match.com
 import { GameComponent } from './components/game/game.component';
 import { ArticleComponent } from './components/article/article.component';
 import { CommentComponent } from './components/comment/comment.component';
+import { ArticleService } from './services/article.service';
+import { CommentService } from './services/comment.service';
+import { GameStatService } from './services/game-stat.service';
+import { PlayerMatchStatService } from './services/player-match-stat.service';
+import { ProfileService } from './services/profile.service';
+import { RegisterService } from './services/register.service';
+import { UserService } from './services/user.service';
 
 
 @NgModule({
@@ -33,7 +40,15 @@ import { CommentComponent } from './components/comment/comment.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    ArticleService,
+    CommentService,
+    GameStatService,
+    PlayerMatchStatService,
+    ProfileService,
+    RegisterService,
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
