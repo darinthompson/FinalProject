@@ -62,11 +62,8 @@ public class ArticleServiceImpl implements ArticleService {
 	public Article create(Article article, String username) {
 		User loggedInUser = userRepo.findByUsername(username);
 		Profile profile = profileRepo.findByUser_Username(username);
-		
-		System.out.println("-------"+loggedInUser+"----------");
-		System.out.println("-------"+profile+"----------");
 
-		if (profile.getUser().equals(loggedInUser)) {
+		if (profile.getUser().equals(loggedInUser) && !loggedInUser.getRole().equals(Role.User)) {
 			article.setAuthor(profile);
 			article.setEnabled(true);
 			articleRepo.saveAndFlush(article);
@@ -74,7 +71,7 @@ public class ArticleServiceImpl implements ArticleService {
 		} else {
 			article = null;
 		}
-		
+
 		return article;
 	}
 
@@ -94,42 +91,46 @@ public class ArticleServiceImpl implements ArticleService {
 				updated = null;
 			}
 		}
-		
+
 		return updated;
 	}
 
 	@Override
 	public boolean enable(Integer aid, String username) {
 		User loggedInUser = userRepo.findByUsername(username);
-		Profile profile = profileRepo.findByUser_Username(username);
-		Article toEnable = articleRepo.findByIdAndAuthor_Id(aid, profile.getId());
+		boolean enabled = false;
 
-		if (profile.getUser().equals(loggedInUser) || loggedInUser.getRole().equals(Role.Admin)) {
-			if (toEnable != null) {
+		Optional<Article> optArticle = articleRepo.findById(aid);
+		if (optArticle.isPresent()) {
+			Article toEnable = optArticle.get();
+			if (toEnable.getAuthor().getUser().equals(loggedInUser) ||
+					loggedInUser.getRole().equals(Role.Admin)) {
 				toEnable.setEnabled(true);
 				articleRepo.saveAndFlush(toEnable);
+				enabled = true;
 			}
-			return true;
-		} else {
-			return false;
 		}
+
+		return enabled;
 	}
 
 	@Override
 	public boolean disable(Integer aid, String username) {
 		User loggedInUser = userRepo.findByUsername(username);
-		Profile profile = profileRepo.findByUser_Username(username);
-		Article toDisable = articleRepo.findByIdAndAuthor_Id(aid, profile.getId());
+		boolean disabled = false;
 
-		if (profile.getUser().equals(loggedInUser) || loggedInUser.getRole().equals(Role.Admin)) {
-			if (toDisable != null) {
+		Optional<Article> optArticle = articleRepo.findById(aid);
+		if (optArticle.isPresent()) {
+			Article toDisable = optArticle.get();
+			if (toDisable.getAuthor().getUser().equals(loggedInUser) ||
+					loggedInUser.getRole().equals(Role.Admin)) {
 				toDisable.setEnabled(false);
 				articleRepo.saveAndFlush(toDisable);
+				disabled = true;
 			}
-			return true;
-		} else {
-			return false;
 		}
+
+		return disabled;
 	}
 
 }
