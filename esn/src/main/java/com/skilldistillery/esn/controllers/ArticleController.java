@@ -102,10 +102,14 @@ public class ArticleController {
 	{
 		try {
 			article = articleSvc.create(article, principal.getName());
-			res.setStatus(201);
-			StringBuffer url = req.getRequestURL();
-			url.append("/").append(article.getId());
-			res.setHeader("Location", url.toString());
+			if (article == null) {
+				res.setStatus(401);
+			} else {
+				res.setStatus(201);
+				StringBuffer url = req.getRequestURL();
+				url.append("/").append(article.getId());
+				res.setHeader("Location", url.toString());
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			res.setStatus(400);
