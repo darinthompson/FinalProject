@@ -13,17 +13,21 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "player_match_stat")
 public class PlayerMatchStat {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private double value;
+	
 	@ManyToOne
 	@JoinColumn(name = "game_stat_id")
 	private GameStat stat;
+	
 	@ManyToOne
 	@JsonIgnore
 	@JoinColumn(name = "player_match_player_id")
 	private Player player;
+	
 	@ManyToOne
 	@JoinColumn(name = "player_match_series_match_id")
 	private SeriesMatch match;

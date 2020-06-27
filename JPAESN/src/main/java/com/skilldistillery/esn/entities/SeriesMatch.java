@@ -19,16 +19,21 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name="series_match")
 public class SeriesMatch {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String title;
+	
 	@Column(name = "team1_title")
 	private String team1Title;
+	
 	@Column(name = "team2_title")
 	private String team2Title;
+	
 	@Column(name = "start_date")
 	private LocalDate startDate;
+	
 	@Column(name = "start_time")
 	private LocalTime startTime;
 	
