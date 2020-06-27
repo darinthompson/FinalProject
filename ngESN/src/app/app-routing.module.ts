@@ -5,14 +5,17 @@ import { ArticleComponent } from './components/article/article.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { GameComponent } from './components/game/game.component';
 import { RegisterComponent } from './components/register/register.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 const routes: Routes = [
-  {path: 'home', component: HomeComponent},
-  {path: 'article', component: ArticleComponent},
-  {path: 'profile', component: ProfileComponent},
-  {path: 'game', component: GameComponent},
-  {path: 'register', component: RegisterComponent},
+  { path: 'home', component: HomeComponent },
+  { path: 'article', component: ArticleComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'game', component: GameComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: '**', component: NotFoundComponent }
+
 ];
 
 @NgModule({

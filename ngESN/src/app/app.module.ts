@@ -20,6 +20,7 @@ import { PlayerMatchStatService } from './services/player-match-stat.service';
 import { ProfileService } from './services/profile.service';
 import { RegisterService } from './services/register.service';
 import { UserService } from './services/user.service';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { UserService } from './services/user.service';
     SeriesMatchComponent,
     GameComponent,
     ArticleComponent,
-    CommentComponent
+    CommentComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
