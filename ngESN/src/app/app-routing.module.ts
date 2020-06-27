@@ -16,8 +16,8 @@ const routes: Routes = [
   { path: 'game', component: GameComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'match', component: SeriesMatchComponent },
+  { path: '', component: HomeComponent },
   { path: '**', component: NotFoundComponent }
-
 ];
 
 @NgModule({
