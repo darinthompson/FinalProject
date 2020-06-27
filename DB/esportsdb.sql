@@ -218,10 +218,12 @@ CREATE TABLE IF NOT EXISTS `series_match` (
   `start_date` DATE NULL,
   `start_time` TIME NULL,
   `title` VARCHAR(1000) NULL,
+  `winner_id` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_matchh_series1_idx` (`series_id` ASC),
   INDEX `fk_series_match_team1_idx` (`team1_id` ASC),
   INDEX `fk_series_match_team2_idx` (`team2_id` ASC),
+  INDEX `fk_series_match_team3_idx` (`winner_id` ASC),
   CONSTRAINT `fk_matchh_series1`
     FOREIGN KEY (`series_id`)
     REFERENCES `series` (`id`)
@@ -234,6 +236,11 @@ CREATE TABLE IF NOT EXISTS `series_match` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_series_match_team2`
     FOREIGN KEY (`team2_id`)
+    REFERENCES `team` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_series_match_team3`
+    FOREIGN KEY (`winner_id`)
     REFERENCES `team` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -556,7 +563,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `esportsdb`;
-INSERT INTO `series_match` (`id`, `series_id`, `team1_id`, `team2_id`, `team1_title`, `team2_title`, `start_date`, `start_time`, `title`) VALUES (1, 1, 1, 2, NULL, NULL, NULL, NULL, 'Match 1');
+INSERT INTO `series_match` (`id`, `series_id`, `team1_id`, `team2_id`, `team1_title`, `team2_title`, `start_date`, `start_time`, `title`, `winner_id`) VALUES (1, 1, 1, 2, NULL, NULL, NULL, NULL, 'Match 1', 1);
 
 COMMIT;
 
