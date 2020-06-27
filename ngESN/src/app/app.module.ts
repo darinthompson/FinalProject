@@ -20,6 +20,7 @@ import { PlayerMatchStatService } from './services/player-match-stat.service';
 import { ProfileService } from './services/profile.service';
 import { RegisterService } from './services/register.service';
 import { UserService } from './services/user.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { UserService } from './services/user.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [
     ArticleService,
