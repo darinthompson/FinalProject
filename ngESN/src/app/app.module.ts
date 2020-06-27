@@ -21,6 +21,8 @@ import { ProfileService } from './services/profile.service';
 import { RegisterService } from './services/register.service';
 import { UserService } from './services/user.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SeriesMatchComponent,
     GameComponent,
     ArticleComponent,
-    CommentComponent
+    CommentComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
