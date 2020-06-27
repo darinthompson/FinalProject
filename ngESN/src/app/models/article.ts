@@ -11,9 +11,9 @@ export class Article {
   createDate: Date;
   author: Profile;
   enabled: boolean;
-  comments: Comment;
+  comments: Comment[];
 
-  constructor(id?: number, title?: string, content?: string, image?: string, createDate?: Date, author?: Profile, enabled?: boolean, comments?: Comment) {
+  constructor(id?: number, title?: string, content?: string, image?: string, createDate?: Date, author?: Profile, enabled?: boolean, comments?: Comment[]) {
     this.id =id;
     this.title = title;
     this.content = content;
