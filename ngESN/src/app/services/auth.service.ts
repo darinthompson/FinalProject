@@ -30,6 +30,7 @@ export class AuthService {
       .pipe(
         tap((res) => {
           localStorage.setItem('credentials' , credentials);
+          localStorage.setItem('username' , username);
           return res;
         }),
         catchError((err: any) => {

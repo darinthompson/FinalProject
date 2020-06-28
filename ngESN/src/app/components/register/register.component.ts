@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import { User } from 'src/app/models/user';
 import { ProfileService } from 'src/app/services/profile.service';
 import { Profile } from 'src/app/models/profile';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private profileSvc: ProfileService,
-    private router: Router
+    private router: Router,
+    private userSvc: UserService
   ) {}
 
   ngOnInit(): void {}
