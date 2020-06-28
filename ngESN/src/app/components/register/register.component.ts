@@ -9,58 +9,51 @@ import { Profile } from 'src/app/models/profile';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-
   newUser: User = new User();
+  newProfile: Profile = new Profile();
 
   constructor(
     private auth: AuthService,
     private profileSvc: ProfileService,
     private router: Router
-  ) { }
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  register(user: User) {
+  registerUserAndProfile(user: User, profile: Profile) {
     this.auth.register(user).subscribe(
-      regSuccess => {
+      (regSuccess) => {
         console.log('User ' + regSuccess + ' created');
         this.newUser = new User();
-      },
-      regFail => {
-        console.error('RegisterComponent.register(): Error on register');
-        console.error(regFail);
-        this.router.navigateByUrl('fourohfour')
-      }
-    );
-  }
-
-  createProfile(form: NgForm) {
-    const profile: Profile = form.value;
-    console.log(profile);
-    this.profileSvc.create(profile).subscribe(
-      createSuccess => {
-        this.auth.login(this.newUser.username, this.newUser.password).subscribe(
-          logSuccess => {
-            this.router.navigateByUrl('home');
-            console.log(logSuccess);
+        this.auth.login(user.username, user.password).subscribe(
+          (logSuccess) => {
+            this.profileSvc.create(profile).subscribe(
+              (createSuccess) => {
+                console.log('Successfully created: ' + createSuccess);
+                this.router.navigateByUrl('home');
+              },
+              (createFail) => {
+                console.error('RegisterComponent.createProfile(): Error on profile creation');
+                console.error(createFail);
+                this.router.navigateByUrl('fourohfour');
+              }
+            );
           },
-          logFail => {
+          (logFail) => {
             console.error('AuthService.login(): Error logging in');
             console.error(logFail);
-            this.router.navigateByUrl('fourohfour')
+            this.router.navigateByUrl('fourohfour');
           }
         );
       },
-      createFail => {
-        console.error('RegisterComponent.createProfile(): Error on profile creation');
-        console.error(createFail);
-        this.router.navigateByUrl('fourohfour')
+      (regFail) => {
+        console.error('RegisterComponent.register(): Error on register');
+        console.error(regFail);
+        this.router.navigateByUrl('fourohfour');
       }
     );
   }
-
 }

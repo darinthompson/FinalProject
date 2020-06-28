@@ -1,4 +1,4 @@
-<form>
+<form id="register-user-form">
   <div class="form-group">
     <label for="username">Username</label>
     <input type="text" class="form-control" id="username" name="username" [(ngModel)]="newUser.username">
@@ -7,5 +7,28 @@
     <label for="password">Password</label>
     <input type="password" class="form-control" id="password" name="password" [(ngModel)]="newUser.password">
   </div>
-  <button type="submit" class="btn btn-primary" (click)="register(newUser)">Register</button>
+  <!-- <button type="submit" class="btn btn-primary" (click)="register(newUser)">Register</button> -->
+</form>
+
+<br><br>
+
+<form id="create-profile-form">
+  <div class="form-group">
+    <label for="fName">First Name</label>
+    <input type="text" class="form-control" id="fName" name="firstName" [(ngModel)]="newProfile.firstName">
+  </div>
+  <div class="form-group">
+    <label for="lName">Last Name</label>
+    <input type="text" class="form-control" id="lName" name="lastName" [(ngModel)]="newProfile.lastName">
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="text" class="form-control" id="email" name="email" [(ngModel)]="newProfile.email">
+  </div>
+  <div class="form-group">
+    <label for="avatar">Avatar URL</label>
+    <input type="text" class="form-control" id="avatar" name="avatar" [(ngModel)]="newProfile.avatar">
+  </div>
+
+  <button type="submit" class="btn btn-primary" (click)="registerUserAndProfile(newUser, newProfile)">Create Profile</button>
 </form>
