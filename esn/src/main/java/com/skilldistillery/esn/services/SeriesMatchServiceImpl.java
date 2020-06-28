@@ -21,7 +21,7 @@ public class SeriesMatchServiceImpl implements SeriesMatchService {
 	}
 
 	@Override
-	public SeriesMatch getMatchById(int id) {
+	public SeriesMatch getMatchById(Integer id) {
 		Optional<SeriesMatch> optMatch = seriesMatchRepo.findById(id);
 		if(optMatch.isPresent()) {
 			return optMatch.get();
@@ -29,7 +29,10 @@ public class SeriesMatchServiceImpl implements SeriesMatchService {
 			return null;
 		}
 	}
-	
-	
+
+	@Override
+	public List<SeriesMatch> getAllByGameId(Integer gid) {
+		return seriesMatchRepo.findByWinner_Game_Id(gid);
+	}
 	
 }

@@ -1,9 +1,7 @@
 package com.skilldistillery.esn.controllers;
 
-import java.security.Principal;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +23,7 @@ public class SeriesMatchController {
 	SeriesMatchService seriesMatchService;
 
 	@GetMapping("matches")
-	public List<SeriesMatch> getAllMatches(HttpServletRequest request, HttpServletResponse response,
-			Principal principal) {
+	public List<SeriesMatch> getAllMatches(HttpServletResponse response) {
 		List<SeriesMatch> matches = null;
 		try {
 			matches = seriesMatchService.getAllMatches();
@@ -43,7 +40,10 @@ public class SeriesMatchController {
 	}
 
 	@GetMapping("matches/{id}")
-	public SeriesMatch getMatchById(@PathVariable int id, HttpServletResponse response, Principal principal) {
+	public SeriesMatch getMatchById(
+			@PathVariable Integer id,
+			HttpServletResponse response)
+	{
 		SeriesMatch match = null;
 		try {
 			match = seriesMatchService.getMatchById(id);
@@ -57,5 +57,27 @@ public class SeriesMatchController {
 			response.setStatus(400);
 		}
 		return match;
+	}
+	
+	@GetMapping("matches/game/{gid}")
+	public List<SeriesMatch> getMatchesByGameId(
+			@PathVariable Integer gid,
+			HttpServletResponse res)
+	{
+		List<SeriesMatch> results;
+		try {
+			results = seriesMatchService.getAllByGameId(gid);
+			if (results.size() > 0) {
+				res.setStatus(200);
+			} else {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			results = null;
+		}
+		
+		return results;
 	}
 }
