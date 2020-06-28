@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {GameService} from "../../services/game.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {Game} from "../../models/game";
 
 @Component({
@@ -10,9 +10,18 @@ import {Game} from "../../models/game";
 })
 export class GameComponent implements OnInit {
 
-  constructor(private gameService: GameService, private currentRoute: ActivatedRoute, private router: Router) { }
+  navSubscription;
+  selected: Game;
 
-  selected: Game
+  constructor(private gameService: GameService, private currentRoute: ActivatedRoute, private router: Router) {
+    this.navSubscription = this.router.events.subscribe((e: any) => {
+      if (e instanceof NavigationEnd) {
+        this.checkRouteForId();
+      }
+    });
+
+  }
+
 
   ngOnInit(): void {
     this.checkRouteForId();
