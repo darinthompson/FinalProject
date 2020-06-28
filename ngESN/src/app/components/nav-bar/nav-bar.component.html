@@ -38,13 +38,17 @@
           </div>
         </ng-template>
 <!--        end of log in modal-->
-
         <a *ngIf="loggedIn()" class="nav-link" [routerLink]="['/']">{{getUsername()}}</a>
       </li>
+      <!-- START OF REGISTER MODAL -->
       <li class="nav-item">
-        <a *ngIf="!loggedIn()" class="nav-link" href="#" tabindex="-1" [routerLink]="['/register']">Register</a>
+        <a *ngIf="!loggedIn()" class="nav-link" tabindex="-1" (click)="open(registercontent)">Register</a>
+        <ng-template #registercontent let-modal>
+          <app-register></app-register>
+        </ng-template>
         <a *ngIf="loggedIn()" class="nav-link" href="#" tabindex="-1" [routerLink]="['/home']" (click)="logOut()">Log Out</a>
       </li>
+      <!-- END OF REGISTER MODAL -->
       <li class="nav-item dropdown">
         <div ngbDropdown class="d-inline-block">
           <a class="nav-link" id="dropdownBasic1" ngbDropdownToggle>Games</a>
