@@ -49,12 +49,10 @@ public class ProfileServiceImpl implements ProfileService {
 	}
 
 	@Override
-	public Profile create(int userId, Profile profile, String username) {
+	public Profile create(Profile profile, String username) {
 		try {
-			Optional<User> optionalUser = userRepo.findById(userId);
-			User user = null;
-			if (optionalUser.isPresent()) {
-				user = optionalUser.get();
+			User user = userRepo.findByUsername(username);
+			if (user != null) {
 				profile.setUser(user);
 				return profileRepo.saveAndFlush(profile);
 			}
