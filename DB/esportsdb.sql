@@ -512,7 +512,7 @@ USE `esportsdb`;
 INSERT INTO `game` (`id`, `title`, `genre`, `img_url`, `website_url`) VALUES (1, 'League of Legends', 'MOBA', 'https://gamepedia.cursecdn.com/lolesports_gamepedia_en/c/c8/LCS_2020_Logo.png', 'https://www.lolesports.com');
 INSERT INTO `game` (`id`, `title`, `genre`, `img_url`, `website_url`) VALUES (2, 'Counterstrike: Global Offensive', 'FPS', NULL, 'https://blog.counter-strike.net/');
 INSERT INTO `game` (`id`, `title`, `genre`, `img_url`, `website_url`) VALUES (3, 'Overwatch', 'FPS', NULL, 'https://playoverwatch.com/en-us/');
-INSERT INTO `game` (`id`, `title`, `genre`, `img_url`, `website_url`) VALUES (DEFAULT, 'Rocket League', 'Sports', NULL, NULL);
+INSERT INTO `game` (`id`, `title`, `genre`, `img_url`, `website_url`) VALUES (4, 'Rocket League', 'Sports', NULL, NULL);
 
 COMMIT;
 
