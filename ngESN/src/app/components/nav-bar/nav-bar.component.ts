@@ -4,6 +4,7 @@ import {AuthService} from "../../services/auth.service";
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {NgForm} from "@angular/forms";
 import {Router} from "@angular/router";
+import {GameService} from "../../services/game.service";
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,7 +13,7 @@ import {Router} from "@angular/router";
 })
 export class NavBarComponent implements OnInit {
 
-  constructor(private authService: AuthService, private modalService: NgbModal, private router: Router) {
+  constructor(private authService: AuthService, private modalService: NgbModal, private gameService: GameService,private router: Router) {
   }
 
   closeResult = '';
@@ -64,6 +65,12 @@ export class NavBarComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  getGame(id:number){
+    return this.gameService.getGameById(id).subscribe(
+
+    )
   }
 }
 
