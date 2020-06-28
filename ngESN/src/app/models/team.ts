@@ -1,5 +1,4 @@
 import { Game } from './game';
-import { Serializer } from 'v8';
 import { SeriesMatch } from './series-match';
 import { Organization } from './organization';
 import { Player } from './player';

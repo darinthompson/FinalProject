@@ -18,10 +18,13 @@ import { CommentService } from './services/comment.service';
 import { GameStatService } from './services/game-stat.service';
 import { PlayerMatchStatService } from './services/player-match-stat.service';
 import { ProfileService } from './services/profile.service';
-import { RegisterService } from './services/register.service';
 import { UserService } from './services/user.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { CreateProfileComponent } from './components/create-profile/create-profile.component';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from './services/auth.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -38,12 +41,15 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     GameComponent,
     ArticleComponent,
     CommentComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CreateProfileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
     ArticleService,
@@ -51,8 +57,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     GameStatService,
     PlayerMatchStatService,
     ProfileService,
-    RegisterService,
-    UserService
+    UserService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
