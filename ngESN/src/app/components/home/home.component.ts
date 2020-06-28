@@ -15,8 +15,11 @@ export class HomeComponent implements OnInit {
   matches: SeriesMatch[];
   articles: Article[];
 
-  constructor(private seriesMatchService: SeriesMatchService, private articleService: ArticleService, private router: Router) {
-  }
+  constructor(
+    private seriesMatchService: SeriesMatchService,
+    private articleService: ArticleService,
+    private router: Router
+  ) {  }
 
   ngOnInit(): void {
     this.seriesMatchService.index().subscribe(
