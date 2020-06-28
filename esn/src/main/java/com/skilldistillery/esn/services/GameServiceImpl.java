@@ -3,6 +3,7 @@ package com.skilldistillery.esn.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.esn.entities.Game;
@@ -10,7 +11,8 @@ import com.skilldistillery.esn.repositories.GameRepo;
 
 @Service
 public class GameServiceImpl implements GameService {
-
+	
+	@Autowired
 	private GameRepo repo;
 	
 	@Override
