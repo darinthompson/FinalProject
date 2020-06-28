@@ -18,7 +18,7 @@ export class SeriesMatchService {
     return this.http.get<SeriesMatch[]>(this.url).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('index: ' + err);
+        return throwError(err);
       })
     )
 
