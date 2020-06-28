@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
     private seriesMatchService: SeriesMatchService,
     private articleService: ArticleService,
     private router: Router
-  ) {  }
+  ) { }
 
   ngOnInit(): void {
     this.seriesMatchService.index().subscribe(
