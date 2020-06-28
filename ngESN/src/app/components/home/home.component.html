@@ -3,7 +3,7 @@
     <div class="picsum-img-wrapper">
       <h3 *ngFor="let match of matches"><img id="team1Img" src="{{match.team1.organization.logoURL}}">
        VS <img id="team2Img" src="{{match.team2.organization.logoURL}}">
-       Winner: {{match.winner.organization.name}}
+      <!-- Winner: {{match.winner.organization.name}} -->
       </h3>
     </div>
     <div class="carousel-caption">
@@ -14,7 +14,6 @@
 </ngb-carousel>
 
 <div *ngFor="let article of articles">
-  <p>{{article.title}}</p>
+  <p (click)="navigateToArticle(article.id)">{{article.title}}</p>
   <p>{{article.content}}</p>
-
 </div>

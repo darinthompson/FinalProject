@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {SeriesMatchService} from "../../services/series-match.service";
-import {Router} from "@angular/router";
-import {SeriesMatch} from "../../models/series-match";
-import {ArticleService} from "../../services/article.service";
-import {Article} from "../../models/article";
+import { Component, OnInit } from '@angular/core';
+import { SeriesMatchService } from "../../services/series-match.service";
+import { Router } from "@angular/router";
+import { SeriesMatch } from "../../models/series-match";
+import { ArticleService } from "../../services/article.service";
+import { Article } from "../../models/article";
 
 @Component({
   selector: 'app-home',
@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
 
   matches: SeriesMatch[];
   articles: Article[];
+  selectedArticle = null;
 
   constructor(
     private seriesMatchService: SeriesMatchService,
@@ -40,4 +41,22 @@ export class HomeComponent implements OnInit {
       }
     );
   }
+
+  navigateToArticle(id: number) {
+    this.getArticle(id);
+    this.router.navigateByUrl(`article/${id}`);
+  }
+
+  getArticle(id: number) {
+    this.articleService.getArticleById(id).subscribe(
+      success => {
+        this.selectedArticle = success;
+      },
+      fail => {
+        console.log("error getting article");
+      }
+    )
+  }
 }
+
+
