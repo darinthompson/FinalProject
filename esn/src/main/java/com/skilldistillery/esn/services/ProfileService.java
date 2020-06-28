@@ -14,7 +14,7 @@ public interface ProfileService {
 
 	public Profile show(String username);
 
-	public Profile create(int userId, Profile profile, String username);
+	public Profile create(Profile profile, String username);
 
 	public Profile update(String username, Profile profile);
 
