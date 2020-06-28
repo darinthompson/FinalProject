@@ -11,7 +11,7 @@ import { SeriesMatchComponent } from './components/series-match/series-match.com
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'article', component: ArticleComponent },
+  { path: 'article/:id', component: ArticleComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'game', component: GameComponent },
   { path: 'register', component: RegisterComponent },

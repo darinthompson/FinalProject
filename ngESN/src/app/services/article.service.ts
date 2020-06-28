@@ -22,4 +22,13 @@ export class ArticleService {
       })
     )
   }
+
+  getArticleById(id: number) {
+    return this.http.get<Article>(this.url + `api/articles/${id}`).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('index: ' + err);
+      })
+    )
+  }
 }
