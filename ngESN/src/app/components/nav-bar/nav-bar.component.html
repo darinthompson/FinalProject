@@ -9,6 +9,7 @@
       <li class="nav-item active">
         <a class="nav-link text-success" [routerLink]="['/home']">Home <span class="sr-only">(current)</span></a>
       </li>
+<!--      start of log in modal-->
       <li class="nav-item">
         <a *ngIf="!loggedIn()" class="nav-link" (click)="open(content)">Log In</a>
         <ng-template #content let-modal>
@@ -36,23 +37,7 @@
             <button type="button" class="btn btn-outline-dark" (click)="logIn(userLogIn)">Submit</button>
           </div>
         </ng-template>
-
-<!--        <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>-->
-
-
-<!--        <pre>{{ closeResult }}</pre>-->
-
-
-
-
-
-
-
-
-
-
-
-
+<!--        end of log in modal-->
 
         <a *ngIf="loggedIn()" class="nav-link" [routerLink]="['/']">{{getUsername()}}</a>
       </li>
