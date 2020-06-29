@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +33,6 @@ public class ProfileController {
 
 	@GetMapping("profiles")
 	public List<Profile> index(
-			HttpServletRequest req,
 			HttpServletResponse res,
 			Principal principal)
 	{
@@ -49,18 +49,19 @@ public class ProfileController {
 			res.setStatus(400);
 			results = null;
 		}
+		
 		return results;
 	}
 
 	@GetMapping("profiles/{pid}")
 	public Profile getById(
-			HttpServletRequest req,
+			@PathVariable Integer pid,
 			HttpServletResponse res,
 			Principal principal)
 	{
 		Profile result;
 		try {
-			result = profileService.show(principal.getName());
+			result = profileService.show(pid);
 			if (result != null) {
 				res.setStatus(200);
 			} else {
@@ -71,6 +72,29 @@ public class ProfileController {
 			res.setStatus(400);
 			result = null;
 		}
+		
+		return result;
+	}
+	
+	@GetMapping("profiles/user")
+	public Profile getByUsername(
+			HttpServletResponse res,
+			Principal principal)
+	{
+		Profile result;
+		try {
+			result = profileService.getByUsername(principal.getName());
+			if (result == null) {
+				res.setStatus(404);
+			} else {
+				res.setStatus(200);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			result = null;
+		}
+		
 		return result;
 	}
 	
@@ -117,9 +141,12 @@ public class ProfileController {
 		return profile;
 	}
 
-	@PutMapping("profiles/{id}/addTeam")
-	public Profile addTeam(HttpServletRequest req, HttpServletResponse res, @RequestBody Team team,
-			Principal principal) {
+	@PutMapping("profiles/addTeam")
+	public Profile addTeam(
+			HttpServletResponse res,
+			@RequestBody Team team,
+			Principal principal)
+	{
 		Profile profile;
 		try {
 			profile = profileService.addTeam(principal.getName(), team);
@@ -132,12 +159,16 @@ public class ProfileController {
 			res.setStatus(400);
 			profile = null;
 		}
+		
 		return profile;
 	}
 
-	@PutMapping("profiles/{id}/addGame")
-	public Profile addGame(HttpServletRequest req, HttpServletResponse res, @RequestBody Game game,
-			Principal principal) {
+	@PutMapping("profiles/addGame")
+	public Profile addGame(
+			HttpServletResponse res,
+			@RequestBody Game game,
+			Principal principal)
+	{
 		Profile profile;
 		try {
 			profile = profileService.addGame(principal.getName(), game);
@@ -150,12 +181,16 @@ public class ProfileController {
 			res.setStatus(400);
 			profile = null;
 		}
+		
 		return profile;
 	}
 
-	@PutMapping("profiles/{id}/addOrg")
-	public Profile addOrg(HttpServletRequest req, HttpServletResponse res, @RequestBody Organization organization,
-			Principal principal) {
+	@PutMapping("profiles/addOrg")
+	public Profile addOrg(
+			HttpServletResponse res,
+			@RequestBody Organization organization,
+			Principal principal)
+	{
 		Profile profile;
 		try {
 			profile = profileService.addOrg(principal.getName(), organization);
@@ -168,12 +203,16 @@ public class ProfileController {
 			res.setStatus(400);
 			profile = null;
 		}
+		
 		return profile;
 	}
 
-	@PutMapping("profiles/{id}/addPlayer")
-	public Profile addPlayer(HttpServletRequest req, HttpServletResponse res, @RequestBody Player player,
-			Principal principal) {
+	@PutMapping("profiles/addPlayer")
+	public Profile addPlayer(
+			HttpServletResponse res,
+			@RequestBody Player player,
+			Principal principal)
+	{
 		Profile profile;
 		try {
 			profile = profileService.addPlayer(principal.getName(), player);
@@ -186,12 +225,16 @@ public class ProfileController {
 			res.setStatus(400);
 			profile = null;
 		}
+		
 		return profile;
 	}
 
-	@PutMapping("profiles/{id}/removeTeam")
-	public Profile removeTeam(HttpServletRequest req, HttpServletResponse res, @RequestBody Team team,
-			Principal principal) {
+	@PutMapping("profiles/removeTeam")
+	public Profile removeTeam(
+			HttpServletResponse res,
+			@RequestBody Team team,
+			Principal principal)
+	{
 		Profile profile;
 		try {
 			profile = profileService.removeTeam(principal.getName(), team);
@@ -204,12 +247,16 @@ public class ProfileController {
 			res.setStatus(400);
 			profile = null;
 		}
+		
 		return profile;
 	}
 
-	@PutMapping("profiles/{id}/removeGame")
-	public Profile removeGame(HttpServletRequest req, HttpServletResponse res, @RequestBody Game game,
-			Principal principal) {
+	@PutMapping("profiles/removeGame")
+	public Profile removeGame(
+			HttpServletResponse res,
+			@RequestBody Game game,
+			Principal principal)
+	{
 		Profile profile;
 		try {
 			profile = profileService.removeGame(principal.getName(), game);
@@ -222,15 +269,19 @@ public class ProfileController {
 			res.setStatus(400);
 			profile = null;
 		}
+		
 		return profile;
 	}
 
-	@PutMapping("profiles/{id}/removeOrg")
-	public Profile removeOrg(HttpServletRequest req, HttpServletResponse res, @RequestBody Organization organization,
-			Principal principal) {
+	@PutMapping("profiles/removeOrg")
+	public Profile removeOrg(
+			HttpServletResponse res,
+			@RequestBody Organization org,
+			Principal principal)
+	{
 		Profile profile;
 		try {
-			profile = profileService.removeOrg(principal.getName(), organization);
+			profile = profileService.removeOrg(principal.getName(), org);
 			if (profile == null) {
 				res.setStatus(404);
 			}
@@ -240,12 +291,16 @@ public class ProfileController {
 			res.setStatus(400);
 			profile = null;
 		}
+		
 		return profile;
 	}
 
-	@PutMapping("profiles/{id}/removePlayer")
-	public Profile removePlayer(HttpServletRequest req, HttpServletResponse res, @RequestBody Player player,
-			Principal principal) {
+	@PutMapping("profiles/removePlayer")
+	public Profile removePlayer(
+			HttpServletResponse res,
+			@RequestBody Player player,
+			Principal principal)
+	{
 		Profile profile;
 		try {
 			profile = profileService.removePlayer(principal.getName(), player);
@@ -258,6 +313,7 @@ public class ProfileController {
 			res.setStatus(400);
 			profile = null;
 		}
+		
 		return profile;
 	}
 }

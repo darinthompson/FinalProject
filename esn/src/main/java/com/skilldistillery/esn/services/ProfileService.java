@@ -12,7 +12,9 @@ public interface ProfileService {
 
 	public List<Profile> index(String username);
 
-	public Profile show(String username);
+	public Profile show(Integer pid);
+	
+	public Profile getByUsername(String username);
 
 	public Profile create(Profile profile, String username);
 

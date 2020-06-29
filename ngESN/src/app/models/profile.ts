@@ -19,7 +19,20 @@ export class Profile {
   favoritePlayers: Player[];
   favoriteGames: Game[];
 
-  constructor(id?: number, firstName?: string, lastName?: string, email?: string, avatar?: string, user?: User, articles?: Article[], comments?: Comment[], favoriteOrganizations?: Organization[], favoriteTeams?: Team[], favoritePlayers?: Player[], favoriteGames?: Game[]) {
+  constructor(
+    id?: number,
+    firstName?: string,
+    lastName?: string,
+    email?: string,
+    avatar?: string,
+    user?: User,
+    articles?: Article[],
+    comments?: Comment[],
+    favoriteOrganizations?: Organization[],
+    favoriteTeams?: Team[],
+    favoritePlayers?: Player[],
+    favoriteGames?: Game[])
+  {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;

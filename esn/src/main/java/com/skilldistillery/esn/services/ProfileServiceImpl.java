@@ -40,12 +40,19 @@ public class ProfileServiceImpl implements ProfileService {
 	}
 
 	@Override
-	public Profile show(String username) {
-		Profile profile = profileRepo.findByUser_Username(username);
-		if (profile != null) {
+	public Profile show(Integer pid) {
+		Optional<Profile> opt = profileRepo.findById(pid);
+		
+		if (opt.isPresent()) {
+			Profile profile = opt.get();
 			return profile;
 		}
 		return null;
+	}
+	
+	@Override
+	public Profile getByUsername(String username) {
+		return profileRepo.findByUser_Username(username);
 	}
 
 	@Override
