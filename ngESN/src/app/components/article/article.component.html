@@ -29,15 +29,14 @@
       <!-- Post Content -->
       <p class="lead">{{selectedArticle.content}}
       <p>
-        <!-- <p class="lead">{{selectedArticle.comments}}</p> -->
       <div class="card my-4">
         <h5 class="card-header">Leave a Comment:</h5>
         <div class="card-body">
-          <form>
+          <form #commentForm="ngForm">
             <div class="form-group">
               <textarea class="form-control" name="content" rows="3" [(ngModel)]="newComment.content" placeholder="Tell us how you really feel..."></textarea>
             </div>
-            <button type="submit" class="btn btn-primary" (click)="createNewComment(selectedArticle.id, newComment)">Submit</button>
+            <button type="submit" class="btn btn-primary" (click)="createNewComment(selectedArticle.id, newComment); commentForm.reset()">Submit</button>
           </form>
         </div>
       </div>
