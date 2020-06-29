@@ -1,17 +1,18 @@
-<ngb-carousel>
-  <ng-template ngbSlide>
-    <div class="picsum-img-wrapper">
-      <h3 *ngFor="let match of matches"><img id="team1Img" src="{{match.team1.organization.logoURL}}">
-        VS <img id="team2Img" src="{{match.team2.organization.logoURL}}">
-        <!-- Winner: {{match.winner.organization.name}} -->
-      </h3>
+<!--<ngb-carousel>-->
+<!--  <ng-template ngbSlide>-->
+    <div class="container-fluid position-sticky" [style.background]="'url(src/assets/download.jpeg)'">
+      <div class="row">
+        <div class="col-sm  text-white" *ngFor="let match of matches">
+      <h6><img id="team1Img" src="{{match.team1.organization.logoURL}}">
+        VS <img id="team2Img" src="{{match.team2.organization.logoURL}}"><br>
+        {{match.winner.organization.name}} wins!
+
+      </h6>
+        </div>
+      </div>
     </div>
-    <div class="carousel-caption">
-      <h3>First slide label</h3>
-      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-    </div>
-  </ng-template>
-</ngb-carousel>
+<!--  </ng-template>-->
+<!--</ngb-carousel>-->
 
 <div class="container">
 
