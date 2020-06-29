@@ -30,7 +30,7 @@ export class ProfileService {
       this.router.navigateByUrl('home');
     }
 
-    return this.http.get<Profile>(this.url, httpOptions).pipe(
+    return this.http.get<Profile[]>(this.url, httpOptions).pipe(
       catchError((err: any) => {
         console.error(err);
         return throwError(

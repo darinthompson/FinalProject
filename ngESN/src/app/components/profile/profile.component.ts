@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from 'src/app/services/profile.service';
 import { Profile } from 'src/app/models/profile';
+import { OrganizationService } from 'src/app/services/organization.service';
+import { Organization } from 'src/app/models/organization';
+import { Team } from 'src/app/models/team';
+import { Player } from 'src/app/models/player';
+import { PlayerService } from 'src/app/services/player.service';
+import { TeamService } from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-profile',
@@ -11,19 +17,23 @@ export class ProfileComponent implements OnInit {
 
   userProfile: Profile;
   username: string;
-  dashboardView = null;
-  accountView = null;
-  articlesView = null;
-  adminView = null;
+  allOrgs: Organization[];
+  allTeams: Team[];
+  allPlayers: Player[];
+  selectedView: string = null;
 
   constructor(
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private orgService: OrganizationService,
+    private teamService: TeamService,
+    private playerService: PlayerService
   ) { }
 
   ngOnInit(): void {
-    this.dashboardView = true;
+    this.selectedView = 'dashboard';
     this.getUsername();
     this.getProfile();
+    this.getAllOrgs();
   }
 
   getUsername() {
@@ -43,31 +53,47 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  setDashboardView() {
-    this.dashboardView = true;
-    this.accountView = false;
-    this.articlesView = false;
-    this.adminView  = false;
+  getAllOrgs() {
+    this.orgService.index().subscribe(
+      orgs => {
+        console.log(orgs);
+        this.allOrgs = orgs;
+      },
+      fail => {
+        console.error('ProfileComponent.getAllOrgs(): Error retrieving list of organizations:');
+        console.error(fail);
+      }
+    );
   }
 
-  setAccountView() {
-    this.dashboardView = false;
-    this.accountView = true;
-    this.articlesView = false;
-    this.adminView  = false;
+  getAllTeams() {
+    this.teamService.index().subscribe(
+      teams => {
+        console.log(teams);
+        this.allTeams = teams;
+      },
+      fail => {
+        console.error('ProfileComponent.getAllTeams(): Error retrieving list of teams:');
+        console.error(fail);
+      }
+    );
   }
 
-  setArticlesView() {
-    this.dashboardView = false;
-    this.accountView = false;
-    this.articlesView = true;
-    this.adminView  = false;
+  getAllPlayers() {
+    this.playerService.index().subscribe(
+      players => {
+        console.log(players);
+        this.allPlayers = players;
+      },
+      fail => {
+        console.error('ProfileComponent.getAllPlayers(): Error retrieving list of players:');
+        console.error(fail);
+      }
+    );
   }
 
-  setAdminView() {
-    this.dashboardView = false;
-    this.accountView = false;
-    this.articlesView = false;
-    this.adminView  = true;
+  getFavMatches() {
+
   }
+
 }
