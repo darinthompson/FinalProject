@@ -1,7 +1,9 @@
+import {SeriesMatchService} from './../../services/series-match.service';
 import {Component, OnInit} from '@angular/core';
 import {GameService} from "../../services/game.service";
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {Game} from "../../models/game";
+import {SeriesMatch} from "../../models/series-match";
 
 @Component({
   selector: 'app-game',
@@ -12,8 +14,9 @@ export class GameComponent implements OnInit {
 
   navSubscription;
   selected: Game;
+  matchList: SeriesMatch[];
 
-  constructor(private gameService: GameService, private currentRoute: ActivatedRoute, private router: Router) {
+  constructor(private gameService: GameService, private seriesMatchService: SeriesMatchService, private currentRoute: ActivatedRoute, private router: Router) {
     this.navSubscription = this.router.events.subscribe((e: any) => {
       if (e instanceof NavigationEnd) {
         this.checkRouteForId();
@@ -36,6 +39,17 @@ export class GameComponent implements OnInit {
       (game) => {
         this.selected = game;
         console.log(game);
+        this.seriesMatchService.getMatchesById(gameId).subscribe(
+          matches => {
+            this.matchList = matches;
+            console.log(matches);
+            console.log(gameId);
+            console.log(this.matchList);
+          },
+          fail => {
+            this.router.navigateByUrl('fourohfour');
+          }
+        )
       },
       (fail) => {
         console.error('Error retrieving game');
