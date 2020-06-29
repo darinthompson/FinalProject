@@ -48,5 +48,10 @@ public class PlayerMatchStstServiceImpl implements PlayerMatchStatService {
 		}
 		return null;
 	}
+	
+	@Override
+	public List<PlayerMatchStat> statsForMatch(int id){
+		return playerMatchStatRepo.findByMatchId(id);
+	}
 
 }

@@ -12,4 +12,7 @@ public interface PlayerMatchStatService {
 	
 	public PlayerMatchStat editPlayerStats(String username, int statId, PlayerMatchStat stat);
 
+	List<PlayerMatchStat> statsForMatch(int id);
+	
+
 }

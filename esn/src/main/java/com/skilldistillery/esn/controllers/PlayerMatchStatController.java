@@ -82,4 +82,23 @@ public class PlayerMatchStatController {
 		}
 		return result;
 	}
+	
+	@GetMapping("stats/match/{matchId}")
+	public List<PlayerMatchStat> getMatchStats(HttpServletRequest req, HttpServletResponse res,
+			@PathVariable int matchId, Principal principal) {
+		List<PlayerMatchStat> results;
+		try {
+			results = playerMatchStatService.statsForMatch(matchId);
+			if (results.size() > 0) {
+				res.setStatus(200);
+			} else {
+				res.setStatus(400);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			results = null;
+		}
+		return results;
+	}
 }
