@@ -39,7 +39,7 @@ public class Article {
 	private Profile author;
 	private boolean enabled;
 
-	@JsonIgnore
+	@JsonIgnoreProperties("article")
 	@OneToMany(mappedBy = "article")
 	private List<Comment> comments;
 	

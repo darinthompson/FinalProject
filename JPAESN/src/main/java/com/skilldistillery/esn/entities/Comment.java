@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Comment {
@@ -20,7 +21,8 @@ public class Comment {
 	private int id;
 	private String content;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties({"articles", "comments", "favoriteOrganizations", "favoriteTeams",
+							"favoritePlayers", "favoriteGames", "user"})
 	@ManyToOne
 	@JoinColumn(name = "profile_id")
 	private Profile profile;
