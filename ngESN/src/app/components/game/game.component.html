@@ -1,10 +1,10 @@
 <p>{{selected.title}}</p>
 
-<div *ngIf="matchList != null">
+<div *ngIf="matchList != null" class="d-flex justify-content-end">
 <div *ngFor="let match of matchList">
 <ul class="list-group list-group-horizontal-sm">
   <li class="list-group-item bg-dark">{{match.startDate}}</li>
-  <li class="list-group-item bg-dark"><img src="{{match.team1.organization.logoURL}}" style="max-height: 50px; max-width: 50px"> VS <img src="{{match.team2.organization.logoURL}}" style="max-height: 50px; max-width: 50px"></li>
+  <li class="list-group-item bg-dark" (click)="getSeriesMatchById(match.id)"><img src="{{match.team1.organization.logoURL}}" style="max-height: 50px; max-width: 50px"> VS <img src="{{match.team2.organization.logoURL}}" style="max-height: 50px; max-width: 50px"></li>
   <li class="list-group-item bg-dark">Winner<br> <img src="{{match.winner.organization.logoURL}}" style="max-height: 50px; max-width: 50px"></li>
 </ul>
 </div>

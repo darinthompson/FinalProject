@@ -37,7 +37,7 @@ public class Player {
 	@JoinTable(name = "team_join_player", joinColumns = @JoinColumn(name = "player_id"), inverseJoinColumns = @JoinColumn(name = "team_id"))
 	private List<Team> teams;
 
-	@JsonIgnore
+	@JsonIgnoreProperties("match")
 	@OneToMany(mappedBy = "player")
 	private List<PlayerMatchStat> stats;
 
