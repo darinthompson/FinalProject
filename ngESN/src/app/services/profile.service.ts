@@ -57,6 +57,23 @@ export class ProfileService {
     );
   }
 
+  getByUsername() {
+    const httpOptions = this.getHttpOptions();
+
+    if (!this.auth.checkLogin()) {
+      this.router.navigateByUrl('home');
+    }
+
+    return this.http.get<Profile>(this.url+'/user', httpOptions).pipe(
+      catchError((err: any) => {
+        console.error(err);
+        return throwError(
+          'ProfileService.getByUsername(): Error retrieving profile: ' + err
+        );
+      })
+    );
+  }
+
   create(profile: Profile) {
     const httpOptions = this.getHttpOptions();
 
