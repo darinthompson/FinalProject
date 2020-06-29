@@ -57,6 +57,18 @@ export class HomeComponent implements OnInit {
       }
     )
   }
+
+  getSeriesMatchById(id: number){
+    this.seriesMatchService.getMatchById(id).subscribe(
+      success => {
+        this.router.navigateByUrl(`match/${id}`)
+      },
+      fail => {
+        console.log(fail);
+        this.router.navigateByUrl('fourohfour');
+      }
+    )
+  }
 }
 
 
