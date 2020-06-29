@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ArticleService } from 'src/app/services/article.service';
 import { Article } from 'src/app/models/article';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommentService } from 'src/app/services/comment.service';
+import { Comment } from 'src/app/models/comment';
 
 @Component({
   selector: 'app-article',
@@ -12,9 +14,11 @@ export class ArticleComponent implements OnInit {
 
   selectedArticle: Article = null;
   comments = [];
+  newComment: Comment = new Comment();
   constructor(
     private articleService: ArticleService,
     private currentRoute: ActivatedRoute,
+    private commentService: CommentService,
     private router: Router
   ) { }
 
@@ -31,6 +35,21 @@ export class ArticleComponent implements OnInit {
         console.log("error getting article");
       }
     )
+  }
+
+  createNewComment(aid: number, comment: Comment) {
+    this.commentService.createComment(aid, comment).subscribe(
+      success => {
+        console.log(comment);
+      },
+      fail => {
+        console.log('ERROR creating comment');
+      }
+    )
+  }
+
+  addComment(comment: Comment) {
+    // this.comments.push(this.commentService.createComment(this.newComment));
   }
 
   checkRouteForId() {
