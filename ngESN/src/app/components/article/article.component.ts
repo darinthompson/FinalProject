@@ -4,6 +4,8 @@ import { Article } from 'src/app/models/article';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommentService } from 'src/app/services/comment.service';
 import { Comment } from 'src/app/models/comment';
+import { format } from 'path';
+import { Form } from '@angular/forms';
 
 @Component({
   selector: 'app-article',
@@ -15,6 +17,7 @@ export class ArticleComponent implements OnInit {
   selectedArticle: Article = null;
   comments = [];
   newComment: Comment = new Comment();
+  commentForm: Form;
   constructor(
     private articleService: ArticleService,
     private currentRoute: ActivatedRoute,
@@ -41,6 +44,7 @@ export class ArticleComponent implements OnInit {
     this.commentService.createComment(aid, comment).subscribe(
       success => {
         console.log(comment);
+        this.checkRouteForId();
       },
       fail => {
         console.log('ERROR creating comment');
@@ -48,9 +52,17 @@ export class ArticleComponent implements OnInit {
     )
   }
 
-  addComment(comment: Comment) {
-    // this.comments.push(this.commentService.createComment(this.newComment));
+  reload() {
+    return this.articleService.getArticleById(this.selectedArticle.id).subscribe(
+      success => {
+        console.log('SUCCESS');
+      },
+      fail => {
+        console.log('ERROR retrieving data');
+      }
+    )
   }
+
 
   checkRouteForId() {
     const articleIdParam = this.currentRoute.snapshot.paramMap.get('id');

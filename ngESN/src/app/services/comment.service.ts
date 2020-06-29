@@ -26,6 +26,15 @@ export class CommentService {
     );
   }
 
+  getAllArticleComments(aid: number) {
+    return this.http.get<Comment[]>(`${this.url}/${aid}`).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('ERROR retrieving comments');
+      })
+    )
+  }
+
   getHttpOptions() {
     const credentials = this.auth.getCredentials();
     const httpOptions = {
@@ -34,7 +43,6 @@ export class CommentService {
         'X-Requested-With': 'XMLHttpRequest',
       }),
     };
-
     return httpOptions;
   }
 }
