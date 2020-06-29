@@ -35,9 +35,9 @@
         <div class="card-body">
           <form>
             <div class="form-group">
-              <textarea class="form-control" rows="3"></textarea>
+              <textarea class="form-control" name="content" rows="3" [(ngModel)]="newComment.content" placeholder="Tell us how you really feel..."></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" (click)="createNewComment(selectedArticle.id, newComment)">Submit</button>
           </form>
         </div>
       </div>
