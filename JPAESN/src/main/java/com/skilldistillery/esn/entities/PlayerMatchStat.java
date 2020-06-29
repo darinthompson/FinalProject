@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "player_match_stat")
@@ -24,11 +25,12 @@ public class PlayerMatchStat {
 	private GameStat stat;
 	
 	@ManyToOne
-	@JsonIgnore
+	@JsonIgnoreProperties("stats")
 	@JoinColumn(name = "player_match_player_id")
 	private Player player;
 	
 	@ManyToOne
+	@JsonIgnoreProperties({"team1", "team2", "winner"})
 	@JoinColumn(name = "player_match_series_match_id")
 	private SeriesMatch match;
 

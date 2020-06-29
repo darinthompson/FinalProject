@@ -2,3 +2,24 @@
   {{player.handle}}
   <div class="text-white" *ngFor="let stat of player.stats">{{stat.stat.statName}} {{stat.value}}</div>
 </div>
+
+<div id="team1Div" class="text-white">
+  <div>
+    <table>
+      <thead>
+      <tr>
+        <th>
+          Player
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let player of match.team1.players">
+          <td>
+            {{player.handle}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
