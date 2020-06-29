@@ -69,4 +69,16 @@ export class GameComponent implements OnInit {
     this.matchList = [];
     this.checkRouteForId();
   }
+
+  getSeriesMatchById(id: number){
+    this.seriesMatchService.getMatchById(id).subscribe(
+      success => {
+        this.router.navigateByUrl(`match/${id}`)
+      },
+      fail => {
+        console.log(fail);
+        this.router.navigateByUrl('fourohfour');
+      }
+    )
+  }
 }
