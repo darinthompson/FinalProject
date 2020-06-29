@@ -11,7 +11,7 @@ import {SeriesMatchComponent} from './components/series-match/series-match.compo
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
-  {path: 'article:id', component: ArticleComponent},
+  {path: 'article/:id', component: ArticleComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'game', component: GameComponent},
   {path: 'register', component: RegisterComponent},
@@ -25,5 +25,6 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule {
 }
