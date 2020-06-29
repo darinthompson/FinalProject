@@ -27,10 +27,33 @@
       <hr>
 
       <!-- Post Content -->
-      <p class="lead">{{selectedArticle.content}}<p>
+      <p class="lead">{{selectedArticle.content}}
+      <p>
+        <!-- <p class="lead">{{selectedArticle.comments}}</p> -->
+      <div class="card my-4">
+        <h5 class="card-header">Leave a Comment:</h5>
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <textarea class="form-control" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Single Comment -->
+      <h3>Comments: </h3>
+      <div *ngFor="let comment of comments">
+        <div class="media mb-4">
+          <img class="d-flex mr-3 rounded-circle" src="{{comment.profile.avatar}}" style="max-height: 50px; max-width: 50px;">
+          <div class="media-body">
+            <h5 class="mt-0">{{comment.profile.firstName}} {{comment.profile.lastName}}</h5>
+            {{comment.content}}
+          </div>
+        </div>
+      </div>
 
 
-      <hr>
     </div>
   </div>
-</div>
