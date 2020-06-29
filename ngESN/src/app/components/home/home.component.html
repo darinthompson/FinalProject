@@ -1,9 +1,9 @@
-<ngb-carousel >
+<ngb-carousel>
   <ng-template ngbSlide>
     <div class="picsum-img-wrapper">
       <h3 *ngFor="let match of matches"><img id="team1Img" src="{{match.team1.organization.logoURL}}">
-       VS <img id="team2Img" src="{{match.team2.organization.logoURL}}">
-      <!-- Winner: {{match.winner.organization.name}} -->
+        VS <img id="team2Img" src="{{match.team2.organization.logoURL}}">
+        <!-- Winner: {{match.winner.organization.name}} -->
       </h3>
     </div>
     <div class="carousel-caption">
@@ -13,7 +13,35 @@
   </ng-template>
 </ngb-carousel>
 
-<div *ngFor="let article of articles">
-  <p (click)="navigateToArticle(article.id)">{{article.title}}</p>
-  <p>{{article.content}}</p>
+<div class="container">
+
+  <div class="row">
+
+    <!-- Blog Entries Column -->
+    <div class="col-md-8">
+      <div *ngFor="let article of articles">
+
+        <h1 class="my-4">Page Heading
+          <small>Secondary Text</small>
+        </h1>
+
+        <!-- Blog Post -->
+        <div class="card mb-4">
+          <img class="card-img-top" src="{{article.image}}" alt="Card image cap">
+          <div class="card-body">
+            <h2 class="card-title">{{article.title}}</h2>
+            <p class="card-text">{{article.content}}</p>
+            <a class="btn btn-primary" (click)="navigateToArticle(article.id)">Read More &rarr;</a>
+          </div>
+          <div class="card-footer text-muted">
+            Posted on January 1, 2020 by
+            <a href="#">{{article.author.firstName}} {{article.author.lastName}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+<!-- <p (click)="navigateToArticle(article.id)">{{article.title}}</p>
+  <p>{{article.content}}</p>
+</div> -->
