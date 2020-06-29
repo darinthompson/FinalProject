@@ -71,11 +71,11 @@
   transition-timing-function: ease-out;
 } */
 
-main {
-  background-image: url('src/assets/images/bg-opaque.png');
-}
-
 @import url('https://fonts.googleapis.com/css?family=Cabin+Sketch');
+
+main {
+  background-image: url('src/assets/images/bg-solid-opaque.png');
+}
 
 .feather {
 	width: 16px;
@@ -174,4 +174,20 @@ a:link {
 
 a:hover {
   text-decoration: none;
+}
+
+.personal-info-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+#personal-info-form-container {
+  flex: 5;
+}
+
+#avatar-container {
+  flex: 1;
+  padding-right: 5em;
+  padding-left: 5em;
 }
