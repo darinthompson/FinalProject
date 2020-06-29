@@ -25,6 +25,9 @@ import { CreateProfileComponent } from './components/create-profile/create-profi
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { OrganizationService } from './services/organization.service';
+import { TeamService } from './services/team.service';
+import { PlayerService } from './services/player.service';
 
 
 
@@ -58,7 +61,10 @@ import { HttpClientModule } from '@angular/common/http';
     PlayerMatchStatService,
     ProfileService,
     UserService,
-    AuthService
+    AuthService,
+    OrganizationService,
+    TeamService,
+    PlayerService
   ],
   bootstrap: [AppComponent]
 })

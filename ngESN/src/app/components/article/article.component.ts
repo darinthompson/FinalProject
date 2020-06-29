@@ -4,7 +4,6 @@ import { Article } from 'src/app/models/article';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommentService } from 'src/app/services/comment.service';
 import { Comment } from 'src/app/models/comment';
-import { format } from 'path';
 import { Form } from '@angular/forms';
 
 @Component({
