@@ -19,15 +19,20 @@ export class GameComponent implements OnInit {
   constructor(private gameService: GameService, private seriesMatchService: SeriesMatchService, private currentRoute: ActivatedRoute, private router: Router) {
     this.navSubscription = this.router.events.subscribe((e: any) => {
       if (e instanceof NavigationEnd) {
-        this.checkRouteForId();
+        this.initialize();
       }
     });
 
   }
 
-
   ngOnInit(): void {
     this.checkRouteForId();
+  }
+
+  ngOnDestroy() {
+    if (this.navSubscription) {
+      this.navSubscription.unsubscribe();
+    }
   }
 
   checkRouteForId() {
@@ -47,7 +52,7 @@ export class GameComponent implements OnInit {
             console.log(this.matchList);
           },
           fail => {
-            this.router.navigateByUrl('fourohfour');
+            this.matchList = null;
           }
         )
       },
@@ -57,5 +62,11 @@ export class GameComponent implements OnInit {
         this.router.navigateByUrl('fourohfour');
       }
     );
+  }
+
+  initialize() {
+    this.selected = null;
+    this.matchList = [];
+    this.checkRouteForId();
   }
 }
