@@ -117,9 +117,13 @@ public class ProfileController {
 		return profile;
 	}
 
-	@PutMapping("profiles/{id}/addTeam")
-	public Profile addTeam(HttpServletRequest req, HttpServletResponse res, @RequestBody Team team,
-			Principal principal) {
+	@PutMapping("profiles/addTeam")
+	public Profile addTeam(
+			HttpServletRequest req,
+			HttpServletResponse res,
+			@RequestBody Team team,
+			Principal principal)
+	{
 		Profile profile;
 		try {
 			profile = profileService.addTeam(principal.getName(), team);
@@ -135,9 +139,13 @@ public class ProfileController {
 		return profile;
 	}
 
-	@PutMapping("profiles/{id}/addGame")
-	public Profile addGame(HttpServletRequest req, HttpServletResponse res, @RequestBody Game game,
-			Principal principal) {
+	@PutMapping("profiles/addGame")
+	public Profile addGame(
+			HttpServletRequest req,
+			HttpServletResponse res,
+			@RequestBody Game game,
+			Principal principal)
+	{
 		Profile profile;
 		try {
 			profile = profileService.addGame(principal.getName(), game);
@@ -153,9 +161,13 @@ public class ProfileController {
 		return profile;
 	}
 
-	@PutMapping("profiles/{id}/addOrg")
-	public Profile addOrg(HttpServletRequest req, HttpServletResponse res, @RequestBody Organization organization,
-			Principal principal) {
+	@PutMapping("profiles/addOrg")
+	public Profile addOrg(
+			HttpServletRequest req,
+			HttpServletResponse res,
+			@RequestBody Organization organization,
+			Principal principal)
+	{
 		Profile profile;
 		try {
 			profile = profileService.addOrg(principal.getName(), organization);
@@ -171,9 +183,13 @@ public class ProfileController {
 		return profile;
 	}
 
-	@PutMapping("profiles/{id}/addPlayer")
-	public Profile addPlayer(HttpServletRequest req, HttpServletResponse res, @RequestBody Player player,
-			Principal principal) {
+	@PutMapping("profiles/addPlayer")
+	public Profile addPlayer(
+			HttpServletRequest req,
+			HttpServletResponse res,
+			@RequestBody Player player,
+			Principal principal)
+	{
 		Profile profile;
 		try {
 			profile = profileService.addPlayer(principal.getName(), player);
@@ -189,9 +205,13 @@ public class ProfileController {
 		return profile;
 	}
 
-	@PutMapping("profiles/{id}/removeTeam")
-	public Profile removeTeam(HttpServletRequest req, HttpServletResponse res, @RequestBody Team team,
-			Principal principal) {
+	@PutMapping("profiles/removeTeam")
+	public Profile removeTeam(
+			HttpServletRequest req,
+			HttpServletResponse res,
+			@RequestBody Team team,
+			Principal principal)
+	{
 		Profile profile;
 		try {
 			profile = profileService.removeTeam(principal.getName(), team);
@@ -207,9 +227,13 @@ public class ProfileController {
 		return profile;
 	}
 
-	@PutMapping("profiles/{id}/removeGame")
-	public Profile removeGame(HttpServletRequest req, HttpServletResponse res, @RequestBody Game game,
-			Principal principal) {
+	@PutMapping("profiles/removeGame")
+	public Profile removeGame(
+			HttpServletRequest req,
+			HttpServletResponse res,
+			@RequestBody Game game,
+			Principal principal)
+	{
 		Profile profile;
 		try {
 			profile = profileService.removeGame(principal.getName(), game);
@@ -225,12 +249,16 @@ public class ProfileController {
 		return profile;
 	}
 
-	@PutMapping("profiles/{id}/removeOrg")
-	public Profile removeOrg(HttpServletRequest req, HttpServletResponse res, @RequestBody Organization organization,
-			Principal principal) {
+	@PutMapping("profiles/removeOrg")
+	public Profile removeOrg(
+			HttpServletRequest req,
+			HttpServletResponse res,
+			@RequestBody Organization org,
+			Principal principal)
+	{
 		Profile profile;
 		try {
-			profile = profileService.removeOrg(principal.getName(), organization);
+			profile = profileService.removeOrg(principal.getName(), org);
 			if (profile == null) {
 				res.setStatus(404);
 			}
@@ -243,9 +271,13 @@ public class ProfileController {
 		return profile;
 	}
 
-	@PutMapping("profiles/{id}/removePlayer")
-	public Profile removePlayer(HttpServletRequest req, HttpServletResponse res, @RequestBody Player player,
-			Principal principal) {
+	@PutMapping("profiles/removePlayer")
+	public Profile removePlayer(
+			HttpServletRequest req,
+			HttpServletResponse res,
+			@RequestBody Player player,
+			Principal principal)
+	{
 		Profile profile;
 		try {
 			profile = profileService.removePlayer(principal.getName(), player);
