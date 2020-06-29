@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ArticleComponent implements OnInit {
 
   selectedArticle: Article = null;
+  comments = [];
   constructor(
     private articleService: ArticleService,
     private currentRoute: ActivatedRoute,
@@ -36,10 +37,12 @@ export class ArticleComponent implements OnInit {
     const articleIdParam = this.currentRoute.snapshot.paramMap.get('id');
     console.log(articleIdParam);
     const id = parseInt(articleIdParam, 10);
-    console.log(id);
+    console.log(id)
     this.articleService.getArticleById(id).subscribe(
       (article) => {
         this.selectedArticle = article;
+        this.comments = this.selectedArticle.comments;
+        console.log(this.selectedArticle.comments);
         console.log(article);
       },
       (fail) => {
