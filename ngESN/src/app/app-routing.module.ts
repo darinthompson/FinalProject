@@ -16,6 +16,7 @@ const routes: Routes = [
   {path: 'game', component: GameComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'match', component: SeriesMatchComponent},
+  {path: 'match/:id', component: SeriesMatchComponent},
   {path: 'games/:id', component: GameComponent, runGuardsAndResolvers: 'always'},
   {path: '', component: HomeComponent},
   {path: '**', component: NotFoundComponent}

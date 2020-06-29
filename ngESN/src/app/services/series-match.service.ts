@@ -33,4 +33,13 @@ export class SeriesMatchService {
       })
     )
   }
+
+  getMatchById(id: number) {
+    return this.http.get<SeriesMatch>(this.url + `/${id}`).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(err);
+      })
+    )
+  }
 }

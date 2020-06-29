@@ -1,1 +1,4 @@
-<p>series-match works!</p>
+<div class="text-white" *ngFor="let player of match.team1.players">
+  {{player.handle}}
+  <div class="text-white" *ngFor="let stat of player.stats">{{stat.stat.statName}} {{stat.value}}</div>
+</div>
