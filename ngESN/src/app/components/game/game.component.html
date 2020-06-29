@@ -1,3 +1,5 @@
 <p>{{selected.title}}</p>
 
-<h3 *ngFor="let match of matchList">{{match.team1.organization.name}} vs {{match.team2.organization.name}}</h3>
+<div *ngIf="matchList != null">
+  <h3 *ngFor="let match of matchList">{{match.team1.organization.name}} vs {{match.team2.organization.name}}</h3>
+</div>
