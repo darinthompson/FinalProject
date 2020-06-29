@@ -13,10 +13,10 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Organization {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
 	private String name;
 	private String description;
 	
@@ -26,6 +26,7 @@ public class Organization {
 	@ManyToOne
 	@JoinColumn(name = "region_id")
 	private Region region;
+	
 	@OneToMany(mappedBy = "organization")
 	private List<Team> teams;
 	

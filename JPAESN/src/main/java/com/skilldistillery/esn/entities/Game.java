@@ -11,17 +11,22 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Game {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String title;
 	private String genre;
+	
 	@Column(name = "img_url")
 	private String imgURL;
+	
 	@Column(name = "website_url")
 	private String websiteURL;
+	
 	@OneToMany(mappedBy = "game")
 	private List<GameStat> gameStat;
+	
 	@OneToMany(mappedBy = "game")
 	private List<Team> teams;
 	
