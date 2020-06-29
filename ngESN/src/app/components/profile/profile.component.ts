@@ -11,12 +11,17 @@ export class ProfileComponent implements OnInit {
 
   userProfile: Profile;
   username: string;
+  dashboardView = null;
+  accountView = null;
+  articlesView = null;
+  adminView = null;
 
   constructor(
     private profileService: ProfileService
   ) { }
 
   ngOnInit(): void {
+    this.dashboardView = true;
     this.getUsername();
     this.getProfile();
   }
@@ -38,4 +43,31 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  setDashboardView() {
+    this.dashboardView = true;
+    this.accountView = false;
+    this.articlesView = false;
+    this.adminView  = false;
+  }
+
+  setAccountView() {
+    this.dashboardView = false;
+    this.accountView = true;
+    this.articlesView = false;
+    this.adminView  = false;
+  }
+
+  setArticlesView() {
+    this.dashboardView = false;
+    this.accountView = false;
+    this.articlesView = true;
+    this.adminView  = false;
+  }
+
+  setAdminView() {
+    this.dashboardView = false;
+    this.accountView = false;
+    this.articlesView = false;
+    this.adminView  = true;
+  }
 }
