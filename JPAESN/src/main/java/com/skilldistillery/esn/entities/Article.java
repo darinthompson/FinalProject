@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Article {
@@ -32,7 +33,7 @@ public class Article {
 	@Column(name="create_date")
 	private LocalDateTime createDate;
 
-	@JsonIgnore
+	@JsonIgnoreProperties({"user", "articles"})
 	@ManyToOne
 	@JoinColumn(name = "profile_id")
 	private Profile author;

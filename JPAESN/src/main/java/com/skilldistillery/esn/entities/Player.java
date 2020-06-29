@@ -17,18 +17,22 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Player {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
 	@Column(name = "first_name")
 	private String firstName;
+	
 	@Column(name = "last_name")
 	private String lastName;
 	private String handle;
+	
 	@Column(name = "stream_url")
 	private String streamURL;
 
-	@JsonIgnoreProperties({ "players" })
+	@JsonIgnoreProperties("players")
 	@ManyToMany
 	@JoinTable(name = "team_join_player", joinColumns = @JoinColumn(name = "player_id"), inverseJoinColumns = @JoinColumn(name = "team_id"))
 	private List<Team> teams;
