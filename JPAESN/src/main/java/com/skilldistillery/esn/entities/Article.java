@@ -1,6 +1,7 @@
 package com.skilldistillery.esn.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -121,7 +122,24 @@ public class Article {
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
-
+	
+	public void addComment(Comment comment) {
+		if(comments == null) {
+			comments = new ArrayList<>();
+		}
+		
+		if(!comments.contains(comment)) {
+			comments.add(comment);
+		}
+	}
+	
+	public void deleteComment(Comment comment) {
+		if(comment != null &&  comments.contains(comment)) {
+			comments.remove(comment);
+			comment.deleteArticle();
+		}
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

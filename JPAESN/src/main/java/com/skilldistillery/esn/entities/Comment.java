@@ -78,6 +78,10 @@ public class Comment {
 	public void setArticle(Article article) {
 		this.article = article;
 	}
+	
+	public void deleteArticle() {
+		this.article = null;
+	}
 
 	public LocalDateTime getCreateAt() {
 		return createAt;
