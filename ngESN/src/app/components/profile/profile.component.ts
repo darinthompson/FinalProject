@@ -129,6 +129,7 @@ export class ProfileComponent implements OnInit {
     this.articleService.create(newArticle).subscribe(
       article => {
         console.log(article);
+        this.getProfileArticles();
       },
       fail => {
         console.error('ProfileComponent.publishArticle(): Error publishing article:');

@@ -106,7 +106,7 @@
                 <p class="card-text">
                   <small class="text-muted">Last comment 3 mins ago</small>
                 </p>
-                <button class="btn mt-auto btn-primary">Go to article</button>
+                <button class="btn mt-auto btn-primary" [routerLink]="['/article/', article.id]">Go to article</button>
               </div>
             </div>
           </div>
@@ -328,6 +328,10 @@
               <input type="text" class="form-control" id="title" name="title" ngModel>
             </div>
             <div class="form-group">
+              <label for="imgURL">Article Image URL</label>
+              <input type="text" class="form-control" id="imgURL" name="image" ngModel>
+            </div>
+            <div class="form-group">
               <textarea class="form-control" name="content" rows="10" placeholder="Write your story here" ngModel></textarea>
             </div>
             <input type="submit" class="btn btn-outline-primary" value="Publish" (click)="publishArticle(newArticle)">
@@ -346,7 +350,7 @@
                 <p class="card-text">
                   <small class="text-muted">Last comment 3 mins ago</small>
                 </p>
-                <button class="btn mt-auto btn-primary">Go to article</button>
+                <button class="btn mt-auto btn-primary" [routerLink]="['/article/', article.id]">Go to article</button>
               </div>
             </div>
           </div>
