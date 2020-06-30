@@ -38,10 +38,8 @@ export class SeriesMatchComponent implements OnInit {
   }
 
   checkRouteForId() {
-    const articleIdParam = this.currentRoute.snapshot.paramMap.get('id');
-    console.log(articleIdParam);
-    const id = parseInt(articleIdParam, 10);
-    console.log(id)
+    const matchIdParam = this.currentRoute.snapshot.paramMap.get('id');
+    const id = parseInt(matchIdParam, 10);
     this.seriesMatchService.getMatchById(id).subscribe(
       (game) => {
         this.bout = game;
@@ -90,5 +88,9 @@ export class SeriesMatchComponent implements OnInit {
       gameplayer.push(newPlayer);
     }
     return gameplayer;
+  }
+
+  navtoPlayerPage(id: number){
+    this.router.navigateByUrl(`player/${id}`);
   }
 }

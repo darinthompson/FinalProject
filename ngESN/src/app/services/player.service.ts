@@ -23,4 +23,15 @@ export class PlayerService {
       })
     );
   }
+
+  getPlayerById(id: number){
+    return this.http.get<Player>(this.url + `/${id}`).pipe(
+      catchError((err: any) => {
+        console.error(err);
+        return throwError(
+          'PlayerService.index(): Error retrieving players: ' + err
+        );
+      })
+    );
+  }
 }
