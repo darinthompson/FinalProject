@@ -24,19 +24,35 @@
       <!-- Preview Image -->
       <img class="img-fluid rounded" src="{{selectedArticle.image}}" alt="">
 
-      <hr>
-
       <!-- Post Content -->
-      <p class="lead">{{selectedArticle.content}}
-      <p>
+      <p class="lead">{{selectedArticle.content}}</p>
+      <button class="btn btn-danger" (click)="delete()">DELETE</button>
+
+        <hr>
+
+
+      <form #articleForm="ngForm">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" id="title" name="title" [(ngModel)]="newArticle.title">
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" name="content" rows="10" [(ngModel)]="newArticle.content"
+            placeholder="Write your story here"></textarea>
+        </div>
+        <input type="submit" class="btn" value="Publish" (click)="createNewArticle(newArticle); articleForm.reset()">
+      </form>
+
       <div class="card my-4">
         <h5 class="card-header">Leave a Comment:</h5>
         <div class="card-body">
           <form #commentForm="ngForm">
             <div class="form-group">
-              <textarea class="form-control" name="content" rows="3" [(ngModel)]="newComment.content" placeholder="Tell us how you really feel..."></textarea>
+              <textarea class="form-control" name="content" rows="3" [(ngModel)]="newComment.content"
+                placeholder="Tell us how you really feel..."></textarea>
             </div>
-            <button type="submit" class="btn btn-primary" (click)="createNewComment(selectedArticle.id, newComment); commentForm.reset()">Submit</button>
+            <button type="submit" class="btn btn-primary"
+              (click)="createNewComment(selectedArticle.id, newComment); commentForm.reset()">Submit</button>
           </form>
         </div>
       </div>
@@ -45,14 +61,23 @@
       <h3>Comments: </h3>
       <div *ngFor="let comment of comments">
         <div class="media mb-4">
-          <img class="d-flex mr-3 rounded-circle" src="{{comment.profile.avatar}}" style="max-height: 50px; max-width: 50px;">
+          <img class="d-flex mr-3 rounded-circle" src="{{comment.profile.avatar}}"
+            style="max-height: 50px; max-width: 50px;">
           <div class="media-body">
             <h5 class="mt-0">{{comment.profile.firstName}} {{comment.profile.lastName}}</h5>
             {{comment.content}}
           </div>
         </div>
       </div>
-
-
     </div>
   </div>
+</div>
+
+
+<!-- <li class="nav-item">
+    <a *ngIf="!loggedIn()" class="nav-link" tabindex="-1" (click)="open(registercontent)">Register</a>
+    <ng-template #registercontent let-modal>
+      <app-register></app-register>
+    </ng-template>
+    <a *ngIf="loggedIn()" class="nav-link" href="#" tabindex="-1" [routerLink]="['/home']" (click)="logOut()">Log Out</a>
+  </li> -->
