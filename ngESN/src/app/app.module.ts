@@ -29,6 +29,7 @@ import { OrganizationService } from './services/organization.service';
 import { TeamService } from './services/team.service';
 import { PlayerService } from './services/player.service';
 import { RecentMatchPipe } from './pipes/recent-match.pipe';
+import { PlayerComponent } from './components/player/player.component';
 
 
 
@@ -47,7 +48,8 @@ import { RecentMatchPipe } from './pipes/recent-match.pipe';
     CommentComponent,
     NotFoundComponent,
     CreateProfileComponent,
-    RecentMatchPipe
+    RecentMatchPipe,
+    PlayerComponent
   ],
   imports: [
     BrowserModule,
