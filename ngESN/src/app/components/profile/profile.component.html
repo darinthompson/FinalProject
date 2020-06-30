@@ -43,9 +43,7 @@
         </h1>
 
         <hr />
-        <p class="lead mt-5">
-          Some sort of sample text or whatever
-        </p>
+
         <div class="row my-4">
           <div class="col-lg-3 col-md-4">
             <div class="card card-inverse bg-inverse mt-3">
@@ -259,14 +257,24 @@
 
           <hr>
 
-          <label for="favorite-orgs-container"><h4>Favorite Organizations</h4></label>
-          <div id="favorite-orgs-container">
-
+          <div class="d-flex flex-row" id="fav-orgs-header"><h4>Favorite Organizations</h4></div>
+          <div id="favorite-orgs-container" class="d-inline-flex flex-wrap" *ngFor="let org of userProfile.favoriteOrganizations">
+            <div class="fav-org-div">
+              <img src="{{org.logoURL}}" alt="org logo" style="max-width: 70px;">
+            </div>
           </div>
 
           <hr>
 
-          <label for="favorite-teams"><h4>Favorite Teams</h4></label>
+          <div class="d-flex flex-row"><h4>Favorite Teams</h4></div>
+          <div id="favorite-teams-container" class="d-inline-flex flex-wrap" *ngFor="let team of userProfile.favoriteTeams">
+            <div class="fav-team-div">
+              <img src="{{team.organization.logoURL}}" alt="team logo" style="max-width: 70px;">
+            </div>
+          </div>
+
+          <hr>
+
 
         </main>
 

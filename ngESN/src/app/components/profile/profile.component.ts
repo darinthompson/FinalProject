@@ -33,7 +33,7 @@ export class ProfileComponent implements OnInit {
     this.selectedView = 'dashboard';
     this.getUsername();
     this.getProfile();
-    this.getAllOrgs();
+    // this.getAllOrgs();
   }
 
   getUsername() {
@@ -91,6 +91,8 @@ export class ProfileComponent implements OnInit {
       }
     );
   }
+
+
 
   getFavMatches() {
 
