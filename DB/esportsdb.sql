@@ -459,6 +459,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 START TRANSACTION;
 USE `esportsdb`;
 INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`) VALUES (1, 'admin', '$2a$10$VGLMyEKzMsCtE4F3avV.dOH6oih0SlVJLLbf95eCJFy8XCOo.jNAO', 1, 'admin');
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`) VALUES (2, 'Serg', '$2a$10$FQ.CowO3PyO2yJfioH/bCeC7kwULaiUSuPakOKhyDpXDdr5CWYawS', 1, 'author');
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`) VALUES (3, 'User', '$2a$10$mV5sZxWE4dIUFCysSxFt7uQOkud5MtUG/JNSwYPqVqwSp/HUybj1e', 1, 'user');
 
 COMMIT;
 
@@ -469,6 +471,8 @@ COMMIT;
 START TRANSACTION;
 USE `esportsdb`;
 INSERT INTO `profile` (`id`, `user_id`, `first_name`, `last_name`, `email`, `avatar_url`) VALUES (1, 1, 'bobby', 'dobbs', 'bobdobbs@esports.com', 'https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/8/88/Cloud9logo_square.png/1200px-Cloud9logo_square.png');
+INSERT INTO `profile` (`id`, `user_id`, `first_name`, `last_name`, `email`, `avatar_url`) VALUES (2, 2, 'Sergio', 'Samoiloff', 'serg@esports.com', 'assets/images/noisia-logo.png');
+INSERT INTO `profile` (`id`, `user_id`, `first_name`, `last_name`, `email`, `avatar_url`) VALUES (3, 3, 'User', 'Resu', 'user@esports.com', 'assets/images/stock-gamer.jpg');
 
 COMMIT;
 
@@ -677,11 +681,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `esportsdb`;
-INSERT INTO `series_match` (`id`, `series_id`, `team1_id`, `team2_id`, `team1_title`, `team2_title`, `start_date`, `start_time`, `title`, `winner_id`) VALUES (1, 1, 1, 2, NULL, NULL, NULL, NULL, 'Match 1', 1);
-INSERT INTO `series_match` (`id`, `series_id`, `team1_id`, `team2_id`, `team1_title`, `team2_title`, `start_date`, `start_time`, `title`, `winner_id`) VALUES (2, 1, 1, 9, NULL, NULL, NULL, NULL, NULL, 1);
-INSERT INTO `series_match` (`id`, `series_id`, `team1_id`, `team2_id`, `team1_title`, `team2_title`, `start_date`, `start_time`, `title`, `winner_id`) VALUES (3, 1, 3, 10, NULL, NULL, NULL, NULL, NULL, 10);
-INSERT INTO `series_match` (`id`, `series_id`, `team1_id`, `team2_id`, `team1_title`, `team2_title`, `start_date`, `start_time`, `title`, `winner_id`) VALUES (4, 1, 5, 6, NULL, NULL, NULL, NULL, NULL, 6);
-INSERT INTO `series_match` (`id`, `series_id`, `team1_id`, `team2_id`, `team1_title`, `team2_title`, `start_date`, `start_time`, `title`, `winner_id`) VALUES (5, 1, 8, 7, NULL, NULL, NULL, NULL, NULL, 8);
+INSERT INTO `series_match` (`id`, `series_id`, `team1_id`, `team2_id`, `team1_title`, `team2_title`, `start_date`, `start_time`, `title`, `winner_id`) VALUES (1, 1, 1, 2, NULL, NULL, '2020-06-26', '13:00:00', 'Match 1', 1);
+INSERT INTO `series_match` (`id`, `series_id`, `team1_id`, `team2_id`, `team1_title`, `team2_title`, `start_date`, `start_time`, `title`, `winner_id`) VALUES (2, 1, 1, 9, NULL, NULL, '2020-06-28', '14:00:00', NULL, 1);
+INSERT INTO `series_match` (`id`, `series_id`, `team1_id`, `team2_id`, `team1_title`, `team2_title`, `start_date`, `start_time`, `title`, `winner_id`) VALUES (3, 1, 3, 10, NULL, NULL, '2020-06-27', '15:00:00', NULL, 10);
+INSERT INTO `series_match` (`id`, `series_id`, `team1_id`, `team2_id`, `team1_title`, `team2_title`, `start_date`, `start_time`, `title`, `winner_id`) VALUES (4, 1, 5, 6, NULL, NULL, '2020-06-28', '15:00:00', NULL, 6);
+INSERT INTO `series_match` (`id`, `series_id`, `team1_id`, `team2_id`, `team1_title`, `team2_title`, `start_date`, `start_time`, `title`, `winner_id`) VALUES (5, 1, 8, 7, NULL, NULL, '2020-06-28', '16:00:00', NULL, 8);
 
 COMMIT;
 
@@ -835,6 +839,16 @@ COMMIT;
 START TRANSACTION;
 USE `esportsdb`;
 INSERT INTO `favorite_organization` (`profile_id`, `organization_id`) VALUES (1, 1);
+INSERT INTO `favorite_organization` (`profile_id`, `organization_id`) VALUES (2, 1);
+INSERT INTO `favorite_organization` (`profile_id`, `organization_id`) VALUES (2, 2);
+INSERT INTO `favorite_organization` (`profile_id`, `organization_id`) VALUES (2, 3);
+INSERT INTO `favorite_organization` (`profile_id`, `organization_id`) VALUES (2, 4);
+INSERT INTO `favorite_organization` (`profile_id`, `organization_id`) VALUES (2, 5);
+INSERT INTO `favorite_organization` (`profile_id`, `organization_id`) VALUES (2, 6);
+INSERT INTO `favorite_organization` (`profile_id`, `organization_id`) VALUES (2, 7);
+INSERT INTO `favorite_organization` (`profile_id`, `organization_id`) VALUES (2, 8);
+INSERT INTO `favorite_organization` (`profile_id`, `organization_id`) VALUES (2, 9);
+INSERT INTO `favorite_organization` (`profile_id`, `organization_id`) VALUES (2, 10);
 
 COMMIT;
 
@@ -845,6 +859,16 @@ COMMIT;
 START TRANSACTION;
 USE `esportsdb`;
 INSERT INTO `favorite_team` (`profile_id`, `team_id`) VALUES (1, 1);
+INSERT INTO `favorite_team` (`profile_id`, `team_id`) VALUES (2, 1);
+INSERT INTO `favorite_team` (`profile_id`, `team_id`) VALUES (2, 2);
+INSERT INTO `favorite_team` (`profile_id`, `team_id`) VALUES (2, 3);
+INSERT INTO `favorite_team` (`profile_id`, `team_id`) VALUES (2, 4);
+INSERT INTO `favorite_team` (`profile_id`, `team_id`) VALUES (2, 5);
+INSERT INTO `favorite_team` (`profile_id`, `team_id`) VALUES (2, 6);
+INSERT INTO `favorite_team` (`profile_id`, `team_id`) VALUES (2, 7);
+INSERT INTO `favorite_team` (`profile_id`, `team_id`) VALUES (2, 8);
+INSERT INTO `favorite_team` (`profile_id`, `team_id`) VALUES (2, 9);
+INSERT INTO `favorite_team` (`profile_id`, `team_id`) VALUES (2, 10);
 
 COMMIT;
 
@@ -855,6 +879,10 @@ COMMIT;
 START TRANSACTION;
 USE `esportsdb`;
 INSERT INTO `favorite_game` (`profile_id`, `game_id`) VALUES (1, 1);
+INSERT INTO `favorite_game` (`profile_id`, `game_id`) VALUES (2, 1);
+INSERT INTO `favorite_game` (`profile_id`, `game_id`) VALUES (2, 2);
+INSERT INTO `favorite_game` (`profile_id`, `game_id`) VALUES (2, 3);
+INSERT INTO `favorite_game` (`profile_id`, `game_id`) VALUES (2, 4);
 
 COMMIT;
 
@@ -865,6 +893,16 @@ COMMIT;
 START TRANSACTION;
 USE `esportsdb`;
 INSERT INTO `favorite_player` (`profile_id`, `player_id`) VALUES (1, 1);
+INSERT INTO `favorite_player` (`profile_id`, `player_id`) VALUES (2, 5);
+INSERT INTO `favorite_player` (`profile_id`, `player_id`) VALUES (2, 9);
+INSERT INTO `favorite_player` (`profile_id`, `player_id`) VALUES (2, 11);
+INSERT INTO `favorite_player` (`profile_id`, `player_id`) VALUES (2, 20);
+INSERT INTO `favorite_player` (`profile_id`, `player_id`) VALUES (2, 33);
+INSERT INTO `favorite_player` (`profile_id`, `player_id`) VALUES (2, 19);
+INSERT INTO `favorite_player` (`profile_id`, `player_id`) VALUES (2, 37);
+INSERT INTO `favorite_player` (`profile_id`, `player_id`) VALUES (2, 45);
+INSERT INTO `favorite_player` (`profile_id`, `player_id`) VALUES (2, 50);
+INSERT INTO `favorite_player` (`profile_id`, `player_id`) VALUES (2, 41);
 
 COMMIT;
 
