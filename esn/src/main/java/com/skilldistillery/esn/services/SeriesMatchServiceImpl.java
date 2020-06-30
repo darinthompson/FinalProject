@@ -24,7 +24,8 @@ public class SeriesMatchServiceImpl implements SeriesMatchService {
 	public SeriesMatch getMatchById(Integer id) {
 		Optional<SeriesMatch> optMatch = seriesMatchRepo.findById(id);
 		if(optMatch.isPresent()) {
-			return optMatch.get();
+			SeriesMatch match = optMatch.get();
+			return match;
 		} else {
 			return null;
 		}
