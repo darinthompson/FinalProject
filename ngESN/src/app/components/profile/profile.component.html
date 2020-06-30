@@ -46,16 +46,14 @@
 
         <div class="row my-4">
           <div class="col-lg-3 col-md-4">
-            <div class="card card-inverse bg-inverse mt-3">
-              <div class="card-block">
-                <h3 class="card-title">{{ username }}</h3>
+              <div id="dashboard-avatar-card">
+                <h3>{{ username }}</h3>
                 <img
                   class="card-img img-fluid"
                   src="{{ userProfile.avatar }}"
                   style="max-height: 100px; max-width: 100px;"
                 />
               </div>
-            </div>
           </div>
 
           <!-- favorites stats table -->
@@ -121,7 +119,7 @@
           <div class="card">
             <img
               class="card-img-top img-fluid"
-              src="https://lh3.googleusercontent.com/proxy/PZZqxLhzcRN1ELqH16Vmo5pOAuqn5OEytEG4j-sUJIref8CcCgRD6GAcZAal273kg4H42XbDOe4hn7Us2_3-NKLLDIQn50JC-TACFAgKSWuVK0TajM3OuaY"
+              src=""
               alt="Card image cap"
             />
             <div class="card-body d-flex flex-column">
@@ -134,7 +132,7 @@
           <div class="card">
             <img
               class="card-img-top img-fluid"
-              src="https://lh3.googleusercontent.com/proxy/PZZqxLhzcRN1ELqH16Vmo5pOAuqn5OEytEG4j-sUJIref8CcCgRD6GAcZAal273kg4H42XbDOe4hn7Us2_3-NKLLDIQn50JC-TACFAgKSWuVK0TajM3OuaY"
+              src=""
               alt="Card image cap"
             />
             <div class="card-body d-flex flex-column">
@@ -257,7 +255,7 @@
 
           <hr>
 
-          <div class="d-flex flex-row" id="fav-orgs-header"><h4>Favorite Organizations</h4></div>
+          <div class="d-flex flex-row"><h4>Favorite Organizations</h4></div>
           <div id="favorite-orgs-container" class="d-inline-flex flex-wrap" *ngFor="let org of userProfile.favoriteOrganizations">
             <div class="fav-org-div">
               <img src="{{org.logoURL}}" alt="org logo" style="max-width: 70px;">
@@ -267,13 +265,71 @@
           <hr>
 
           <div class="d-flex flex-row"><h4>Favorite Teams</h4></div>
-          <div id="favorite-teams-container" class="d-inline-flex flex-wrap" *ngFor="let team of userProfile.favoriteTeams">
+
+          <div class="d-flex">
+            <ul ngbNav #nav="ngbNav" class="nav-pills" orientation="vertical">
+              <li ngbNavItem="game" *ngFor="let game of games">
+                <a ngbNavLink>{{game.title}}</a>
+                <ng-template ngbNavContent>
+                  <div id="fav-teams-container" class="d-inline-flex flex-wrap" *ngFor="let team of userProfile.favoriteTeams | filterTeams: game">
+                    <div class="fav-team-div">
+                      <img src="{{team.organization.logoURL}}" alt="team logo" style="max-width: 70px;">
+                    </div>
+                  </div>
+                </ng-template>
+              </li>
+              <!-- <li ngbNavItem="overwatch">
+                <a ngbNavLink>Overwatch</a>
+                <ng-template ngbNavContent>
+                  <div id="fav-teams-ow-container" class="d-inline-flex flex-wrap" *ngFor="let team of userProfile.favoriteTeams">
+                    <div class="fav-team-div">
+                      <img src="{{team.organization.logoURL}}" alt="team logo" style="max-width: 70px;">
+                    </div>
+                  </div>
+                </ng-template>
+              </li>
+              <li ngbNavItem="lol">
+                <a ngbNavLink>League of Legends</a>
+                <ng-template ngbNavContent>
+                  <div id="fav-teams-lol-container" class="d-inline-flex flex-wrap" *ngFor="let team of userProfile.favoriteTeams">
+                    <div class="fav-team-div">
+                      <img src="{{team.organization.logoURL}}" alt="team logo" style="max-width: 70px;">
+                    </div>
+                  </div>
+                </ng-template>
+              </li>
+              <li ngbNavItem="rocketLeague">
+                <a ngbNavLink>Rocket League</a>
+                <ng-template ngbNavContent>
+                  <div id="fav-teams-rl-container" class="d-inline-flex flex-wrap" *ngFor="let team of userProfile.favoriteTeams">
+                    <div class="fav-team-div">
+                      <img src="{{team.organization.logoURL}}" alt="team logo" style="max-width: 70px;">
+                    </div>
+                  </div>
+                </ng-template>
+              </li> -->
+            </ul>
+
+            <div [ngbNavOutlet]="nav" class="ml-4"></div>
+          </div>
+
+          <!-- <div id="favorite-teams-container" class="d-inline-flex flex-wrap" *ngFor="let team of userProfile.favoriteTeams">
             <div class="fav-team-div">
               <img src="{{team.organization.logoURL}}" alt="team logo" style="max-width: 70px;">
             </div>
+          </div> -->
+
+          <hr>
+
+          <div class="d-flex flex-row"><h4>Favorite Players</h4></div>
+          <div id="favorite-players-container" class="d-inline-flex flex-wrap">
+            <ul *ngFor="let player of userProfile.favoritePlayers">
+              <li>{{player.handle}}</li>
+            </ul>
           </div>
 
           <hr>
+
 
 
         </main>

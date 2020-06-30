@@ -29,6 +29,9 @@ import { OrganizationService } from './services/organization.service';
 import { TeamService } from './services/team.service';
 import { PlayerService } from './services/player.service';
 import { RecentMatchPipe } from './pipes/recent-match.pipe';
+import { FilterOrgsPipe } from './pipes/filter-orgs.pipe';
+import { FilterTeamsPipe } from './pipes/filter-teams.pipe';
+import { FilterPlayersPipe } from './pipes/filter-players.pipe';
 import { PlayerComponent } from './components/player/player.component';
 
 
@@ -49,6 +52,9 @@ import { PlayerComponent } from './components/player/player.component';
     NotFoundComponent,
     CreateProfileComponent,
     RecentMatchPipe,
+    FilterOrgsPipe,
+    FilterTeamsPipe,
+    FilterPlayersPipe,
     PlayerComponent
   ],
   imports: [
@@ -69,7 +75,10 @@ import { PlayerComponent } from './components/player/player.component';
     OrganizationService,
     TeamService,
     PlayerService,
-    RecentMatchPipe
+    RecentMatchPipe,
+    FilterOrgsPipe,
+    FilterTeamsPipe,
+    FilterPlayersPipe
   ],
   bootstrap: [AppComponent]
 })

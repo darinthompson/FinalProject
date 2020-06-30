@@ -7,6 +7,8 @@ import { Team } from 'src/app/models/team';
 import { Player } from 'src/app/models/player';
 import { PlayerService } from 'src/app/services/player.service';
 import { TeamService } from 'src/app/services/team.service';
+import { Game } from 'src/app/models/game';
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'app-profile',
@@ -21,18 +23,21 @@ export class ProfileComponent implements OnInit {
   allTeams: Team[];
   allPlayers: Player[];
   selectedView: string = null;
+  games: Game[] = [];
 
   constructor(
     private profileService: ProfileService,
     private orgService: OrganizationService,
     private teamService: TeamService,
-    private playerService: PlayerService
+    private playerService: PlayerService,
+    private gameService: GameService
   ) { }
 
   ngOnInit(): void {
     this.selectedView = 'dashboard';
     this.getUsername();
     this.getProfile();
+    this.getAllGames();
     // this.getAllOrgs();
   }
 
@@ -92,6 +97,18 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  getAllGames() {
+    this.gameService.index().subscribe(
+      games => {
+        console.log(games);
+        this.games = games;
+      },
+      fail => {
+        console.error('ProfileComponent.getAllGames(): Error retrieving list of games:');
+        console.error(fail);
+      }
+    )
+  }
 
 
   getFavMatches() {
