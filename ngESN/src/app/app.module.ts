@@ -32,6 +32,7 @@ import { RecentMatchPipe } from './pipes/recent-match.pipe';
 import { FilterOrgsPipe } from './pipes/filter-orgs.pipe';
 import { FilterTeamsPipe } from './pipes/filter-teams.pipe';
 import { FilterPlayersPipe } from './pipes/filter-players.pipe';
+import { PlayerComponent } from './components/player/player.component';
 
 
 
@@ -53,7 +54,8 @@ import { FilterPlayersPipe } from './pipes/filter-players.pipe';
     RecentMatchPipe,
     FilterOrgsPipe,
     FilterTeamsPipe,
-    FilterPlayersPipe
+    FilterPlayersPipe,
+    PlayerComponent
   ],
   imports: [
     BrowserModule,

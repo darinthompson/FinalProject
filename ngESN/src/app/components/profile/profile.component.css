@@ -71,7 +71,7 @@
   transition-timing-function: ease-out;
 } */
 
-@import url('https://fonts.googleapis.com/css?family=Cabin+Sketch');
+/* @import url('https://fonts.googleapis.com/css?family=Cabin+Sketch'); */
 
 main {
   background-color: #d1f7ff;
@@ -102,12 +102,12 @@ main {
 	overflow-y: auto;
 }
 
-@supports ((position: -webkit-sticky) or (position: sticky)) {
+/* @supports ((position: -webkit-sticky) or (position: sticky)) {
 	.sidebar-sticky {
 		position: -webkit-sticky;
 		position: sticky;
 	}
-}
+} */
 
 .navbar-brand {
 	display: block;
@@ -118,7 +118,7 @@ main {
 	color: #fff;
 	text-align: center;
 	transition: background 0.5s;
-	font-family: 'Cabin Sketch', cursive;
+	/* font-family: 'Cabin Sketch', cursive; */
 	font-size: 1.8rem;
 	line-height: 2rem;
 }
