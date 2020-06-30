@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   matches: SeriesMatch[];
   articles: Article[];
   selectedArticle = null;
+  newArticle: Article = new Article();
 
   constructor(
     private seriesMatchService: SeriesMatchService,
@@ -45,6 +46,14 @@ export class HomeComponent implements OnInit {
   navigateToArticle(id: number) {
     this.getArticle(id);
     this.router.navigateByUrl(`article/${id}`);
+  }
+
+  createNewArticle(article: Article) {
+    this.articleService.create(article).subscribe(
+      success => {
+        console.log(article);
+      }
+    )
   }
 
   getArticle(id: number) {

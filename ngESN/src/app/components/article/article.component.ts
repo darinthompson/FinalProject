@@ -14,9 +14,11 @@ import { Form } from '@angular/forms';
 export class ArticleComponent implements OnInit {
 
   selectedArticle: Article = null;
-  comments = [];
   newComment: Comment = new Comment();
+  newArticle: Article = new Article();
   commentForm: Form;
+  comments = [];
+
   constructor(
     private articleService: ArticleService,
     private currentRoute: ActivatedRoute,
@@ -51,6 +53,14 @@ export class ArticleComponent implements OnInit {
     )
   }
 
+  createNewArticle(article: Article) {
+    this.articleService.create(article).subscribe(
+      success => {
+        console.log(article);
+      }
+    )
+  }
+
   reload() {
     return this.articleService.getArticleById(this.selectedArticle.id).subscribe(
       success => {
@@ -62,6 +72,17 @@ export class ArticleComponent implements OnInit {
     )
   }
 
+  delete() {
+    return this.articleService.destroy(this.selectedArticle.id).subscribe(
+      success => {
+        console.log('SUCCESS deleting article');
+        this.checkRouteForId();
+      },
+      fail => {
+        console.log('ERROR deleting article');
+      }
+    )
+  }
 
   checkRouteForId() {
     const articleIdParam = this.currentRoute.snapshot.paramMap.get('id');
