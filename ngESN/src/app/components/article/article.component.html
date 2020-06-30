@@ -37,10 +37,14 @@
           <input type="text" class="form-control" id="title" name="title" [(ngModel)]="newArticle.title">
         </div>
         <div class="form-group">
+          <label for="title">IMG URL</label>
+          <input type="text" class="form-control" id="imgURL" name="url" [(ngModel)]="newArticle.image">
+        </div>
+        <div class="form-group">
           <textarea class="form-control" name="content" rows="10" [(ngModel)]="newArticle.content"
             placeholder="Write your story here"></textarea>
         </div>
-        <input type="submit" class="btn" value="Publish" (click)="createNewArticle(newArticle); articleForm.reset()">
+        <input type="submit" class="btn" value="Publish" (click)="createNewArticle(newArticle); articleForm.reset()" [routerLink]="['/home']">
       </form>
 
       <div class="card my-4">
@@ -73,11 +77,3 @@
   </div>
 </div>
 
-
-<!-- <li class="nav-item">
-    <a *ngIf="!loggedIn()" class="nav-link" tabindex="-1" (click)="open(registercontent)">Register</a>
-    <ng-template #registercontent let-modal>
-      <app-register></app-register>
-    </ng-template>
-    <a *ngIf="loggedIn()" class="nav-link" href="#" tabindex="-1" [routerLink]="['/home']" (click)="logOut()">Log Out</a>
-  </li> -->
