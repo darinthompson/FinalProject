@@ -28,6 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { OrganizationService } from './services/organization.service';
 import { TeamService } from './services/team.service';
 import { PlayerService } from './services/player.service';
+import { RecentMatchPipe } from './pipes/recent-match.pipe';
 
 
 
@@ -45,7 +46,8 @@ import { PlayerService } from './services/player.service';
     ArticleComponent,
     CommentComponent,
     NotFoundComponent,
-    CreateProfileComponent
+    CreateProfileComponent,
+    RecentMatchPipe
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,8 @@ import { PlayerService } from './services/player.service';
     AuthService,
     OrganizationService,
     TeamService,
-    PlayerService
+    PlayerService,
+    RecentMatchPipe
   ],
   bootstrap: [AppComponent]
 })
