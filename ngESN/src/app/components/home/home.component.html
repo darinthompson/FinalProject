@@ -14,11 +14,6 @@
     <!-- Blog Entries Column -->
     <div class="col-md-8">
       <div *ngFor="let article of articles">
-
-        <h1 class="my-4">Page Heading
-          <small>Secondary Text</small>
-        </h1>
-
         <!-- Blog Post -->
         <div class="card mb-4">
           <img class="card-img-top" src="{{article.image}}" alt="Card image cap">
@@ -28,7 +23,7 @@
             <a class="btn btn-primary" (click)="navigateToArticle(article.id)">Read More &rarr;</a>
           </div>
           <div class="card-footer text-muted">
-            Posted on January 1, 2020 by
+            Written: {{article.createDate}}
             <a href="#">{{article.author.firstName}} {{article.author.lastName}}</a>
           </div>
         </div>

@@ -46,7 +46,7 @@ export class ArticleService {
   }
 
   destroy(id: number) {
-    return this.http.delete<Article>(this.url + `api/articles/${id}`, this.getHttpOptions()).pipe(
+    return this.http.delete<Article>(this.url + `api/articles/disable/${id}`, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('index: ' + err);
