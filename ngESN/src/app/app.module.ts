@@ -29,6 +29,9 @@ import { OrganizationService } from './services/organization.service';
 import { TeamService } from './services/team.service';
 import { PlayerService } from './services/player.service';
 import { RecentMatchPipe } from './pipes/recent-match.pipe';
+import { FilterOrgsPipe } from './pipes/filter-orgs.pipe';
+import { FilterTeamsPipe } from './pipes/filter-teams.pipe';
+import { FilterPlayersPipe } from './pipes/filter-players.pipe';
 
 
 
@@ -47,7 +50,10 @@ import { RecentMatchPipe } from './pipes/recent-match.pipe';
     CommentComponent,
     NotFoundComponent,
     CreateProfileComponent,
-    RecentMatchPipe
+    RecentMatchPipe,
+    FilterOrgsPipe,
+    FilterTeamsPipe,
+    FilterPlayersPipe
   ],
   imports: [
     BrowserModule,
@@ -67,7 +73,10 @@ import { RecentMatchPipe } from './pipes/recent-match.pipe';
     OrganizationService,
     TeamService,
     PlayerService,
-    RecentMatchPipe
+    RecentMatchPipe,
+    FilterOrgsPipe,
+    FilterTeamsPipe,
+    FilterPlayersPipe
   ],
   bootstrap: [AppComponent]
 })

@@ -74,7 +74,7 @@
 @import url('https://fonts.googleapis.com/css?family=Cabin+Sketch');
 
 main {
-  background-image: url('src/assets/images/bg-solid-opaque.png');
+  background-color: #d1f7ff;
 }
 
 .feather {
@@ -194,4 +194,10 @@ a:hover {
 
 .d-flex.flex-row {
   padding-bottom: 20px;
+}
+
+#dashboard-avatar-card {
+  border: none;
+  background-color: #d1f7ff;
+  text-align: center;
 }
