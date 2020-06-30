@@ -11,18 +11,21 @@
           <th class="col">
             Player
           </th>
-          <th class="col">
-            Kills
+          <th class="col" *ngFor="let statName of bout.team1.game.gameStat">
+          {{statName.statName}}
           </th>
-          <th class="col">
-            Deaths
-          </th>
-          <th class="col">
-            Assists
-          </th>
-          <th class="col">
-            CS
-          </th>
+<!--          <th class="col">-->
+<!--            Kills-->
+<!--          </th>-->
+<!--          <th class="col">-->
+<!--            Deaths-->
+<!--          </th>-->
+<!--          <th class="col">-->
+<!--            Assists-->
+<!--          </th>-->
+<!--          <th class="col">-->
+<!--            CS-->
+<!--          </th>-->
         </tr>
         </thead>
         <tbody>
