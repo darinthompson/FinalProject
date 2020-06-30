@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -43,19 +44,27 @@ public class Profile {
 	private List<Comment> comments;
 
 	@OneToMany
-	@JoinColumn(name = "id")
+	@JoinTable(name = "favorite_organization",
+			joinColumns = @JoinColumn(name = "profile_id"),
+			inverseJoinColumns = @JoinColumn(name = "organization_id"))
 	private List<Organization> favoriteOrganizations;
 
 	@OneToMany
-	@JoinColumn(name = "id")
+	@JoinTable(name = "favorite_team",
+			joinColumns = @JoinColumn(name = "profile_id"),
+			inverseJoinColumns = @JoinColumn(name = "team_id"))
 	private List<Team> favoriteTeams;
 
 	@OneToMany
-	@JoinColumn(name = "id")
+	@JoinTable(name = "favorite_player",
+			joinColumns = @JoinColumn(name = "profile_id"),
+			inverseJoinColumns = @JoinColumn(name = "player_id"))
 	private List<Player> favoritePlayers;
 
 	@OneToMany
-	@JoinColumn(name = "id")
+	@JoinTable(name = "favorite_game",
+			joinColumns = @JoinColumn(name = "profile_id"),
+			inverseJoinColumns = @JoinColumn(name = "game_id"))
 	private List<Game> favoriteGames;
 
 	public Profile() {
