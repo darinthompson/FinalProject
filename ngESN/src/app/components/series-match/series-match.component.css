@@ -1,0 +1,13 @@
+#matchDiv{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+#team1Img{
+  flex-grow: 1;
+}
+
+#team2Div{
+  flex-grow: 1;
+}

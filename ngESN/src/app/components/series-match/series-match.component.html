@@ -1,25 +1,78 @@
-<div class="text-white" *ngFor="let player of match.team1.players">
-  {{player.handle}}
-  <div class="text-white" *ngFor="let stat of player.stats">{{stat.stat.statName}} {{stat.value}}</div>
-</div>
-
-<div id="team1Div" class="text-white">
-  <div>
-    <table>
-      <thead>
-      <tr>
-        <th>
-          Player
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let player of match.team1.players">
+<!--<div class="text-white" *ngFor="let player of match.team1.players">-->
+<!--  {{player.handle}}-->
+<!--  <div class="text-white" *ngFor="let stat of player.stats">{{stat.stat.statName}} {{stat.value}}</div>-->
+<!--</div>-->
+<div class="container-fluid" id="matchDiv">
+  <div id="team1Div" class="text-white container-fluid">
+    <div>
+      <table class="table table-dark">
+        <thead>
+        <tr>
+          <th class="col">
+            Player
+          </th>
+          <th class="col">
+            Kills
+          </th>
+          <th class="col">
+            Deaths
+          </th>
+          <th class="col">
+            Assists
+          </th>
+          <th class="col">
+            CS
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let player of team1Players">
           <td>
             {{player.handle}}
           </td>
+          <td *ngFor="let stat of player.stats">
+            {{stat.value}}
+          </td>
         </tr>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <div id="team2Div" class="text-white container-fluid">
+    <div>
+      <table class="table table-dark">
+        <thead>
+        <tr>
+          <th class="col">
+            Player
+          </th>
+          <th class="col">
+            Kills
+          </th>
+          <th class="col">
+            Deaths
+          </th>
+          <th class="col">
+            Assists
+          </th>
+          <th class="col">
+            CS
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let player of team2Players">
+          <td>
+            {{player.handle}}
+          </td>
+          <td *ngFor="let stat of player.stats">
+            {{stat.value}}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
