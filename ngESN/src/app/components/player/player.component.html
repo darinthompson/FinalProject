@@ -1,1 +1,3 @@
-<p>player works!</p>
+<p>{{player.handle}}</p>
+<p *ngFor="let team of player.teams">{{team.organization.name}}</p>
+<p *ngFor="let stat of player.stats">{{stat.stat.statName}} : {{stat.value}}</p>

@@ -14,7 +14,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let player of team1Players">
+        <tr *ngFor="let player of team1Players" (click)="navtoPlayerPage(player.id)">
           <td>
             {{player.handle}}
           </td>

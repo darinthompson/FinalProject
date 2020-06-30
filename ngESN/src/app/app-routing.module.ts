@@ -7,6 +7,7 @@ import {GameComponent} from './components/game/game.component';
 import {RegisterComponent} from './components/register/register.component';
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {SeriesMatchComponent} from './components/series-match/series-match.component';
+import {PlayerComponent} from "./components/player/player.component";
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'match', component: SeriesMatchComponent},
   {path: 'match/:id', component: SeriesMatchComponent},
   {path: 'games/:id', component: GameComponent, runGuardsAndResolvers: 'always'},
+  {path: 'player/:id', component: PlayerComponent},
   {path: '', component: HomeComponent},
   {path: '**', component: NotFoundComponent}
 ];
