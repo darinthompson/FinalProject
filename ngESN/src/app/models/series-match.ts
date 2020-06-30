@@ -7,8 +7,8 @@ export class SeriesMatch {
   title: string;
   team1Title: string;
   team2Title: string;
-  startDate: Date;
-  startTime: Time;
+  startDate: string;
+  startTime: string;
   series: Series;
   team1: Team;
   team2: Team;
@@ -19,8 +19,8 @@ export class SeriesMatch {
     title?: string,
     team1Title?: string,
     team2Title?: string,
-    startDate?: Date,
-    startTime?: Time,
+    startDate?: string,
+    startTime?: string,
     series?: Series,
     team1?: Team,
     team2?: Team,
