@@ -11,7 +11,7 @@ import { AuthService } from './auth.service';
 })
 export class ArticleService {
 
-  private url = environment.baseURL;
+  private url = environment.baseURL + 'api/articles';
 
   constructor(
     private http: HttpClient,
@@ -19,39 +19,48 @@ export class ArticleService {
   ) { }
 
   getAllArticles() {
-    return this.http.get<Article[]>(this.url + 'api/articles').pipe(
+    return this.http.get<Article[]>(this.url).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('index: ' + err);
+        return throwError('ArticleService.getAllArticles(): Error retrieving list of articles: ' + err);
       })
-    )
+    );
   }
 
   getArticleById(id: number) {
-    return this.http.get<Article>(this.url + `api/articles/${id}`).pipe(
+    return this.http.get<Article>(this.url + `/${id}`).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('index: ' + err);
+        return throwError('ArticleService.getArticleById(): Error retrieving article: ' + err);
       })
-    )
+    );
+  }
+
+  getAllAuthoredArticles() {
+    return this.http.get<Article[]>(this.url + '/author', this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('ArticleService.getAllAuthoredArticles(): Error retrieving author articles: ' + err);
+      })
+    );
   }
 
   create(article: Article) {
-    return this.http.post<Article>(this.url + `api/articles`, article, this.getHttpOptions()).pipe(
+    return this.http.post<Article>(this.url, article, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('index: ' + err);
+        return throwError('ArticleService.create(): Error creating article: ' + err);
       })
-    )
+    );
   }
 
   destroy(id: number) {
-    return this.http.delete<Article>(this.url + `api/articles/disable/${id}`, this.getHttpOptions()).pipe(
+    return this.http.delete<Article>(this.url + `/disable/${id}`, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('index: ' + err);
+        return throwError('ArticleService.destroy(): Error destroying article: ' + err);
       })
-    )
+    );
   }
 
   getHttpOptions() {
@@ -65,5 +74,3 @@ export class ArticleService {
     return httpOptions;
   }
 }
-
-

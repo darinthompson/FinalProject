@@ -9,6 +9,9 @@ import { PlayerService } from 'src/app/services/player.service';
 import { TeamService } from 'src/app/services/team.service';
 import { Game } from 'src/app/models/game';
 import { GameService } from 'src/app/services/game.service';
+import { ArticleService } from 'src/app/services/article.service';
+import { NgForm } from '@angular/forms';
+import { Article } from 'src/app/models/article';
 
 @Component({
   selector: 'app-profile',
@@ -24,13 +27,16 @@ export class ProfileComponent implements OnInit {
   allPlayers: Player[];
   selectedView: string = null;
   games: Game[] = [];
+  selectedGame: Game = null;
+  profileArticles: Article[] = null;
 
   constructor(
     private profileService: ProfileService,
     private orgService: OrganizationService,
     private teamService: TeamService,
     private playerService: PlayerService,
-    private gameService: GameService
+    private gameService: GameService,
+    private articleService: ArticleService
   ) { }
 
   ngOnInit(): void {
@@ -39,6 +45,7 @@ export class ProfileComponent implements OnInit {
     this.getProfile();
     this.getAllGames();
     // this.getAllOrgs();
+    this.getProfileArticles();
   }
 
   getUsername() {
@@ -102,17 +109,44 @@ export class ProfileComponent implements OnInit {
       games => {
         console.log(games);
         this.games = games;
+        this.selectedGame = this.games[0];
       },
       fail => {
         console.error('ProfileComponent.getAllGames(): Error retrieving list of games:');
         console.error(fail);
       }
-    )
+    );
   }
 
-
-  getFavMatches() {
-
+  setSelectedGame(game: Game) {
+    console.log('Setting selected game');
+    console.log(game);
+    this.selectedGame = game;
   }
 
+  publishArticle(form: NgForm) {
+    const newArticle: Article = form.value;
+    this.articleService.create(newArticle).subscribe(
+      article => {
+        console.log(article);
+      },
+      fail => {
+        console.error('ProfileComponent.publishArticle(): Error publishing article:');
+        console.error(fail);
+      }
+    );
+  }
+
+  getProfileArticles() {
+    this.articleService.getAllAuthoredArticles().subscribe(
+      articles => {
+        console.log(articles);
+        this.profileArticles = articles;
+      },
+      fail => {
+        console.error('ProfileComponent.getProfileArticles(): Error retrieving authored articles:');
+        console.error(fail);
+      }
+    );
+  }
 }
