@@ -9,28 +9,33 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Game {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String title;
 	private String genre;
-	
+
 	@Column(name = "img_url")
 	private String imgURL;
-	
+
 	@Column(name = "website_url")
 	private String websiteURL;
-	
+	@JsonIgnoreProperties("game")
 	@OneToMany(mappedBy = "game")
 	private List<GameStat> gameStat;
-	
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "game")
 	private List<Team> teams;
-	
-	public Game() {}
+
+	public Game() {
+	}
 
 	public Game(int id, String title, String genre, String imgURL, String websiteURL) {
 		super();
@@ -81,6 +86,22 @@ public class Game {
 		this.websiteURL = websiteURL;
 	}
 
+	public List<GameStat> getGameStat() {
+		return gameStat;
+	}
+
+	public void setGameStat(List<GameStat> gameStat) {
+		this.gameStat = gameStat;
+	}
+
+	public List<Team> getTeams() {
+		return teams;
+	}
+
+	public void setTeams(List<Team> teams) {
+		this.teams = teams;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -119,5 +140,5 @@ public class Game {
 		builder.append("]");
 		return builder.toString();
 	}
-	
+
 }
