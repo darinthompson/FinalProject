@@ -11,17 +11,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.esn.entities.SeriesMatch;
 import com.skilldistillery.esn.entities.Team;
 import com.skilldistillery.esn.services.TeamService;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin({"*", "http:localhost:4209"})
+@CrossOrigin({ "*", "http:localhost:4209" })
 public class TeamController {
 
 	@Autowired
 	private TeamService teamSvc;
-	
+
 	@GetMapping("teams")
 	public List<Team> index(HttpServletResponse res) {
 		List<Team> results;
@@ -37,15 +38,12 @@ public class TeamController {
 			res.setStatus(400);
 			results = null;
 		}
-		
+
 		return results;
 	}
-	
+
 	@GetMapping("teams/org/{oid}")
-	public List<Team> getTeamsByOrg(
-			@PathVariable Integer oid,
-			HttpServletResponse res)
-	{
+	public List<Team> getTeamsByOrg(@PathVariable Integer oid, HttpServletResponse res) {
 		List<Team> results;
 		try {
 			results = teamSvc.getTeamsByOrg(oid);
@@ -59,15 +57,12 @@ public class TeamController {
 			res.setStatus(400);
 			results = null;
 		}
-		
+
 		return results;
 	}
-	
+
 	@GetMapping("teams/region/{rid}")
-	public List<Team> getTeamsByRegion(
-			@PathVariable Integer rid,
-			HttpServletResponse res)
-	{
+	public List<Team> getTeamsByRegion(@PathVariable Integer rid, HttpServletResponse res) {
 		List<Team> results;
 		try {
 			results = teamSvc.getTeamsByRegion(rid);
@@ -81,15 +76,12 @@ public class TeamController {
 			res.setStatus(400);
 			results = null;
 		}
-		
+
 		return results;
 	}
-	
+
 	@GetMapping("teams/{tid}")
-	public Team show(
-			@PathVariable Integer tid,
-			HttpServletResponse res)
-	{
+	public Team show(@PathVariable Integer tid, HttpServletResponse res) {
 		Team result;
 		try {
 			result = teamSvc.show(tid);
@@ -103,7 +95,29 @@ public class TeamController {
 			res.setStatus(400);
 			result = null;
 		}
-		
+
+		return result;
+	}
+
+	@GetMapping("teams/{tid}/matches")
+	public List<SeriesMatch> getMatchesByTeamId(@PathVariable Integer tid, HttpServletResponse res) {
+
+		List<SeriesMatch> result;
+
+		try {
+			result = teamSvc.getMatchesByTeamId(tid);
+			if (result != null) {
+				System.out.println(result.size() + "+++++++++++++++++++++++++++++++++++++++++");
+				res.setStatus(200);
+			} else {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			result = null;
+		}
+
 		return result;
 	}
 }

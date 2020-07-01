@@ -2,6 +2,7 @@ package com.skilldistillery.esn.services;
 
 import java.util.List;
 
+import com.skilldistillery.esn.entities.SeriesMatch;
 import com.skilldistillery.esn.entities.Team;
 
 public interface TeamService {
@@ -13,4 +14,6 @@ public interface TeamService {
 	List<Team> getTeamsByRegion(Integer rid);
 	
 	Team show(Integer tid);
+	
+	List<SeriesMatch>getMatchesByTeamId(int id);
 }
