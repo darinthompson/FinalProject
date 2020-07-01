@@ -74,7 +74,8 @@
 /* @import url('https://fonts.googleapis.com/css?family=Cabin+Sketch'); */
 
 main {
-  background-color: #d1f7ff;
+  background-color: #cccccc;
+  color: black;
 }
 
 .feather {
