@@ -54,6 +54,21 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `game`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `game` ;
+
+CREATE TABLE IF NOT EXISTS `game` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(200) NULL,
+  `genre` VARCHAR(500) NULL,
+  `img_url` VARCHAR(5000) NULL,
+  `website_url` VARCHAR(5000) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `article`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `article` ;
@@ -66,11 +81,18 @@ CREATE TABLE IF NOT EXISTS `article` (
   `profile_id` INT NOT NULL,
   `create_date` DATETIME NULL,
   `enabled` TINYINT NOT NULL DEFAULT 1,
+  `game_id` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_article_profile1_idx` (`profile_id` ASC),
+  INDEX `fk_article_game1_idx` (`game_id` ASC),
   CONSTRAINT `fk_article_profile1`
     FOREIGN KEY (`profile_id`)
     REFERENCES `profile` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_article_game1`
+    FOREIGN KEY (`game_id`)
+    REFERENCES `game` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -110,28 +132,12 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `game`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `game` ;
-
-CREATE TABLE IF NOT EXISTS `game` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(200) NULL,
-  `genre` VARCHAR(500) NULL,
-  `img_url` VARCHAR(5000) NULL,
-  `website_url` VARCHAR(5000) NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `team`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `team` ;
 
 CREATE TABLE IF NOT EXISTS `team` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `img_url` VARCHAR(5000) NULL,
   `organization_id` INT NOT NULL,
   `game_id` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -160,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `player` (
   `first_name` VARCHAR(100) NULL,
   `last_name` VARCHAR(100) NULL,
   `handle` VARCHAR(200) NULL,
-  `stream_url` VARCHAR(5000) NULL,
+  `img_url` VARCHAR(5000) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -213,8 +219,6 @@ CREATE TABLE IF NOT EXISTS `series_match` (
   `series_id` INT NOT NULL,
   `team1_id` INT NOT NULL,
   `team2_id` INT NOT NULL,
-  `team1_title` VARCHAR(45) NULL,
-  `team2_title` VARCHAR(45) NULL,
   `start_date` DATE NULL,
   `start_time` TIME NULL,
   `title` VARCHAR(1000) NULL,
@@ -478,11 +482,24 @@ COMMIT;
 
 
 -- -----------------------------------------------------
+-- Data for table `game`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `esportsdb`;
+INSERT INTO `game` (`id`, `title`, `genre`, `img_url`, `website_url`) VALUES (1, 'League of Legends', 'MOBA', 'https://gamepedia.cursecdn.com/lolesports_gamepedia_en/c/c8/LCS_2020_Logo.png', 'https://www.lolesports.com');
+INSERT INTO `game` (`id`, `title`, `genre`, `img_url`, `website_url`) VALUES (2, 'Counterstrike: Global Offensive', 'FPS', NULL, 'https://blog.counter-strike.net/');
+INSERT INTO `game` (`id`, `title`, `genre`, `img_url`, `website_url`) VALUES (3, 'Overwatch', 'FPS', NULL, 'https://playoverwatch.com/en-us/');
+INSERT INTO `game` (`id`, `title`, `genre`, `img_url`, `website_url`) VALUES (4, 'Rocket League', 'Sports', NULL, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
 -- Data for table `article`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `esportsdb`;
-INSERT INTO `article` (`id`, `title`, `content`, `img_url`, `profile_id`, `create_date`, `enabled`) VALUES (1, 'test', 'test article', 'https://specials-images.forbesimg.com/imageserve/5e0f8f19db7a9600065d7cec/960x0.jpg?fit=scale', 1, NULL, 1);
+INSERT INTO `article` (`id`, `title`, `content`, `img_url`, `profile_id`, `create_date`, `enabled`, `game_id`) VALUES (1, 'test', 'test article', 'https://specials-images.forbesimg.com/imageserve/5e0f8f19db7a9600065d7cec/960x0.jpg?fit=scale', 1, NULL, 1, NULL);
 
 COMMIT;
 
@@ -493,6 +510,8 @@ COMMIT;
 START TRANSACTION;
 USE `esportsdb`;
 INSERT INTO `region` (`id`, `name`) VALUES (1, 'North America');
+INSERT INTO `region` (`id`, `name`) VALUES (2, 'Pacific');
+INSERT INTO `region` (`id`, `name`) VALUES (3, 'Atlantic');
 
 COMMIT;
 
@@ -517,33 +536,20 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `game`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `esportsdb`;
-INSERT INTO `game` (`id`, `title`, `genre`, `img_url`, `website_url`) VALUES (1, 'League of Legends', 'MOBA', 'https://gamepedia.cursecdn.com/lolesports_gamepedia_en/c/c8/LCS_2020_Logo.png', 'https://www.lolesports.com');
-INSERT INTO `game` (`id`, `title`, `genre`, `img_url`, `website_url`) VALUES (2, 'Counterstrike: Global Offensive', 'FPS', NULL, 'https://blog.counter-strike.net/');
-INSERT INTO `game` (`id`, `title`, `genre`, `img_url`, `website_url`) VALUES (3, 'Overwatch', 'FPS', NULL, 'https://playoverwatch.com/en-us/');
-INSERT INTO `game` (`id`, `title`, `genre`, `img_url`, `website_url`) VALUES (4, 'Rocket League', 'Sports', NULL, NULL);
-
-COMMIT;
-
-
--- -----------------------------------------------------
 -- Data for table `team`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `esportsdb`;
-INSERT INTO `team` (`id`, `img_url`, `organization_id`, `game_id`) VALUES (1, 'https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/8/88/Cloud9logo_square.png/1200px-Cloud9logo_square.png', 1, 1);
-INSERT INTO `team` (`id`, `img_url`, `organization_id`, `game_id`) VALUES (2, 'https://gamepedia.cursecdn.com/lolesports_gamepedia_en/f/f4/Team_Liquidlogo_square.png', 2, 1);
-INSERT INTO `team` (`id`, `img_url`, `organization_id`, `game_id`) VALUES (3, NULL, 3, 1);
-INSERT INTO `team` (`id`, `img_url`, `organization_id`, `game_id`) VALUES (4, NULL, 4, 1);
-INSERT INTO `team` (`id`, `img_url`, `organization_id`, `game_id`) VALUES (5, NULL, 5, 1);
-INSERT INTO `team` (`id`, `img_url`, `organization_id`, `game_id`) VALUES (6, NULL, 6, 1);
-INSERT INTO `team` (`id`, `img_url`, `organization_id`, `game_id`) VALUES (7, NULL, 7, 1);
-INSERT INTO `team` (`id`, `img_url`, `organization_id`, `game_id`) VALUES (8, NULL, 8, 1);
-INSERT INTO `team` (`id`, `img_url`, `organization_id`, `game_id`) VALUES (9, NULL, 9, 1);
-INSERT INTO `team` (`id`, `img_url`, `organization_id`, `game_id`) VALUES (10, NULL, 10, 1);
+INSERT INTO `team` (`id`, `organization_id`, `game_id`) VALUES (1, 1, 1);
+INSERT INTO `team` (`id`, `organization_id`, `game_id`) VALUES (2, 2, 1);
+INSERT INTO `team` (`id`, `organization_id`, `game_id`) VALUES (3, 3, 1);
+INSERT INTO `team` (`id`, `organization_id`, `game_id`) VALUES (4, 4, 1);
+INSERT INTO `team` (`id`, `organization_id`, `game_id`) VALUES (5, 5, 1);
+INSERT INTO `team` (`id`, `organization_id`, `game_id`) VALUES (6, 6, 1);
+INSERT INTO `team` (`id`, `organization_id`, `game_id`) VALUES (7, 7, 1);
+INSERT INTO `team` (`id`, `organization_id`, `game_id`) VALUES (8, 8, 1);
+INSERT INTO `team` (`id`, `organization_id`, `game_id`) VALUES (9, 9, 1);
+INSERT INTO `team` (`id`, `organization_id`, `game_id`) VALUES (10, 10, 1);
 
 COMMIT;
 
@@ -553,56 +559,56 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `esportsdb`;
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (1, 'Robert', 'Huang', 'Blaber', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (2, 'Jo', 'Yong-in', 'CoreJJ', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (3, NULL, NULL, 'Licorice', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (4, NULL, NULL, 'Nisqy', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (5, NULL, NULL, 'Zven', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (6, NULL, NULL, 'Vulcan', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (7, NULL, NULL, 'Impact', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (8, NULL, NULL, 'Broxah', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (9, NULL, NULL, 'Jensen', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (10, NULL, NULL, 'Tactical', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (11, NULL, NULL, 'allorim', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (12, NULL, NULL, 'Xmithie', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (13, NULL, NULL, 'Insanity', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (14, NULL, NULL, 'Apollo', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (15, NULL, NULL, 'Hakuho', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (16, NULL, NULL, 'ssumday', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (17, NULL, NULL, 'Meteos', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (18, NULL, NULL, 'Ryoma', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (19, NULL, NULL, 'Cody Sun', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (20, NULL, NULL, 'Stunt', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (21, NULL, NULL, 'Ruin', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (22, NULL, NULL, 'Wiggily', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (23, NULL, NULL, 'Pobelter', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (24, NULL, NULL, 'Stixxay', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (25, NULL, NULL, 'Smoothie', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (26, NULL, NULL, 'Lourlo', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (27, NULL, NULL, 'Akaadian', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (28, NULL, NULL, 'Froggen', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (29, NULL, NULL, 'Johnsun', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (30, NULL, NULL, 'Aphromoo', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (31, NULL, NULL, 'Kumo', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (32, NULL, NULL, 'Svenskeren', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (33, NULL, NULL, 'Jiizuke', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (34, NULL, NULL, 'Bang', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (35, NULL, NULL, 'Zeyzal', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (36, NULL, NULL, 'Solo', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (37, NULL, NULL, 'Santorin', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (38, NULL, NULL, 'PowerOfEvil', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (39, NULL, NULL, 'Mash', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (40, NULL, NULL, 'IgNar', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (41, NULL, NULL, 'Hauntzer', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (42, NULL, NULL, 'Closer', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (43, NULL, NULL, 'Damonte', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (44, NULL, NULL, 'FBI', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (45, NULL, NULL, 'Huhi', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (46, NULL, NULL, 'BrokenBlade', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (47, NULL, NULL, 'Spica', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (48, NULL, NULL, 'Bjergsen', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (49, NULL, NULL, 'Doublelift', NULL);
-INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `stream_url`) VALUES (50, NULL, NULL, 'Biofrost', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (1, 'Robert', 'Huang', 'Blaber', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (2, 'Jo', 'Yong-in', 'CoreJJ', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (3, NULL, NULL, 'Licorice', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (4, NULL, NULL, 'Nisqy', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (5, NULL, NULL, 'Zven', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (6, NULL, NULL, 'Vulcan', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (7, NULL, NULL, 'Impact', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (8, NULL, NULL, 'Broxah', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (9, NULL, NULL, 'Jensen', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (10, NULL, NULL, 'Tactical', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (11, NULL, NULL, 'allorim', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (12, NULL, NULL, 'Xmithie', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (13, NULL, NULL, 'Insanity', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (14, NULL, NULL, 'Apollo', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (15, NULL, NULL, 'Hakuho', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (16, NULL, NULL, 'ssumday', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (17, NULL, NULL, 'Meteos', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (18, NULL, NULL, 'Ryoma', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (19, NULL, NULL, 'Cody Sun', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (20, NULL, NULL, 'Stunt', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (21, NULL, NULL, 'Ruin', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (22, NULL, NULL, 'Wiggily', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (23, NULL, NULL, 'Pobelter', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (24, NULL, NULL, 'Stixxay', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (25, NULL, NULL, 'Smoothie', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (26, NULL, NULL, 'Lourlo', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (27, NULL, NULL, 'Akaadian', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (28, NULL, NULL, 'Froggen', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (29, NULL, NULL, 'Johnsun', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (30, NULL, NULL, 'Aphromoo', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (31, NULL, NULL, 'Kumo', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (32, NULL, NULL, 'Svenskeren', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (33, NULL, NULL, 'Jiizuke', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (34, NULL, NULL, 'Bang', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (35, NULL, NULL, 'Zeyzal', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (36, NULL, NULL, 'Solo', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (37, NULL, NULL, 'Santorin', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (38, NULL, NULL, 'PowerOfEvil', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (39, NULL, NULL, 'Mash', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (40, NULL, NULL, 'IgNar', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (41, NULL, NULL, 'Hauntzer', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (42, NULL, NULL, 'Closer', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (43, NULL, NULL, 'Damonte', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (44, NULL, NULL, 'FBI', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (45, NULL, NULL, 'Huhi', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (46, NULL, NULL, 'BrokenBlade', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (47, NULL, NULL, 'Spica', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (48, NULL, NULL, 'Bjergsen', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (49, NULL, NULL, 'Doublelift', NULL);
+INSERT INTO `player` (`id`, `first_name`, `last_name`, `handle`, `img_url`) VALUES (50, NULL, NULL, 'Biofrost', NULL);
 
 COMMIT;
 
@@ -672,6 +678,7 @@ COMMIT;
 START TRANSACTION;
 USE `esportsdb`;
 INSERT INTO `series` (`id`, `name`, `description`, `img_url`) VALUES (1, 'LCS Sumer Split', 'North America League of Legends pro circuit', 'https://gamepedia.cursecdn.com/lolesports_gamepedia_en/c/c8/LCS_2020_Logo.png');
+INSERT INTO `series` (`id`, `name`, `description`, `img_url`) VALUES (2, 'Overwatch League', 'Overwatch Pro League', 'www.overwatchleague.com');
 
 COMMIT;
 
@@ -681,11 +688,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `esportsdb`;
-INSERT INTO `series_match` (`id`, `series_id`, `team1_id`, `team2_id`, `team1_title`, `team2_title`, `start_date`, `start_time`, `title`, `winner_id`) VALUES (1, 1, 1, 2, NULL, NULL, '2020-06-26', '13:00:00', 'Match 1', 1);
-INSERT INTO `series_match` (`id`, `series_id`, `team1_id`, `team2_id`, `team1_title`, `team2_title`, `start_date`, `start_time`, `title`, `winner_id`) VALUES (2, 1, 1, 9, NULL, NULL, '2020-06-28', '14:00:00', NULL, 1);
-INSERT INTO `series_match` (`id`, `series_id`, `team1_id`, `team2_id`, `team1_title`, `team2_title`, `start_date`, `start_time`, `title`, `winner_id`) VALUES (3, 1, 3, 10, NULL, NULL, '2020-06-27', '15:00:00', NULL, 10);
-INSERT INTO `series_match` (`id`, `series_id`, `team1_id`, `team2_id`, `team1_title`, `team2_title`, `start_date`, `start_time`, `title`, `winner_id`) VALUES (4, 1, 5, 6, NULL, NULL, '2020-06-28', '15:00:00', NULL, 6);
-INSERT INTO `series_match` (`id`, `series_id`, `team1_id`, `team2_id`, `team1_title`, `team2_title`, `start_date`, `start_time`, `title`, `winner_id`) VALUES (5, 1, 8, 7, NULL, NULL, '2020-06-28', '16:00:00', NULL, 8);
+INSERT INTO `series_match` (`id`, `series_id`, `team1_id`, `team2_id`, `start_date`, `start_time`, `title`, `winner_id`) VALUES (1, 1, 1, 2, '2020-06-26', '13:00:00', 'Match 1', 1);
+INSERT INTO `series_match` (`id`, `series_id`, `team1_id`, `team2_id`, `start_date`, `start_time`, `title`, `winner_id`) VALUES (2, 1, 1, 9, '2020-06-28', '14:00:00', NULL, 1);
+INSERT INTO `series_match` (`id`, `series_id`, `team1_id`, `team2_id`, `start_date`, `start_time`, `title`, `winner_id`) VALUES (3, 1, 3, 10, '2020-06-27', '15:00:00', NULL, 10);
+INSERT INTO `series_match` (`id`, `series_id`, `team1_id`, `team2_id`, `start_date`, `start_time`, `title`, `winner_id`) VALUES (4, 1, 5, 6, '2020-06-28', '15:00:00', NULL, 6);
+INSERT INTO `series_match` (`id`, `series_id`, `team1_id`, `team2_id`, `start_date`, `start_time`, `title`, `winner_id`) VALUES (5, 1, 8, 7, '2020-06-28', '16:00:00', NULL, 8);
 
 COMMIT;
 
