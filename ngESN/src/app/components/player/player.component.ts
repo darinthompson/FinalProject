@@ -7,6 +7,8 @@ import {ProfileService} from "../../services/profile.service";
 import {TeamService} from "../../services/team.service";
 import {SeriesMatchService} from "../../services/series-match.service";
 import {AuthService} from "../../services/auth.service";
+import {Team} from "../../models/team";
+import {Profile} from "../../models/profile";
 
 @Component({
   selector: 'app-player',
@@ -18,6 +20,7 @@ export class PlayerComponent implements OnInit {
   player: Player;
   recentMatches: SeriesMatch[] = [];
   loggedIn: boolean;
+  profile: Profile;
 
 
   constructor(private playerService: PlayerService,
@@ -32,6 +35,7 @@ export class PlayerComponent implements OnInit {
   ngOnInit(): void {
     this.checkRouteForId();
     this.checklogin();
+    this.checkFavoritePlayers();
   }
 
   getPlayerById(id: number) {
@@ -100,7 +104,7 @@ export class PlayerComponent implements OnInit {
   addFavoritePlayer(player: Player) {
     this.profileService.addPlayer(player).subscribe(
       data => {
-        console.log(data);
+        this.checkFavoritePlayers();
       },
       err => {
         console.log(err);
@@ -116,5 +120,26 @@ navagateToMatch(id: number){
 checklogin(){
     this.loggedIn = this.authService.checkLogin();
 }
+
+  checkFavoritePlayers(){
+    this.profileService.getByUsername().subscribe(
+      data => {
+        this.profile = data;
+      },
+      err => {
+        console.log(err);
+        this.router.navigateByUrl('fourohfour');
+      }
+    );
+  }
+
+  displayFollow(player: Player){
+    for (let singlePlayer of this.profile.favoritePlayers){
+      if(singlePlayer.id === player.id){
+        return false;
+      }
+    }
+    return true;
+  }
 }
 
