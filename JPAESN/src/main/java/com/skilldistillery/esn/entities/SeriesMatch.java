@@ -25,12 +25,6 @@ public class SeriesMatch {
 	private int id;
 	private String title;
 	
-	@Column(name = "team1_title")
-	private String team1Title;
-	
-	@Column(name = "team2_title")
-	private String team2Title;
-	
 	@Column(name = "start_date")
 	private LocalDate startDate;
 	
@@ -64,8 +58,6 @@ public class SeriesMatch {
 		super();
 		this.id = id;
 		this.title = title;
-		this.team1Title = team1Title;
-		this.team2Title = team2Title;
 		this.startDate = startDate;
 		this.startTime = startTime;
 	}
@@ -84,22 +76,6 @@ public class SeriesMatch {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public String getTeam1Title() {
-		return team1Title;
-	}
-
-	public void setTeam1Title(String team1Title) {
-		this.team1Title = team1Title;
-	}
-
-	public String getTeam2Title() {
-		return team2Title;
-	}
-
-	public void setTeam2Title(String team2Title) {
-		this.team2Title = team2Title;
 	}
 
 	public LocalDate getStartDate() {
@@ -179,14 +155,18 @@ public class SeriesMatch {
 		builder.append(id);
 		builder.append(", title=");
 		builder.append(title);
-		builder.append(", team1Title=");
-		builder.append(team1Title);
-		builder.append(", team2Title=");
-		builder.append(team2Title);
 		builder.append(", startDate=");
 		builder.append(startDate);
 		builder.append(", startTime=");
 		builder.append(startTime);
+		builder.append(", series=");
+		builder.append(series);
+		builder.append(", team1=");
+		builder.append(team1);
+		builder.append(", team2=");
+		builder.append(team2);
+		builder.append(", winner=");
+		builder.append(winner);
 		builder.append("]");
 		return builder.toString();
 	}

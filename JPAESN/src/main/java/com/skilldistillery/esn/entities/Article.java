@@ -43,12 +43,16 @@ public class Article {
 	@OneToMany(mappedBy = "article")
 	private List<Comment> comments;
 	
+	@ManyToOne
+	@JoinColumn(name = "game_id")
+	private Game game;
+	
 	public Article() {
 		super();
 	}
 
 	public Article(int id, String title, String content, String image, LocalDateTime createDate, Profile author,
-			List<Comment> comments) {
+			boolean enabled, List<Comment> comments, Game game) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -56,7 +60,9 @@ public class Article {
 		this.image = image;
 		this.createDate = createDate;
 		this.author = author;
+		this.enabled = enabled;
 		this.comments = comments;
+		this.game = game;
 	}
 
 	public int getId() {
@@ -123,6 +129,14 @@ public class Article {
 		this.comments = comments;
 	}
 	
+	public Game getGame() {
+		return game;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
 	public void addComment(Comment comment) {
 		if(comments == null) {
 			comments = new ArrayList<>();

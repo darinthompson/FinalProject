@@ -3,7 +3,6 @@ package com.skilldistillery.esn.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,8 +22,6 @@ public class Team {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name = "img_url")
-	private String image;
 	
 	@ManyToOne
 	@JoinColumn(name = "game_id")
@@ -56,10 +53,9 @@ public class Team {
 	
 	public Team() {}
 
-	public Team(int id, String image, Game game, List<Player> players) {
+	public Team(int id, Game game, List<Player> players) {
 		super();
 		this.id = id;
-		this.image = image;
 		this.game = game;
 		this.players = players;
 	}
@@ -70,14 +66,6 @@ public class Team {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
 	}
 
 	public Game getGame() {
@@ -147,8 +135,6 @@ public class Team {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Team [id=");
 		builder.append(id);
-		builder.append(", image=");
-		builder.append(image);
 		builder.append(", game=");
 		builder.append(game);
 		builder.append(", matchesTeam1=");
