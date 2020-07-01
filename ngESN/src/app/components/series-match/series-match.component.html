@@ -1,10 +1,19 @@
-
 <br><br>
-<h3 class="text-center">Winner:&nbsp; {{bout.winner.organization.name}}</h3>
+<h3 *ngIf="bout.winner.id === bout.team1.id" class="text-center">
+  Winner:&nbsp; {{bout.team1.organization.name}}
+</h3>
+<h3 *ngIf="bout.winner.id === bout.team2.id" class="text-center">
+  Winner:  {{bout.team2.organization.name}}
+</h3>
 <div class="container-fluid" id="matchDiv">
   <div id="team1Div" class="text-white container-fluid">
     <div>
-      <h3 *ngIf="bout != null" id="team1Header" class="text-center"><img style="max-width: 100px" src="{{bout.team1.organization.logoURL}}"></h3>
+      <h3 *ngIf="bout != null" id="team1Header" class="text-center">
+        <img style="max-width: 100px" src="{{bout.team1.organization.logoURL}}">
+      </h3>
+      <button class="btn btn-secondary" (click)="addFavoriteTeam(bout.team1)">
+        Follow {{bout.team1.organization.name}}
+      </button>
       <table class="table table-dark">
         <thead>
         <tr>
@@ -33,29 +42,25 @@
 
   <div id="team2Div" class="text-white container-fluid">
     <div>
-      <h3 *ngIf="bout != null" id="team2Header" class="text-center"><img style="max-width: 100px" src="{{bout.team2.organization.logoURL}}"></h3>
+      <h3 *ngIf="bout != null" id="team2Header" class="text-center">
+        <img style="max-width: 100px" src="{{bout.team2.organization.logoURL}}">
+      </h3>
+      <button class="btn btn-secondary" (click)="addFavoriteTeam(bout.team2)">
+        Follow {{bout.team2.organization.name}}
+      </button>
       <table class="table table-dark">
         <thead>
         <tr>
           <th class="col">
             Player
           </th>
-          <th class="col">
-            Kills
-          </th>
-          <th class="col">
-            Deaths
-          </th>
-          <th class="col">
-            Assists
-          </th>
-          <th class="col">
-            CS
+          <th class="col" *ngFor="let statName of bout.team2.game.gameStat">
+            {{statName.statName}}
           </th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let player of team2Players">
+        <tr *ngFor="let player of team2Players" (click)="navtoPlayerPage(player.id)">
           <td>
             {{player.handle}}
           </td>
