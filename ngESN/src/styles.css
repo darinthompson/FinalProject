@@ -2,5 +2,15 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 
 body  {
-  background-color: #01012b;
+  background-image: url(src/assets/images/poly-bg-blur2.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  color: #cccccc;
+}
+
+.navbar.navbar-expand-lg.sticky-top {
+  background-color: #0f292f;
+  color: #0b0c10;
+  margin-bottom: 20px;
 }
