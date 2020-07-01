@@ -6,16 +6,16 @@ export class Player {
   firstName: string;
   lastName: string;
   handle: string;
-  streamURL: string;
+  imgURL: string;
   teams: Team[];
   stats: PlayerMatchStat[];
 
-  constructor(id?: number, firstName?: string, lastName?: string, handle?: string, streamURL?: string, teams?: Team[], stats?: PlayerMatchStat[]) {
+  constructor(id?: number, firstName?: string, lastName?: string, handle?: string, imgURL?: string, teams?: Team[], stats?: PlayerMatchStat[]) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.handle = handle;
-    this.streamURL = streamURL;
+    this.imgURL = imgURL;
     this.teams = teams;
     this.stats = stats;
   }
