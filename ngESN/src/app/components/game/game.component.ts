@@ -16,6 +16,7 @@ export class GameComponent implements OnInit {
 
   navSubscription;
   selected: Game;
+  selectedArticle = null;
   matchList: SeriesMatch[];
   gameArticles: Article[] = [];
 
@@ -95,4 +96,21 @@ export class GameComponent implements OnInit {
       }
     )
   }
+
+  getArticle(id: number) {
+    this.articleService.getArticleById(id).subscribe(
+      success => {
+        this.selectedArticle = success;
+      },
+      fail => {
+        console.log("error getting article");
+      }
+    )
+  }
+
+  navigateToArticle(id: number) {
+    this.getArticle(id);
+    this.router.navigateByUrl(`article/${id}`);
+  }
+
 }
