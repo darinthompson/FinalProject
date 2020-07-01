@@ -1,6 +1,7 @@
 .card-title {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
+  /* text-transform: uppercase; */
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 200;
   color: #ccc;
 }
 
@@ -20,6 +21,7 @@
 .card-meta {
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
+  margin-top: -10px;
   color: #ccc;
 }
 
@@ -29,3 +31,44 @@
   color: #ccc;
 }
 
+.comment-header {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 200;
+}
+
+.article-background {
+  /* text-align: center; */
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.container {
+  width: 70%;
+}
+
+.comment-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 200;
+}
+
+.container {
+  padding: 50px;
+}
+
+.comment-btn {
+  background-color: #14A098;
+  color: #fff;
+}
+
+.comment-btn:hover {
+  background-color: #fff;
+  border-color: #14A098;
+  color: #14A098;
+}
+
+.comment-card {
+  background-color: #0F292F;
+}
+
+.card {
+  background-color: #0F292F;
+}
