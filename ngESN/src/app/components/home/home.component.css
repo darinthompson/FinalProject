@@ -10,10 +10,12 @@
 
 .card-title {
   font-family: 'Roboto', sans-serif;
+  font-weight: 400;
   color: black;
 }
 
 .card-text {
   font-family: 'Open Sans', sans-serif;
+  font-weight: 200;
   color: black;
 }
