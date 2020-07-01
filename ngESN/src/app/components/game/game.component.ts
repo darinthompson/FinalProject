@@ -37,19 +37,13 @@ export class GameComponent implements OnInit {
 
   checkRouteForId() {
     const gameIdParam = this.currentRoute.snapshot.paramMap.get('id');
-    console.log(gameIdParam);
     const gameId = parseInt(gameIdParam, 10);
-    console.log(gameId);
     this.gameService.getGameById(gameId).subscribe(
       (game) => {
         this.selected = game;
-        console.log(game);
         this.seriesMatchService.getMatchesById(gameId).subscribe(
           matches => {
             this.matchList = matches;
-            console.log(matches);
-            console.log(gameId);
-            console.log(this.matchList);
           },
           fail => {
             this.matchList = null;

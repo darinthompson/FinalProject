@@ -1,15 +1,15 @@
 <!--<p>{{player.handle}}</p>-->
 <!--<p *ngFor="let team of player.teams">{{team.organization.name}}</p>-->
 <!--<p *ngFor="let stat of player.stats">{{stat.stat.statName}} : {{stat.value}}</p>-->
-
-<h3 *ngFor="let team of player.teams"> {{player.handle}}  <img  style="max-width: 75px" src="{{team.organization.logoURL}}"></h3>
+<br><br>
+<h3 *ngFor="let team of player.teams"> {{player.handle}}  <img  style="max-width: 75px" src="{{team.organization.logoURL}}"></h3><br><br><br>
 <table class="table table-dark" *ngFor="let team of player.teams">
   <thead>
   <tr>
     <th>
       Stat Name
     </th>
-    <th>
+    <th class="text-center">
       Career Total
     </th>
   </tr>
@@ -19,9 +19,10 @@
     <td>
       {{stat.name}}
     </td>
-    <td>
+    <td class="text-center">
       {{stat.value}}
     </td>
   </tr>
   </tbody>
 </table>
+

@@ -3,6 +3,8 @@ import {PlayerService} from "../../services/player.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Player} from "../../models/player";
 import {PlayerMatchStat} from "../../models/player-match-stat";
+import {Team} from "../../models/team";
+import {SeriesMatch} from "../../models/series-match";
 
 @Component({
   selector: 'app-player',
@@ -12,7 +14,7 @@ import {PlayerMatchStat} from "../../models/player-match-stat";
 export class PlayerComponent implements OnInit {
 
   player: Player;
-  matchStats: PlayerMatchStat[];
+
 
   constructor(private playerService: PlayerService, private router: Router, private currentRoute: ActivatedRoute) {
   }
@@ -53,13 +55,13 @@ export class PlayerComponent implements OnInit {
     let index = 0;
     let keys = {};
     for (let stat of currentPlayer.stats) {
-      if (!keys.hasOwnProperty(stat.stat.id)){
+      if (!keys.hasOwnProperty(stat.stat.id)) {
         keys[stat.stat.id] = index++;
       }
       let gameStatId = keys[stat.stat.id];
-      if (statSummary[gameStatId]){
+      if (statSummary[gameStatId]) {
         statSummary[gameStatId].value += stat.value;
-      }else{
+      } else {
         statSummary[gameStatId] = {};
         statSummary[gameStatId].value = stat.value;
         statSummary[gameStatId].name = stat.stat.statName;
@@ -68,3 +70,4 @@ export class PlayerComponent implements OnInit {
     return statSummary;
   }
 }
+
