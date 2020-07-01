@@ -121,7 +121,10 @@ checklogin(){
     this.loggedIn = this.authService.checkLogin();
 }
 
-  checkFavoritePlayers(){
+  checkFavoritePlayers() {
+    if (!this.loggedIn) {
+      this.profile = null;
+    } else {
     this.profileService.getByUsername().subscribe(
       data => {
         this.profile = data;
@@ -132,8 +135,12 @@ checklogin(){
       }
     );
   }
+  }
 
   displayFollow(player: Player){
+    if (!this.loggedIn) {
+      return true;
+    }
     for (let singlePlayer of this.profile.favoritePlayers){
       if(singlePlayer.id === player.id){
         return false;

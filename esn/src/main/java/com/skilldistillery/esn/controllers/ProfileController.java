@@ -65,7 +65,7 @@ public class ProfileController {
 			if (result != null) {
 				res.setStatus(200);
 			} else {
-				res.setStatus(400);
+				result = null;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -116,26 +116,34 @@ export class SeriesMatchComponent implements OnInit {
       }
     )
   }
-  checkLogIn(){
+
+  checkLogIn() {
     this.loggedIn = this.authService.checkLogin();
   }
 
-  checkFavoriteTeams(){
-    this.profileService.getByUsername().subscribe(
-      data => {
-        this.profile = data;
-        console.log(this.profile)
-      },
-      err => {
-        console.log(err);
-        this.router.navigateByUrl('fourohfour');
-      }
-    );
+  checkFavoriteTeams() {
+    if (!this.loggedIn) {
+      this.profile = null;
+    } else {
+      this.profileService.getByUsername().subscribe(
+        data => {
+          this.profile = data;
+          console.log(this.profile)
+        },
+        err => {
+          console.log(err);
+          this.router.navigateByUrl('fourohfour');
+        }
+      );
+    }
   }
 
-  displayFollow(team: Team){
-    for (let singleTeam of this.profile.favoriteTeams){
-      if(singleTeam.id === team.id){
+  displayFollow(team: Team) {
+    if (!this.loggedIn) {
+      return true;
+    }
+    for (let singleTeam of this.profile.favoriteTeams) {
+      if (singleTeam.id === team.id) {
         return false;
       }
     }
