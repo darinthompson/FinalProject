@@ -2,10 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {PlayerService} from "../../services/player.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Player} from "../../models/player";
-import {PlayerMatchStat} from "../../models/player-match-stat";
-import {Team} from "../../models/team";
 import {SeriesMatch} from "../../models/series-match";
 import {ProfileService} from "../../services/profile.service";
+import {TeamService} from "../../services/team.service";
+import {SeriesMatchService} from "../../services/series-match.service";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-player',
@@ -15,16 +16,22 @@ import {ProfileService} from "../../services/profile.service";
 export class PlayerComponent implements OnInit {
 
   player: Player;
+  recentMatches: SeriesMatch[] = [];
+  loggedIn: boolean;
 
 
   constructor(private playerService: PlayerService,
               private profileService: ProfileService,
+              private teamService: TeamService,
+              private authService: AuthService,
+              private seriesMatchService: SeriesMatchService,
               private router: Router,
               private currentRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
     this.checkRouteForId();
+    this.checklogin();
   }
 
   getPlayerById(id: number) {
@@ -45,6 +52,15 @@ export class PlayerComponent implements OnInit {
     this.playerService.getPlayerById(id).subscribe(
       (data) => {
         this.player = data;
+        this.teamService.getMatchesByTeamId(this.player.teams[this.player.teams.length - 1].id).subscribe(
+          data => {
+            this.recentMatches = data
+          },
+          err => {
+            console.log(err);
+            this.router.navigateByUrl('fourohfour');
+          }
+        )
       },
       (fail) => {
         console.log("Error retrieving player");
@@ -56,6 +72,7 @@ export class PlayerComponent implements OnInit {
 
   getPlayersStats(currentPlayer: Player) {
     let statSummary = [];
+    let statAverages = [];
     let index = 0;
     let keys = {};
     for (let stat of currentPlayer.stats) {
@@ -65,11 +82,17 @@ export class PlayerComponent implements OnInit {
       let gameStatId = keys[stat.stat.id];
       if (statSummary[gameStatId]) {
         statSummary[gameStatId].value += stat.value;
+        statSummary[gameStatId].totalMatches += 1;
       } else {
         statSummary[gameStatId] = {};
         statSummary[gameStatId].value = stat.value;
         statSummary[gameStatId].name = stat.stat.statName;
+        statSummary[gameStatId].totalMatches = 1;
       }
+    }
+    for (let stat of statSummary){
+      stat.average = stat.value / stat.totalMatches;
+      console.log(stat);
     }
     return statSummary;
   }
@@ -85,5 +108,13 @@ export class PlayerComponent implements OnInit {
       }
     )
   }
+
+navagateToMatch(id: number){
+    this.router.navigateByUrl(`match/${id}`)
+}
+
+checklogin(){
+    this.loggedIn = this.authService.checkLogin();
+}
 }
 

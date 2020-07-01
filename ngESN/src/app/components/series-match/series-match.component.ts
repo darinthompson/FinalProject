@@ -6,6 +6,7 @@ import {Player} from "../../models/player";
 import {Game} from "../../models/game";
 import {ProfileService} from "../../services/profile.service";
 import {Team} from "../../models/team";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-series-match',
@@ -14,6 +15,7 @@ import {Team} from "../../models/team";
 })
 export class SeriesMatchComponent implements OnInit {
 
+  loggedIn: boolean;
   bout: SeriesMatch;
   team1Players: Player[];
   team2Players: Player[];
@@ -21,12 +23,14 @@ export class SeriesMatchComponent implements OnInit {
 
   constructor(private seriesMatchService: SeriesMatchService,
               private profileService: ProfileService,
+              private authService: AuthService,
               private router: Router,
               private currentRoute: ActivatedRoute) {
   };
 
   ngOnInit(): void {
     this.checkRouteForId();
+    this.checkLogIn();
   }
 
 
@@ -108,5 +112,8 @@ export class SeriesMatchComponent implements OnInit {
         this.router.navigateByUrl('fourohfour');
       }
     )
+  }
+  checkLogIn(){
+    this.loggedIn = this.authService.checkLogin();
   }
 }

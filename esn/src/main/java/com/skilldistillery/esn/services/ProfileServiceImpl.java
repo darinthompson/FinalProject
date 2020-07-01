@@ -113,7 +113,7 @@ public class ProfileServiceImpl implements ProfileService {
 
 		if (profile != null && optionalPlayer.isPresent()) {
 			profile.addPlayer(optionalPlayer.get());
-			return profile;
+			return profileRepo.saveAndFlush(profile);
 		}
 		return null;
 	}

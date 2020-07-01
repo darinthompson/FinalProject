@@ -1,12 +1,15 @@
 package com.skilldistillery.esn.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.esn.entities.SeriesMatch;
 import com.skilldistillery.esn.entities.Team;
+import com.skilldistillery.esn.repositories.SeriesMatchRepository;
 import com.skilldistillery.esn.repositories.TeamRepo;
 
 @Service
@@ -14,6 +17,9 @@ public class TeamServiceImpl implements TeamService {
 	
 	@Autowired
 	private TeamRepo repo;
+	
+	@Autowired
+	private SeriesMatchRepository matchRepo;
 
 	@Override
 	public List<Team> index() {
@@ -38,6 +44,20 @@ public class TeamServiceImpl implements TeamService {
 			result = opt.get();
 		}
 		return result;
+	}
+
+	@Override
+	public List<SeriesMatch> getMatchesByTeamId(int id) {
+		List<SeriesMatch> fiveMatchResult = new ArrayList<>();
+		List<SeriesMatch> allMatches = matchRepo.findByTeam1IdOrTeam2IdOrderByStartDateDesc(id, id);
+		for(int i=0; i < 5 && i < allMatches.size(); i++) {
+			if(allMatches.get(i) != null) {
+				fiveMatchResult.add(allMatches.get(i));
+			}else {
+				break;
+			}
+		}
+		return fiveMatchResult;
 	}
 
 }
