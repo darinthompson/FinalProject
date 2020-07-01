@@ -1,60 +1,50 @@
-<div class="container">
+<div class="container article-background">
 
-  <div class="row">
+  <!-- Post Content Column -->
+  <div class="col-lg-12">
 
-    <!-- Post Content Column -->
-    <div class="col-lg-8">
-
-      <!-- Title -->
-      <h1 class="mt-4 card-title">{{selectedArticle.title}}</h1>
-
-      <!-- Author -->
-      <p class="lead card-name">
-        by
-        <a class="card-link" href="#">{{selectedArticle.author.firstName}} {{selectedArticle.author.lastName}}</a>
-      </p>
-
-      <hr>
-
-      <!-- Date/Time -->
+    <!-- Title -->
+    <h1 class="mt-5 card-title article-header">{{selectedArticle.title}}</h1>
+    <!-- Author -->
+    <p class="lead card-name">
+      Written By:
+      <a class="card-link" href="#">{{selectedArticle.author.firstName}} {{selectedArticle.author.lastName}}</a>
       <p class="card-meta">Posted on {{selectedArticle.createDate | date:'mediumDate'}}</p>
+    <hr>
+    <!-- Date/Time -->
 
-      <hr>
+    <hr>
+    <!-- Preview Image -->
+    <img class="img-fluid rounded" src="{{selectedArticle.image}}" alt="">
+    <!-- Post Content -->
+    <p class="lead card-text">{{selectedArticle.content}}</p>
+    <hr>
 
-      <!-- Preview Image -->
-      <img class="img-fluid rounded" src="{{selectedArticle.image}}" alt="">
-
-      <!-- Post Content -->
-      <p class="lead card-text">{{selectedArticle.content}}</p>
-      <hr>
-
-      <div class="card my-4">
-        <h5 class="card-header">Leave a Comment:</h5>
-        <div class="card-body">
-          <form #commentForm="ngForm">
-            <div class="form-group">
-              <textarea class="form-control" name="content" rows="3" [(ngModel)]="newComment.content"
-                placeholder="Tell us how you really feel..."></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary"
-              (click)="createNewComment(selectedArticle.id, newComment); commentForm.reset()">Submit</button>
-          </form>
-        </div>
-      </div>
-
-      <!-- Single Comment -->
-      <h3>Comments: </h3>
-      <div *ngFor="let comment of comments">
-        <div class="media mb-4">
-          <img class="d-flex mr-3 rounded-circle" src="{{comment.profile.avatar}}"
-            style="max-height: 50px; max-width: 50px;">
-          <div class="media-body">
-            <h5 class="mt-0">{{comment.profile.firstName}} {{comment.profile.lastName}}</h5>
-            {{comment.content}}
+    <div class="card my-4">
+      <h5 class="card-header comment-header">Leave a Comment:</h5>
+      <div class="card-body">
+        <form #commentForm="ngForm">
+          <div class="form-group">
+            <textarea class="form-control card-meta" name="content" rows="3" [(ngModel)]="newComment.content"
+              placeholder="Tell us how you really feel..."></textarea>
           </div>
+          <button type="submit" class="btn comment-btn card-text"
+            (click)="createNewComment(selectedArticle.id, newComment); commentForm.reset()">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Single Comment -->
+    <h3 class="comment-title">Comments: </h3>
+    <div *ngFor="let comment of comments">
+      <div class="media mb-4">
+        <img class="d-flex mr-3 rounded-circle" src="{{comment.profile.avatar}}"
+          style="max-height: 50px; max-width: 50px;">
+        <div class="media-body">
+          <h5 class="mt-0 card-meta">{{comment.profile.firstName}} {{comment.profile.lastName}}</h5>
+          <p class="card-text">{{comment.content}}</p>
         </div>
       </div>
     </div>
   </div>
 </div>
-
