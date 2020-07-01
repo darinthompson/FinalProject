@@ -4,6 +4,8 @@ import {SeriesMatch} from "../../models/series-match";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Player} from "../../models/player";
 import {Game} from "../../models/game";
+import {ProfileService} from "../../services/profile.service";
+import {Team} from "../../models/team";
 
 @Component({
   selector: 'app-series-match',
@@ -17,8 +19,11 @@ export class SeriesMatchComponent implements OnInit {
   team2Players: Player[];
 
 
-  constructor(private seriesMatchService: SeriesMatchService, private router: Router, private currentRoute: ActivatedRoute) {
-  }
+  constructor(private seriesMatchService: SeriesMatchService,
+              private profileService: ProfileService,
+              private router: Router,
+              private currentRoute: ActivatedRoute) {
+  };
 
   ngOnInit(): void {
     this.checkRouteForId();
@@ -59,10 +64,10 @@ export class SeriesMatchComponent implements OnInit {
   team1StatsByMatchId(game: SeriesMatch) {
     let gameplayer: Player[] = [];
     for (let i = 0; i < game.team1.players.length; i++) {
-     let newPlayer: Player = new Player();
-     newPlayer.stats = [];
-     newPlayer.handle = game.team1.players[i].handle;
-     newPlayer.id = game.team1.players[i].id;
+      let newPlayer: Player = new Player();
+      newPlayer.stats = [];
+      newPlayer.handle = game.team1.players[i].handle;
+      newPlayer.id = game.team1.players[i].id;
       for (let j = 0; j < game.team1.players[i].stats.length; j++) {
         if (game.team1.players[i].stats[j].match.id === this.bout.id) {
           newPlayer.stats.push(game.team1.players[i].stats[j]);
@@ -90,7 +95,18 @@ export class SeriesMatchComponent implements OnInit {
     return gameplayer;
   }
 
-  navtoPlayerPage(id: number){
+  navtoPlayerPage(id: number) {
     this.router.navigateByUrl(`player/${id}`);
+  }
+
+  addFavoriteTeam(team: Team) {
+    this.profileService.addTeam(team).subscribe(
+      data => {
+      },
+      fail => {
+        console.log(fail);
+        this.router.navigateByUrl('fourohfour');
+      }
+    )
   }
 }
