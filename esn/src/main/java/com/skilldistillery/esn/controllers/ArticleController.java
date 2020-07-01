@@ -49,6 +49,25 @@ public class ArticleController {
 		return results;
 	}
 	
+	@GetMapping("articles/game/{id}")
+	public List<Article> getArticlesByGameId(@PathVariable int id, HttpServletResponse response) {
+		List<Article> results;
+		try {
+			results = articleSvc.getArticlesByGameId(id);
+			if(results.size() > 0) {
+				response.setStatus(200);
+			} else {
+				response.setStatus(400);
+				results = null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setStatus(400);
+			results = null;
+		}
+		return results;
+	}
+	
 	@GetMapping("articles/author")
 	public List<Article> getAllAuthorArticlesEnabled(
 			HttpServletResponse res,

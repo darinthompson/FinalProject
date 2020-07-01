@@ -133,4 +133,10 @@ public class ArticleServiceImpl implements ArticleService {
 		return disabled;
 	}
 
+	@Override
+	public List<Article> getArticlesByGameId(Integer gameId) {
+		return articleRepo.findByGameId(gameId);
+	}
+	
+
 }

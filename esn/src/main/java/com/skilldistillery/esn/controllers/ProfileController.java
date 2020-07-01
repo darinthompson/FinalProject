@@ -120,12 +120,13 @@ public class ProfileController {
 		return profile;
 	}
 
-	@PutMapping("profiles/{pid}")
+	@PutMapping("profiles/update")
 	public Profile updateProfile(
 			HttpServletResponse res,
 			@RequestBody Profile profile,
 			Principal principal)
 	{
+		System.out.println("-----"+profile+"------");
 		try {
 			profile = profileService.update(principal.getName(), profile);
 			if (profile == null) {

@@ -91,14 +91,14 @@ export class ProfileService {
     );
   }
 
-  update(profile: Profile, id: number) {
+  update(profile: Profile) {
     const httpOptions = this.getHttpOptions();
 
     if (!this.auth.checkLogin()) {
       this.router.navigateByUrl('home');
     }
 
-    return this.http.put<Profile>(this.url+`/${id}`, profile, httpOptions).pipe(
+    return this.http.put<Profile>(this.url + '/update', profile, httpOptions).pipe(
       catchError((err: any) => {
         console.error(err);
         return throwError(

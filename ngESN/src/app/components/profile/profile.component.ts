@@ -32,6 +32,7 @@ export class ProfileComponent implements OnInit {
   games: Game[] = [];
   selectedGame: Game = null;
   profileArticles: Article[] = null;
+  newArticle: Article = new Article();
 
   constructor(
     private profileService: ProfileService,
@@ -153,12 +154,26 @@ export class ProfileComponent implements OnInit {
     this.selectedGame = game;
   }
 
-  publishArticle(form: NgForm) {
-    const newArticle: Article = form.value;
-    this.articleService.create(newArticle).subscribe(
+  updateProfile(form: NgForm) {
+    const updatedProfile: Profile = form.value;
+    this.profileService.update(updatedProfile).subscribe(
+      profile => {
+        console.log(profile);
+        this.getProfile();
+      },
+      fail => {
+        console.error('ProfileComponent.updateProfile(): Error updating profile:');
+        console.error(fail);
+      }
+    );
+  }
+
+  publishArticle(article: Article) {
+    // const newArticle: Article = form.value;
+    this.articleService.create(article).subscribe(
       (article) => {
         console.log(article);
-        // this.selectedView = 'articles';
+        this.newArticle = new Article();
         this.getProfileArticles();
         this.getProfile();
       },

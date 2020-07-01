@@ -10,5 +10,7 @@ public interface ArticleRepo extends JpaRepository<Article, Integer> {
 	
 	List<Article> findByEnabledTrue();
 	List<Article> findByAuthor_IdAndEnabledTrue(Integer profileId);
+	List<Article> findByGameId(Integer gameid);
 	Article findByIdAndAuthor_Id(Integer articleId, Integer profileId);
+	
 }

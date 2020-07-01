@@ -73,12 +73,20 @@ public class ProfileServiceImpl implements ProfileService {
 	@Override
 	public Profile update(String username, Profile profile) {
 		Profile managedProfile = profileRepo.findByUser_Username(username);
-
+		
 		if (managedProfile != null) {
-			managedProfile.setAvatar(profile.getAvatar());
-			managedProfile.setEmail(profile.getEmail());
-			managedProfile.setFirstName(profile.getFirstName());
-			managedProfile.setLastName(profile.getLastName());
+			if (!profile.getAvatar().equals("")) {
+				managedProfile.setAvatar(profile.getAvatar());				
+			}
+			if (!profile.getEmail().equals("")) {
+				managedProfile.setEmail(profile.getEmail());
+			}
+			if (!profile.getFirstName().equals("")) {
+				managedProfile.setFirstName(profile.getFirstName());
+			}
+			if (!profile.getLastName().equals("")) {
+				managedProfile.setLastName(profile.getLastName());
+			}
 
 			return profileRepo.saveAndFlush(managedProfile);
 		}

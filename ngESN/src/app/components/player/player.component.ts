@@ -5,6 +5,7 @@ import {Player} from "../../models/player";
 import {PlayerMatchStat} from "../../models/player-match-stat";
 import {Team} from "../../models/team";
 import {SeriesMatch} from "../../models/series-match";
+import {ProfileService} from "../../services/profile.service";
 
 @Component({
   selector: 'app-player',
@@ -16,7 +17,10 @@ export class PlayerComponent implements OnInit {
   player: Player;
 
 
-  constructor(private playerService: PlayerService, private router: Router, private currentRoute: ActivatedRoute) {
+  constructor(private playerService: PlayerService,
+              private profileService: ProfileService,
+              private router: Router,
+              private currentRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -68,6 +72,18 @@ export class PlayerComponent implements OnInit {
       }
     }
     return statSummary;
+  }
+
+  addFavoritePlayer(player: Player) {
+    this.profileService.addPlayer(player).subscribe(
+      data => {
+        console.log(data);
+      },
+      err => {
+        console.log(err);
+        this.router.navigateByUrl('fourohfour');
+      }
+    )
   }
 }
 

@@ -206,3 +206,7 @@ a:hover {
   margin-right: 5px;
   margin-bottom: 5px;
 }
+
+#publish-button {
+  float: right;
+}
