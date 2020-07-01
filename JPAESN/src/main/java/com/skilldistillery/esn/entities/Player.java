@@ -12,7 +12,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -29,8 +28,8 @@ public class Player {
 	private String lastName;
 	private String handle;
 	
-	@Column(name = "stream_url")
-	private String streamURL;
+	@Column(name = "img_url")
+	private String imgURL;
 
 	@JsonIgnoreProperties("players")
 	@ManyToMany
@@ -44,14 +43,16 @@ public class Player {
 	public Player() {
 	}
 
-	public Player(int id, String firstName, String lastName, String handle, String streamURL, List<Team> teams) {
+	public Player(int id, String firstName, String lastName, String handle, String imgURL, List<Team> teams,
+			List<PlayerMatchStat> stats) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.handle = handle;
-		this.streamURL = streamURL;
+		this.imgURL = imgURL;
 		this.teams = teams;
+		this.stats = stats;
 	}
 
 	public List<Team> getTeams() {
@@ -94,12 +95,12 @@ public class Player {
 		this.handle = handle;
 	}
 
-	public String getStreamURL() {
-		return streamURL;
+	public String getImgURL() {
+		return imgURL;
 	}
 
-	public void setStreamURL(String streamURL) {
-		this.streamURL = streamURL;
+	public void setImgURL(String imgURL) {
+		this.imgURL = imgURL;
 	}
 
 	public List<PlayerMatchStat> getStats() {
@@ -143,8 +144,6 @@ public class Player {
 		builder.append(lastName);
 		builder.append(", handle=");
 		builder.append(handle);
-		builder.append(", streamURL=");
-		builder.append(streamURL);
 		builder.append("]");
 		return builder.toString();
 	}

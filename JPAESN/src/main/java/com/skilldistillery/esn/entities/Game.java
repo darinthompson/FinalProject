@@ -33,6 +33,9 @@ public class Game {
 	@JsonIgnore
 	@OneToMany(mappedBy = "game")
 	private List<Team> teams;
+	
+	@OneToMany(mappedBy = "game")
+	private List<Article> articles;
 
 	public Game() {
 	}
