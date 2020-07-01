@@ -9,6 +9,7 @@ public interface ArticleService {
 	List<Article> getAllArticles();
 	List<Article> getAllEnabledArticles();
 	List<Article> getAllAuthorEnabledArticles(String username);
+	List<Article> getArticlesByGameId(Integer gameId);
 	Article show(Integer id);
 	Article create(Article article, String username);
 	Article update(Article article, Integer articleId, String username);
