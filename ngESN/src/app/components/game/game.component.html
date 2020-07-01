@@ -3,7 +3,7 @@
 <div *ngIf="matchList != null" class="d-flex justify-content-end">
   <div>
     <ul class="list-group align-content-center" *ngFor="let match of matchList">
-      <li class="list-group-item bg-dark">{{match.startDate}} : {{match.startTime}}</li>
+      <li class="list-group-item bg-dark">{{match.startDate | date}} : {{match.startTime}}</li>
       <li class="list-group-item bg-dark" (click)="getSeriesMatchById(match.id)">
        <span *ngIf="match.team1.id === match.winner.id" class="text-success">W&nbsp;&nbsp;</span>
         <span *ngIf="match.team1.id != match.winner.id" class="text-danger">L&nbsp;&nbsp;</span>
