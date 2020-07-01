@@ -36,6 +36,15 @@ export class ArticleService {
     );
   }
 
+  getArticlesByGameId(id: number) {
+    return this.http.get<Article[]>(this.url + `/game/${id}`).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('ArticleService.getArticlesByGameId(): Error reterieving list of articles' + err);
+      })
+    );
+  }
+
   getAllAuthoredArticles() {
     return this.http.get<Article[]>(this.url + '/author', this.getHttpOptions()).pipe(
       catchError((err: any) => {
