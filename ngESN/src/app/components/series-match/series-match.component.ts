@@ -7,6 +7,7 @@ import {Game} from "../../models/game";
 import {ProfileService} from "../../services/profile.service";
 import {Team} from "../../models/team";
 import {AuthService} from "../../services/auth.service";
+import {Profile} from "../../models/profile";
 
 @Component({
   selector: 'app-series-match',
@@ -19,6 +20,7 @@ export class SeriesMatchComponent implements OnInit {
   bout: SeriesMatch;
   team1Players: Player[];
   team2Players: Player[];
+  profile: Profile;
 
 
   constructor(private seriesMatchService: SeriesMatchService,
@@ -31,6 +33,7 @@ export class SeriesMatchComponent implements OnInit {
   ngOnInit(): void {
     this.checkRouteForId();
     this.checkLogIn();
+    this.checkFavoriteTeams();
   }
 
 
@@ -52,10 +55,9 @@ export class SeriesMatchComponent implements OnInit {
     this.seriesMatchService.getMatchById(id).subscribe(
       (game) => {
         this.bout = game;
-        console.log(this.bout);
         this.team1Players = this.team1StatsByMatchId(game);
         this.team2Players = this.team2StatsByMatchId(game);
-        console.log()
+        console.log(this.bout);
       },
       (fail) => {
         console.log("Error retrieving match");
@@ -106,6 +108,7 @@ export class SeriesMatchComponent implements OnInit {
   addFavoriteTeam(team: Team) {
     this.profileService.addTeam(team).subscribe(
       data => {
+        this.checkFavoriteTeams();
       },
       fail => {
         console.log(fail);
@@ -115,5 +118,27 @@ export class SeriesMatchComponent implements OnInit {
   }
   checkLogIn(){
     this.loggedIn = this.authService.checkLogin();
+  }
+
+  checkFavoriteTeams(){
+    this.profileService.getByUsername().subscribe(
+      data => {
+        this.profile = data;
+        console.log(this.profile)
+      },
+      err => {
+        console.log(err);
+        this.router.navigateByUrl('fourohfour');
+      }
+    );
+  }
+
+  displayFollow(team: Team){
+    for (let singleTeam of this.profile.favoriteTeams){
+      if(singleTeam.id === team.id){
+        return false;
+      }
+    }
+    return true;
   }
 }
