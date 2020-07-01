@@ -13,7 +13,7 @@ import {PlayerComponent} from "./components/player/player.component";
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'article/:id', component: ArticleComponent},
-  {path: 'profile', component: ProfileComponent},
+  {path: 'profile', component: ProfileComponent, runGuardsAndResolvers: 'always'},
   {path: 'game', component: GameComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'match', component: SeriesMatchComponent},

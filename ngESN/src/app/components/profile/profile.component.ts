@@ -12,14 +12,17 @@ import { GameService } from 'src/app/services/game.service';
 import { ArticleService } from 'src/app/services/article.service';
 import { NgForm } from '@angular/forms';
 import { Article } from 'src/app/models/article';
+import { Router, NavigationEnd, RouterEvent } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-
+  navSubscription;
   userProfile: Profile;
   username: string;
   allOrgs: Organization[];
@@ -36,16 +39,32 @@ export class ProfileComponent implements OnInit {
     private teamService: TeamService,
     private playerService: PlayerService,
     private gameService: GameService,
-    private articleService: ArticleService
-  ) { }
+    private articleService: ArticleService,
+    private router: Router
+  ) {
+    // this.navSubscription = this.router.events.subscribe((e: any) => {
+    //   if (e instanceof NavigationEnd) {
+    //     // this.initializeEvents();
+    //   }
+    // });
+  }
 
   ngOnInit(): void {
+    this.router.events
+      .pipe(filter((event: RouterEvent) => event instanceof NavigationEnd))
+      .subscribe(() => {});
+
     this.selectedView = 'dashboard';
     this.getUsername();
     this.getProfile();
     this.getAllGames();
-    // this.getAllOrgs();
     this.getProfileArticles();
+  }
+
+  ngOnDestroy() {
+    if (this.navSubscription) {
+      this.navSubscription.unsubscribe();
+    }
   }
 
   getUsername() {
@@ -54,12 +73,14 @@ export class ProfileComponent implements OnInit {
 
   getProfile() {
     this.profileService.getByUsername().subscribe(
-      profile => {
+      (profile) => {
         console.log(profile);
         this.userProfile = profile;
       },
-      fail => {
-        console.error('ProfileComponent.getProfile(): Error retrieving profile:');
+      (fail) => {
+        console.error(
+          'ProfileComponent.getProfile(): Error retrieving profile:'
+        );
         console.error(fail);
       }
     );
@@ -67,12 +88,14 @@ export class ProfileComponent implements OnInit {
 
   getAllOrgs() {
     this.orgService.index().subscribe(
-      orgs => {
+      (orgs) => {
         console.log(orgs);
         this.allOrgs = orgs;
       },
-      fail => {
-        console.error('ProfileComponent.getAllOrgs(): Error retrieving list of organizations:');
+      (fail) => {
+        console.error(
+          'ProfileComponent.getAllOrgs(): Error retrieving list of organizations:'
+        );
         console.error(fail);
       }
     );
@@ -80,12 +103,14 @@ export class ProfileComponent implements OnInit {
 
   getAllTeams() {
     this.teamService.index().subscribe(
-      teams => {
+      (teams) => {
         console.log(teams);
         this.allTeams = teams;
       },
-      fail => {
-        console.error('ProfileComponent.getAllTeams(): Error retrieving list of teams:');
+      (fail) => {
+        console.error(
+          'ProfileComponent.getAllTeams(): Error retrieving list of teams:'
+        );
         console.error(fail);
       }
     );
@@ -93,12 +118,14 @@ export class ProfileComponent implements OnInit {
 
   getAllPlayers() {
     this.playerService.index().subscribe(
-      players => {
+      (players) => {
         console.log(players);
         this.allPlayers = players;
       },
-      fail => {
-        console.error('ProfileComponent.getAllPlayers(): Error retrieving list of players:');
+      (fail) => {
+        console.error(
+          'ProfileComponent.getAllPlayers(): Error retrieving list of players:'
+        );
         console.error(fail);
       }
     );
@@ -106,13 +133,15 @@ export class ProfileComponent implements OnInit {
 
   getAllGames() {
     this.gameService.index().subscribe(
-      games => {
+      (games) => {
         console.log(games);
         this.games = games;
         this.selectedGame = this.games[0];
       },
-      fail => {
-        console.error('ProfileComponent.getAllGames(): Error retrieving list of games:');
+      (fail) => {
+        console.error(
+          'ProfileComponent.getAllGames(): Error retrieving list of games:'
+        );
         console.error(fail);
       }
     );
@@ -127,12 +156,32 @@ export class ProfileComponent implements OnInit {
   publishArticle(form: NgForm) {
     const newArticle: Article = form.value;
     this.articleService.create(newArticle).subscribe(
-      article => {
+      (article) => {
         console.log(article);
+        // this.selectedView = 'articles';
         this.getProfileArticles();
+        this.getProfile();
       },
-      fail => {
-        console.error('ProfileComponent.publishArticle(): Error publishing article:');
+      (fail) => {
+        console.error(
+          'ProfileComponent.publishArticle(): Error publishing article:'
+        );
+        console.error(fail);
+      }
+    );
+  }
+
+  disableArticle(aid: number) {
+    this.articleService.destroy(aid).subscribe(
+      (success) => {
+        console.log(success);
+        this.getProfileArticles();
+        this.getProfile();
+      },
+      (fail) => {
+        console.error(
+          'ProfileComponent.disableArticle(): Error destroying article:'
+        );
         console.error(fail);
       }
     );
@@ -140,12 +189,15 @@ export class ProfileComponent implements OnInit {
 
   getProfileArticles() {
     this.articleService.getAllAuthoredArticles().subscribe(
-      articles => {
+      (articles) => {
         console.log(articles);
         this.profileArticles = articles;
+        console.log(this.profileArticles);
       },
-      fail => {
-        console.error('ProfileComponent.getProfileArticles(): Error retrieving authored articles:');
+      (fail) => {
+        console.error(
+          'ProfileComponent.getProfileArticles(): Error retrieving authored articles:'
+        );
         console.error(fail);
       }
     );
