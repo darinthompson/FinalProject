@@ -201,3 +201,8 @@ a:hover {
   background-color: #d1f7ff;
   text-align: center;
 }
+
+#regular-buttons button {
+  margin-right: 5px;
+  margin-bottom: 5px;
+}

@@ -98,7 +98,7 @@
         <h2 class="sub-header mt-5">{{ userProfile.firstName }}'s Articles</h2>
         <div class="mb-3">
           <div class="card-deck" *ngFor="let article of userProfile.articles">
-            <div class="card" style="max-width: 25rem;">
+            <div class="card" style="max-width: 25rem;" *ngIf="article.enabled === true">
               <img src="{{ article.image }}" class="card-img-top" alt="..." />
               <div class="card-body d-flex flex-column">
                 <h5 class="card-title">{{ article.title }}</h5>
@@ -322,7 +322,7 @@
 
         <div id="article-create-div">
           <h2 class="mt-5">New Article</h2>
-          <form id="create-article-form" #newArticle="ngForm">
+          <form id="create-article-form" #newArticle="ngForm" (ngSubmit)="publishArticle(newArticle); newArticle.reset()">
             <div class="form-group">
               <label for="title">Title</label>
               <input type="text" class="form-control" id="title" name="title" ngModel>
@@ -334,7 +334,7 @@
             <div class="form-group">
               <textarea class="form-control" name="content" rows="10" placeholder="Write your story here" ngModel></textarea>
             </div>
-            <input type="submit" class="btn btn-outline-primary" value="Publish" (click)="publishArticle(newArticle)">
+            <input type="submit" class="btn btn-outline-primary" value="Publish">
           </form>
         </div>
 
@@ -342,7 +342,7 @@
 
         <div class="mb-3">
           <div class="card-deck" *ngFor="let article of userProfile.articles">
-            <div class="card" style="max-width: 25rem;">
+            <div class="card" style="max-width: 25rem;" *ngIf="article.enabled === true">
               <img src="{{ article.image }}" class="card-img-top" alt="..." />
               <div class="card-body d-flex flex-column">
                 <h5 class="card-title">{{ article.title }}</h5>
@@ -350,7 +350,10 @@
                 <p class="card-text">
                   <small class="text-muted">Last comment 3 mins ago</small>
                 </p>
-                <button class="btn mt-auto btn-primary" [routerLink]="['/article/', article.id]">Go to article</button>
+                <div id="regular-buttons">
+                  <button class="btn mt-auto btn-primary" [routerLink]="['/article/', article.id]">Go to article</button>
+                  <button class="btn mt-auto btn-danger" (click)="disableArticle(article.id)">Delete</button>
+                </div>
               </div>
             </div>
           </div>

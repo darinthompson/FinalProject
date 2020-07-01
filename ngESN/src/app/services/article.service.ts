@@ -55,7 +55,7 @@ export class ArticleService {
   }
 
   destroy(id: number) {
-    return this.http.delete<Article>(this.url + `/disable/${id}`, this.getHttpOptions()).pipe(
+    return this.http.delete<boolean>(this.url + `/disable/${id}`, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('ArticleService.destroy(): Error destroying article: ' + err);
