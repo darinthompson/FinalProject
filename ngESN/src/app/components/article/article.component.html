@@ -6,18 +6,18 @@
     <div class="col-lg-8">
 
       <!-- Title -->
-      <h1 class="mt-4">{{selectedArticle.title}}</h1>
+      <h1 class="mt-4 card-title">{{selectedArticle.title}}</h1>
 
       <!-- Author -->
-      <p class="lead">
+      <p class="lead card-name">
         by
-        <a href="#">{{selectedArticle.author.firstName}} {{selectedArticle.author.lastName}}</a>
+        <a class="card-link" href="#">{{selectedArticle.author.firstName}} {{selectedArticle.author.lastName}}</a>
       </p>
 
       <hr>
 
       <!-- Date/Time -->
-      <p>Posted on {{selectedArticle.createDate}}</p>
+      <p class="card-meta">Posted on {{selectedArticle.createDate | date:'mediumDate'}}</p>
 
       <hr>
 
@@ -25,7 +25,7 @@
       <img class="img-fluid rounded" src="{{selectedArticle.image}}" alt="">
 
       <!-- Post Content -->
-      <p class="lead">{{selectedArticle.content}}</p>
+      <p class="lead card-text">{{selectedArticle.content}}</p>
       <hr>
 
       <div class="card my-4">
