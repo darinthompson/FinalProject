@@ -59,7 +59,6 @@ export class SeriesMatchComponent implements OnInit {
         this.team1Players = this.team1StatsByMatchId(game);
         this.team2Players = this.team2StatsByMatchId(game);
         this.dataReady = true;
-        console.log(this.dataReady);
       },
       (fail) => {
         console.log("Error retrieving match");

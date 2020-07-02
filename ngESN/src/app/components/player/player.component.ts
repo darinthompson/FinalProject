@@ -61,6 +61,7 @@ export class PlayerComponent implements OnInit {
         this.teamService.getMatchesByTeamId(this.player.teams[this.player.teams.length - 1].id).subscribe(
           data => {
             this.recentMatches = data;
+            this.dataReady = true;
           },
           err => {
             console.log(err);
@@ -133,7 +134,6 @@ export class PlayerComponent implements OnInit {
       this.profileService.getByUsername().subscribe(
         data => {
           this.profile = data;
-          this.dataReady = true;
         },
         err => {
           console.log(err);
