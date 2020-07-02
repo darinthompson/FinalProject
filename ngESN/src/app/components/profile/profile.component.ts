@@ -14,7 +14,6 @@ import { NgForm } from '@angular/forms';
 import { Article } from 'src/app/models/article';
 import { Router, NavigationEnd, RouterEvent } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { from } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -33,6 +32,7 @@ export class ProfileComponent implements OnInit {
   selectedGame: Game = null;
   profileArticles: Article[] = null;
   newArticle: Article = new Article();
+  isDataLoaded: boolean = false;
 
   constructor(
     private profileService: ProfileService,
@@ -42,13 +42,7 @@ export class ProfileComponent implements OnInit {
     private gameService: GameService,
     private articleService: ArticleService,
     private router: Router
-  ) {
-    // this.navSubscription = this.router.events.subscribe((e: any) => {
-    //   if (e instanceof NavigationEnd) {
-    //     // this.initializeEvents();
-    //   }
-    // });
-  }
+  ) { }
 
   ngOnInit(): void {
     this.router.events
@@ -208,6 +202,7 @@ export class ProfileComponent implements OnInit {
         console.log(articles);
         this.profileArticles = articles;
         console.log(this.profileArticles);
+        this.isDataLoaded = true;
       },
       (fail) => {
         console.error(
