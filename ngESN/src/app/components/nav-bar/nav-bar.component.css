@@ -13,3 +13,19 @@
 .modal-content {
   background-color: #14a098;
 }
+
+.modal-header, .modal-title, .modal-body, .modal-footer {
+  background-color: #0F292f;
+}
+
+.submit-btn {
+  background-color: #14a098;
+  color: #fff;
+}
+
+.submit-btn:hover {
+  background-color: #fff;
+  border:1px solid #14a098;
+  color: #14a098
+}
+
