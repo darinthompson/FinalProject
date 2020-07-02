@@ -31,14 +31,14 @@
         >
           Articles
         </button>
-        <button
+        <!-- <button
           *ngIf="userProfile.user.role === 'Admin'"
           class="btn btn-outline-dark"
           data-parent="#sidebar"
           (click)="selectedView = 'admin'"
         >
           Admin Area
-        </button>
+        </button> -->
       </div>
     </div>
 
@@ -108,7 +108,7 @@
         </div>
         <!--/table-->
 
-        <hr />
+        <!-- <hr />
         <h2 class="sub-header mt-5">{{ userProfile.firstName }}'s Articles</h2>
         <div class="mb-3">
           <div class="card-deck" *ngFor="let article of userProfile.articles">
@@ -133,7 +133,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         <!--/row-->
 
         <hr />
@@ -158,45 +158,7 @@
             </div>
           </div>
 
-          <div class="card">
-            <div class="card-block">
-              <ul class="list-unstyled">
-                <li class="text-capitalize">
-                  <code class="text-lowercase">text-capitalize</code> Capitalize
-                  each word
-                </li>
-                <li class="text-uppercase">
-                  <code class="text-lowercase">text-uppercase</code> Uppercase
-                  text
-                </li>
-                <li class="text-success">
-                  <code>text-success</code> Contextual colors for text
-                </li>
-                <li>
-                  <code>text-muted</code>
-                  <span class="text-muted">Lighten with muted</span>
-                </li>
-                <li>
-                  <code>text-info</code>
-                  <span class="text-muted">Info text color</span>
-                </li>
-                <li>
-                  <code>text-danger</code>
-                  <span class="text-muted">Danger text color</span>
-                </li>
-                <li>
-                  <code>text-warning</code>
-                  <span class="text-muted">Warning text color</span>
-                </li>
-                <li>
-                  <code>text-primary</code>
-                  <span class="text-primary">Primary text color</span>
-                </li>
-              </ul>
-            </div>
-          </div>
         </div>
-        <!--/card-columns-->
         <hr />
       </div>
 
@@ -315,12 +277,6 @@
           </div>
         </div>
 
-
-
-
-
-        </div>
-
         <hr />
 
         <div class="d-flex flex-row"><h4>Favorite Players</h4></div>
@@ -330,7 +286,9 @@
           </ul>
         </div>
 
-        <hr />
+        </div>
+
+        <!-- <hr /> -->
 
       <!-- ARTICLES VIEW -->
 
@@ -396,9 +354,9 @@
         </div>
         <br />
 
-        <h2 class="mt-5">Posted Articles</h2>
+        <h2 class="mt-5" style="margin-bottom: 10px;">Posted Articles</h2>
 
-        <div class="row row-cols-1 row-cols-md-3">
+        <div class="row row-cols-1 row-cols-md-3" style="margin: 3px;">
           <div class="mb-3" *ngFor="let article of userProfile.articles">
             <div
               class="card"
