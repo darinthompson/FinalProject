@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {PlayerService} from "../../services/player.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Player} from "../../models/player";
@@ -7,7 +7,6 @@ import {ProfileService} from "../../services/profile.service";
 import {TeamService} from "../../services/team.service";
 import {SeriesMatchService} from "../../services/series-match.service";
 import {AuthService} from "../../services/auth.service";
-import {Team} from "../../models/team";
 import {Profile} from "../../models/profile";
 
 @Component({
@@ -21,6 +20,7 @@ export class PlayerComponent implements OnInit {
   recentMatches: SeriesMatch[] = [];
   loggedIn: boolean;
   profile: Profile;
+  dataReady: boolean = false;
 
 
   constructor(private playerService: PlayerService,
@@ -36,6 +36,8 @@ export class PlayerComponent implements OnInit {
     this.checkRouteForId();
     this.checklogin();
     this.checkFavoritePlayers();
+    console.log(this.player);
+    console.log(this.profile);
   }
 
   getPlayerById(id: number) {
@@ -74,6 +76,10 @@ export class PlayerComponent implements OnInit {
     );
   }
 
+  getPlayerMatches() {
+    return this.recentMatches;
+  }
+
   getPlayersStats(currentPlayer: Player) {
     let statSummary = [];
     let statAverages = [];
@@ -94,9 +100,8 @@ export class PlayerComponent implements OnInit {
         statSummary[gameStatId].totalMatches = 1;
       }
     }
-    for (let stat of statSummary){
+    for (let stat of statSummary) {
       stat.average = stat.value / stat.totalMatches;
-      console.log(stat);
     }
     return statSummary;
   }
@@ -113,36 +118,37 @@ export class PlayerComponent implements OnInit {
     )
   }
 
-navagateToMatch(id: number){
+  navagateToMatch(id: number) {
     this.router.navigateByUrl(`match/${id}`)
-}
+  }
 
-checklogin(){
+  checklogin() {
     this.loggedIn = this.authService.checkLogin();
-}
+  }
 
   checkFavoritePlayers() {
     if (!this.loggedIn) {
       this.profile = null;
     } else {
-    this.profileService.getByUsername().subscribe(
-      data => {
-        this.profile = data;
-      },
-      err => {
-        console.log(err);
-        this.router.navigateByUrl('fourohfour');
-      }
-    );
-  }
+      this.profileService.getByUsername().subscribe(
+        data => {
+          this.profile = data;
+          this.dataReady = true;
+        },
+        err => {
+          console.log(err);
+          this.router.navigateByUrl('fourohfour');
+        }
+      );
+    }
   }
 
-  displayFollow(player: Player){
+  displayFollow(player: Player) {
     if (!this.loggedIn) {
       return true;
     }
-    for (let singlePlayer of this.profile.favoritePlayers){
-      if(singlePlayer.id === player.id){
+    for (let singlePlayer of this.profile.favoritePlayers) {
+      if (singlePlayer.id === player.id) {
         return false;
       }
     }
