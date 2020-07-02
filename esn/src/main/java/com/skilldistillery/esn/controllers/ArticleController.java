@@ -54,7 +54,7 @@ public class ArticleController {
 		List<Article> results;
 		try {
 			results = articleSvc.getArticlesByGameId(id);
-			if(results.size() > 0) {
+			if(results.size() >= 0) {
 				response.setStatus(200);
 			} else {
 				response.setStatus(400);
@@ -76,7 +76,7 @@ public class ArticleController {
 		List<Article> results;
 		try {
 			results = articleSvc.getAllAuthorEnabledArticles(principal.getName());
-			if (results.size() > 0) {
+			if (results.size() >= 0) {
 				res.setStatus(200);
 			} else {
 				res.setStatus(404);

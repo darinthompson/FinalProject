@@ -77,7 +77,7 @@ public class CommentController {
 		List<Comment> results;
 		try {
 			results = comSvc.getAllProfileComments(principal.getName());
-			if (results.size() > 0) {
+			if (results.size() >= 0) {
 				res.setStatus(200);
 			} else {
 				res.setStatus(404);
@@ -99,7 +99,7 @@ public class CommentController {
 		List<Comment> results;
 		try {
 			results = comSvc.getAllArticleComments(aid);
-			if (results.size() > 0) {
+			if (results.size() >= 0) {
 				res.setStatus(200);
 			} else {
 				res.setStatus(404);
