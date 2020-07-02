@@ -1,72 +1,83 @@
 <div *ngIf="dataReady">
-<br><br>
-<h3 *ngFor="let team of player.teams">
-  {{player.handle}}  <img  style="max-width: 75px" src="{{team.organization.logoURL}}">
-</h3>
-<!--Display button only if user isnt following player already-->
-<div *ngIf="loggedIn">
-<button class="btn btn-secondary" *ngIf="displayFollow(player)" (click)="addFavoritePlayer(player)">
-  Follow
-</button>
-</div>
-<br><br><br>
-<div id="playerDiv">
-<table class="table table-borderless text-white text-center" *ngFor="let team of player.teams">
-  <thead>
-  <tr>
-    <th style="color: #cb2d6f">
-      Stat Name
-    </th>
-    <th style="color: #CB2D6F">
-      Career Average
-    </th>
-    <th class="text-center" style="color: #CB2D6F">
-      Career Total
-    </th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let stat of getPlayersStats(player)">
-    <td>
-      {{stat.name}}
-    </td>
-    <td>
-      {{stat.average}}
-    </td>
-    <td class="text-center">
-      {{stat.value}}
-    </td>
-  </tr>
-  </tbody>
-</table>
-</div>
+  <br><br>
+  <h3 *ngFor="let team of player.teams">
+    {{player.handle}}  <img style="max-width: 75px" src="{{team.organization.logoURL}}">
+  </h3>
+  <!--Display button only if user isnt following player already-->
+  <div *ngIf="loggedIn">
+    <button class="btn" style="background-color: #0f292f; color: #14A098" *ngIf="displayFollow(player)"
+            (click)="addFavoritePlayer(player)">
+      Follow
+    </button>
+  </div>
+  <br><br><br>
 
-<div id="latestMatchesDiv">
-<table class="table text-white table-borderless text-center">
-  <thead>
-  <tr>
-    <th>
-      Team 1
-    </th>
-    <th>
-      Team 2
-    </th>
-    <th>Date</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let singleMatch of getPlayerMatches()">
-    <td (click)="navagateToMatch(singleMatch.id)">
-      {{singleMatch.team1.organization.name}}
-    </td>
-    <td (click)="navagateToMatch(singleMatch.id)">
-      {{singleMatch.team2.organization.name}}
-    </td>
-    <td>
-      {{singleMatch.startDate}}
-    </td>
-  </tr>
-  </tbody>
-</table>
-</div>
+  <h1 class="text-center" style="color: #cccccc">
+    Career Stats
+  </h1>
+  <div id="playerDiv">
+    <table class="table table-borderless text-white text-center" *ngFor="let team of player.teams">
+      <thead>
+      <tr>
+        <th class="text-center" style="color: #cb2d6f">
+          Stat Name
+        </th>
+        <th class="text-center" style="color: #CB2D6F">
+          Career Average
+        </th>
+        <th class="text-center" style="color: #CB2D6F">
+          Career Total
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr  class="text-center" *ngFor="let stat of getPlayersStats(player)">
+        <td class="text-center">
+          {{stat.name}}
+        </td>
+        <td class="text-center">
+          {{stat.average}}
+        </td>
+        <td class="text-center">
+          {{stat.value}}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <h1 class="text-center">
+    Most Recent Matches
+  </h1>
+  <div id="latestMatchesDiv">
+    <table class="table text-white table-borderless text-center">
+      <thead>
+      <tr>
+        <th class="text-center" style="color: #CB2D6F">
+          Team 1
+        </th>
+        <th class="text-center" style="color: #CB2D6F">
+          Team 2
+        </th>
+        <th class="text-center" style="color: #CB2D6F">
+          Date
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="text-center" *ngFor="let singleMatch of getPlayerMatches()">
+        <td  class="text-center" (click)="navagateToMatch(singleMatch.id)">
+          {{singleMatch.team1.organization.name}}
+        </td>
+        <td class="text-center" (click)="navagateToMatch(singleMatch.id)">
+          {{singleMatch.team2.organization.name}}
+        </td>
+        <td class="text-center">
+          {{singleMatch.startDate}}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

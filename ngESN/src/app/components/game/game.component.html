@@ -1,22 +1,22 @@
-<p>{{selected.title}}</p>
+<a href="{{selected.websiteURL}}"><img src="{{selected.imgURL}}"></a>
 
-<div *ngIf="matchList != null" class="d-flex justify-content-end">
+<div *ngIf="matchList != null" class="container-fluid float-right" style="width: 280px">
   <div>
-    <ul class="list-group align-content-center" *ngFor="let match of matchList">
-      <li class="list-group-item bg-dark">{{match.startDate | date}} : {{match.startTime}}</li>
-      <li class="list-group-item bg-dark" (click)="getSeriesMatchById(match.id)">
-       <span *ngIf="match.team1.id === match.winner.id" class="text-success">W&nbsp;&nbsp;</span>
-        <span *ngIf="match.team1.id != match.winner.id" class="text-danger">L&nbsp;&nbsp;</span>
+    <ul id="gamesMatchList" class="list-group align-content-center" *ngFor="let match of matchList">
+      <li id="gamesMatchList1" class="list-group-item ">{{match.startDate | date}} : {{match.startTime}}</li>
+      <li id="gamesMatchList2" class="list-group-item " (click)="getSeriesMatchById(match.id)">
+        <span *ngIf="match.team1.id === match.winner.id" class="text-success"> <strong> W </strong>&nbsp;&nbsp;</span>
+        <span *ngIf="match.team1.id != match.winner.id" class="text-danger"> <strong> L </strong>&nbsp;&nbsp;</span>
         <img src="{{match.team1.organization.logoURL}}" style="max-height: 50px; max-width: 50px">
         VS <img src="{{match.team2.organization.logoURL}}" style="max-height: 50px; max-width: 50px">
-        <span *ngIf="match.team2.id === match.winner.id" class="text-success">&nbsp;&nbsp;W</span>
-        <span *ngIf="match.team2.id != match.winner.id" class="text-danger">&nbsp;&nbsp;L</span>
+        <span *ngIf="match.team2.id === match.winner.id" class="text-success">&nbsp;<strong>&nbsp;W </strong></span>
+        <span *ngIf="match.team2.id != match.winner.id" class="text-danger">&nbsp;&nbsp;<strong> L </strong></span>
       </li>
     </ul>
   </div>
 </div>
 
-<div class="col-md-8">
+<div class="col-md-8" style="margin-top: 100px">
   <div *ngFor="let article of gameArticles">
     <!-- Blog Post -->
     <div class="card mb-4">

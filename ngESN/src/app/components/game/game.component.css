@@ -9,3 +9,14 @@
   font-weight: 200;
   color: black;
 }
+
+#gamesMatchList, #gamesMatchList1{
+  background-color: rgba(15,41,47,0.7);
+  border-radius: 20px;
+  margin: 5px;
+}
+#gamesMatchList2{
+  background-color: rgba(20, 160, 152, 0.4);
+  border-radius: 20px;
+  margin: 5px;
+}
