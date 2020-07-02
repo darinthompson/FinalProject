@@ -9,7 +9,11 @@
 
 ### Technologies Used
 - Angular
+- HTML5
+- CSS 3
 - Java
+- Bootstrap
+- Angular Bootstrap
 - AWS 
 - Vanilla JavaScript
 - TypeScript
