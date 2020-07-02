@@ -163,7 +163,6 @@ export class ProfileComponent implements OnInit {
   }
 
   publishArticle(article: Article) {
-    // const newArticle: Article = form.value;
     this.articleService.create(article).subscribe(
       (article) => {
         console.log(article);
@@ -178,6 +177,19 @@ export class ProfileComponent implements OnInit {
         console.error(fail);
       }
     );
+  }
+
+  removeFavoriteTeam(team: Team) {
+    this.profileService.removeTeam(team).subscribe(
+      profile => {
+        console.log(profile);
+        this.getProfile();
+      },
+      fail => {
+        console.error('ProfileComponent.removeFavoriteTeam(): Error removing team from profile:');
+        console.error(fail);
+      }
+    )
   }
 
   disableArticle(aid: number) {
