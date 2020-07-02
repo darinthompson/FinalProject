@@ -80,7 +80,7 @@ export class ProfileComponent implements OnInit {
       (profile) => {
         console.log(profile);
         this.userProfile = profile;
-        // this.favoriteTeams = profile.favoriteTeams;
+        this.favoriteTeams = profile.favoriteTeams;
         // this.getMatchesForFavTeams();
         // this.getRecentFavMatches();
       },

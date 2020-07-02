@@ -8,7 +8,7 @@ import { Game } from '../models/game';
 export class FilterTeamsPipe implements PipeTransform {
 
   transform(teams: Team[], game: Game): Team[] {
-    const filteredTeams = [];
+    const filteredTeams: Team[] = [];
 
     for (let i = 0; i < teams.length; i++) {
         if (teams[i].game.id === game.id) {
