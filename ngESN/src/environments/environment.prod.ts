@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseURL: '/ESN/'
+  baseURL: '/esn/'
 };
