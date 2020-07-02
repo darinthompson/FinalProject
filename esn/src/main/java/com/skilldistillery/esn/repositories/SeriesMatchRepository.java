@@ -11,4 +11,6 @@ public interface SeriesMatchRepository extends JpaRepository<SeriesMatch, Intege
 	List<SeriesMatch> findByWinner_Game_Id(Integer gid);
 	
 	List<SeriesMatch> findByTeam1IdOrTeam2IdOrderByStartDateDesc(int tid1, int tid2);
+	
+//	List<SeriesMatch> findByTeam1IdOrTeam2Id(Integer tid);
 }

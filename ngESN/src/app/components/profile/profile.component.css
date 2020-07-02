@@ -58,12 +58,8 @@ a:hover {
   justify-content: space-evenly;
 }
 
-.d-flex ul li {
-  margin-bottom: 40px;
-}
-
 #fav-teams-container {
-  min-height: 300px;
+  min-height: 225px;
 }
 
 .fav-team-div, .fav-org-div {

@@ -83,25 +83,23 @@
               <label for="fav-team-match-stats"
                 ><h4>Latest Match Results</h4></label
               >
-              <table class="table table-striped" id="fav-team-match-stats">
+              <table class="table table-striped table-borderless" id="fav-team-match-stats">
                 <thead class="thead-inverse">
                   <tr>
                     <th>Game</th>
                     <th>Series</th>
                     <th>Match</th>
                     <th>Winner</th>
-                    <th>Final Score</th>
                     <th>Date</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>...</td>
-                    <td>1,001</td>
-                    <td>responsive</td>
-                    <td>bootstrap</td>
-                    <td>cards</td>
-                    <td>cards</td>
+                  <tr *ngFor="let game of allMatches | slice:0:10; let i = index">
+                    <td>{{game.team1.game.title}}</td>
+                    <td>{{game.series.name}}</td>
+                    <td>{{game.team1.organization.name}} -vs- {{game.team2.organization.name}}</td>
+                    <td>{{game.winner.organization.name}}</td>
+                    <td>{{game.startDate}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -285,34 +283,18 @@
           </div>
         </div>
 
-        <hr />
-
-        <div class="d-flex flex-row"><h4>Favorite Organizations</h4></div>
-        <div
-          id="favorite-orgs-container"
-          class="d-inline-flex flex-wrap"
-          *ngFor="let org of userProfile.favoriteOrganizations"
-        >
-          <div class="fav-org-div">
-            <img
-              src="{{ org.logoURL }}"
-              alt="org logo"
-              style="max-width: 70px;"
-            />
-          </div>
+        <div class="d-flex" id="game-nav-buttons">
+          <ul ngbNav #nav="ngbNav" class="nav-pills" orientation="horizontal">
+            <li ngbNavItem="game" *ngFor="let game of games">
+              <button class="btn btn-outline-primary" ngbNavLink (click)="setSelectedGame(game)">{{ game.title }}</button>
+            </li>
+          </ul>
         </div>
 
         <hr />
 
         <div id="fav-teams-container">
           <div class="d-flex flex-row"><h4>Favorite Teams</h4></div>
-          <div class="d-flex" id="fav-teams-buttons">
-            <ul ngbNav #nav="ngbNav" class="nav-pills" orientation="horizontal">
-              <li ngbNavItem="game" *ngFor="let game of games">
-                <button class="btn btn-outline-primary" ngbNavLink (click)="setSelectedGame(game)">{{ game.title }}</button>
-              </li>
-            </ul>
-          </div>
           <div
             class="d-inline-flex flex-wrap"
             *ngFor="
@@ -327,15 +309,11 @@
               placement="bottom"
               />
               <ng-template #popContent>
-                <button class="btn btn-danger" (click)="removeFavoriteTeam(team)">Remove</button></ng-template>
+                <button class="btn btn-danger" (click)="removeFavoriteTeam(team)">Remove</button>
+              </ng-template>
             </div>
           </div>
-
         </div>
-
-
-
-
 
 
 

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -101,13 +102,12 @@ public class TeamController {
 
 	@GetMapping("teams/{tid}/matches")
 	public List<SeriesMatch> getMatchesByTeamId(@PathVariable Integer tid, HttpServletResponse res) {
-
+		
 		List<SeriesMatch> result;
-
+		
 		try {
 			result = teamSvc.getMatchesByTeamId(tid);
 			if (result != null) {
-				System.out.println(result.size() + "+++++++++++++++++++++++++++++++++++++++++");
 				res.setStatus(200);
 			} else {
 				res.setStatus(404);
@@ -117,7 +117,33 @@ public class TeamController {
 			res.setStatus(400);
 			result = null;
 		}
-
+		
 		return result;
 	}
+	
+	@GetMapping("teams/favorites/matches")
+	public List<SeriesMatch> getFavoriteTeamsMatches(
+			@RequestBody Team[] teams,
+			HttpServletResponse res)
+	{
+		System.out.println("\n\n\n"+teams+"\n\n\n");
+		
+		List<SeriesMatch> results;
+		
+		try {
+			results = teamSvc.getMatchesByFavTeams(teams);
+			if (results != null) {
+				res.setStatus(200);
+			} else {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			results = null;
+		}
+		
+		return results;
+	}
+	
 }

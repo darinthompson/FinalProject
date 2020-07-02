@@ -15,5 +15,7 @@ public interface TeamService {
 	
 	Team show(Integer tid);
 	
-	List<SeriesMatch>getMatchesByTeamId(int id);
+	List<SeriesMatch> getMatchesByTeamId(int id);
+	
+	List<SeriesMatch> getMatchesByFavTeams(Team[] teams);
 }

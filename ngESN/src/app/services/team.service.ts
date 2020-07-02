@@ -36,4 +36,13 @@ export class TeamService {
       })
     );
   }
+
+  getAllFavTeamMatches(teams: Team[]) {
+    return this.http.get<SeriesMatch[]>(this.url + '/favorites/matches').pipe(
+      catchError((err: any) => {
+        console.error(err);
+        return throwError('TeamService.getAllFavTeamMatches(): Error retrieving matches: ' + err);
+      })
+    );
+  }
 }
