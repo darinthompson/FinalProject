@@ -5,11 +5,12 @@
 #### Team Flash Dazzle
 * Sergio Samoiloff - Developer, Scrum Master, ESports news analyst
 * Shane Duncan - Developer, Father of 20, DBA
-* Darin Thompson - Developer, Troll, Dungeon Master, Repo Owner
+* Darin Thompson - Developer, Repo Owner, Dungeon Master
 
 ### Technologies Used
 - Angular
 - Java
+- AWS 
 - Vanilla JavaScript
 - TypeScript
 - Git
