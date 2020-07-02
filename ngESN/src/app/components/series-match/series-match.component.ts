@@ -21,6 +21,7 @@ export class SeriesMatchComponent implements OnInit {
   team1Players: Player[];
   team2Players: Player[];
   profile: Profile;
+  dataReady: boolean = false;
 
 
   constructor(private seriesMatchService: SeriesMatchService,
@@ -124,11 +125,12 @@ export class SeriesMatchComponent implements OnInit {
   checkFavoriteTeams() {
     if (!this.loggedIn) {
       this.profile = null;
+      this.dataReady = true;
     } else {
       this.profileService.getByUsername().subscribe(
         data => {
           this.profile = data;
-          console.log(this.profile)
+         this.dataReady = true;
         },
         err => {
           console.log(err);

@@ -1,6 +1,4 @@
-<!--<p>{{player.handle}}</p>-->
-<!--<p *ngFor="let team of player.teams">{{team.organization.name}}</p>-->
-<!--<p *ngFor="let stat of player.stats">{{stat.stat.statName}} : {{stat.value}}</p>-->
+<div *ngIf="dataReady">
 <br><br>
 <h3 *ngFor="let team of player.teams">
   {{player.handle}}  <img  style="max-width: 75px" src="{{team.organization.logoURL}}">
@@ -12,16 +10,17 @@
 </button>
 </div>
 <br><br><br>
-<table class="table table-dark" *ngFor="let team of player.teams">
+<div id="playerDiv">
+<table class="table table-borderless text-white text-center" *ngFor="let team of player.teams">
   <thead>
   <tr>
-    <th>
+    <th style="color: #cb2d6f">
       Stat Name
     </th>
-    <th>
+    <th style="color: #CB2D6F">
       Career Average
     </th>
-    <th class="text-center">
+    <th class="text-center" style="color: #CB2D6F">
       Career Total
     </th>
   </tr>
@@ -40,9 +39,10 @@
   </tr>
   </tbody>
 </table>
+</div>
 
-
-<table class="table table-dark">
+<div id="latestMatchesDiv">
+<table class="table text-white table-borderless text-center">
   <thead>
   <tr>
     <th>
@@ -55,7 +55,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let singleMatch of recentMatches">
+  <tr *ngFor="let singleMatch of getPlayerMatches()">
     <td (click)="navagateToMatch(singleMatch.id)">
       {{singleMatch.team1.organization.name}}
     </td>
@@ -68,3 +68,5 @@
   </tr>
   </tbody>
 </table>
+</div>
+</div>

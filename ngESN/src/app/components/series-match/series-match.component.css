@@ -12,3 +12,19 @@
   flex-grow: 1;
 }
 
+#team1Div{
+  background-color: rgba(15,41,47,0.7);
+  border-radius: 20px;
+  margin: 5px;
+}
+
+#team2Div{
+  background-color: rgba(15,41,47,0.7);
+  border-radius: 20px;
+  margin: 5px;
+}
+
+#team1Header, #team2Header{
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
