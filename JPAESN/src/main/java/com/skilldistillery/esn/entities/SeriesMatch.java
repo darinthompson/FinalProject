@@ -33,7 +33,7 @@ public class SeriesMatch {
 	
 	@JsonIgnoreProperties({"seriesMatch"})
 	@ManyToOne
-	@JsonIgnore
+//	@JsonIgnore
 	@JoinColumn(name="series_id")
 	private Series series;
 	

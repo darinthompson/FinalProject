@@ -8,25 +8,38 @@ import { Game } from '../models/game';
 export class FilterOrgsPipe implements PipeTransform {
 
   transform(orgs: Organization[], game: Game): Organization[] {
+    const paramOrgs: Organization[] = orgs;
     const filteredOrgs = [];
+    const paramGame = game;
 
-    for (let i = 0; i < orgs.length; i++) {
-      let teamsArray = orgs[i].teams;
-      for (let j = 0; j < teamsArray.length; j++) {
-        if (teamsArray[j].game.id === game.id) {
-          filteredOrgs.push(orgs[i]);
+    console.log('orgs param: ' + orgs);
+    console.log('orgs param var: ' + paramOrgs);
+
+    if (orgs) {
+      for (let i = 0; i < orgs.length; i++) {
+        if (orgs[i].teams) {
+          console.log('orgs[i].teams: ' + orgs[i].teams);
+
+          for (let j = 0; j < orgs[i].teams.length; j++) {
+            if (orgs[i].teams[j].game.id === game.id) {
+              filteredOrgs.push(orgs[i]);
+            }
+          }
         }
       }
     }
 
-    // orgs.forEach(function(org) {
-
-    //   org.teams.forEach(function(team)  {
-    //     if (team.game.id === game.id) {
-    //       filteredOrgs.push(org);
+    // for (let i = 0; i < orgs.length; i++) {
+    //   let teamsArray = [];
+    //   teamsArray.push(orgs[i].teams);
+    //   for (let j = 0; j < teamsArray.length; j++) {
+    //     let currentTeam = teamsArray[j];
+    //     let currentTeamGame = currentTeam.game;
+    //     if (currentTeamGame.id === paramGame.id) {
+    //       filteredOrgs.push(orgs[i]);
     //     }
-    //   })
-    // })
+    //   }
+    // }
 
     return filteredOrgs;
   }

@@ -60,4 +60,14 @@ public class TeamServiceImpl implements TeamService {
 		return fiveMatchResult;
 	}
 
+	@Override
+	public List<SeriesMatch> getMatchesByFavTeams(Team[] teams) {		
+		List<SeriesMatch> results = new ArrayList<>();
+		for (Team team : teams) {
+			List<SeriesMatch> temp = matchRepo.findByTeam1IdOrTeam2IdOrderByStartDateDesc(team.getId(), team.getId());
+			results.addAll(temp);
+		}
+		return results;
+	}
+
 }

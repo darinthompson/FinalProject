@@ -14,6 +14,8 @@ import { NgForm } from '@angular/forms';
 import { Article } from 'src/app/models/article';
 import { Router, NavigationEnd, RouterEvent } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { SeriesMatch } from 'src/app/models/series-match';
+import { SeriesMatchService } from 'src/app/services/series-match.service';
 
 @Component({
   selector: 'app-profile',
@@ -22,11 +24,15 @@ import { filter } from 'rxjs/operators';
 })
 export class ProfileComponent implements OnInit {
   navSubscription;
-  userProfile: Profile;
+  userProfile: Profile = new Profile();
   username: string;
+  recentFavsMatches: SeriesMatch[]; // issues
+  allFavTeamMatches: SeriesMatch[]; // issues
+  favoriteTeams: Team[];
   allOrgs: Organization[];
   allTeams: Team[];
   allPlayers: Player[];
+  allMatches: SeriesMatch[];
   selectedView: string = null;
   games: Game[] = [];
   selectedGame: Game = null;
@@ -41,7 +47,8 @@ export class ProfileComponent implements OnInit {
     private playerService: PlayerService,
     private gameService: GameService,
     private articleService: ArticleService,
-    private router: Router
+    private router: Router,
+    private matchService: SeriesMatchService
   ) { }
 
   ngOnInit(): void {
@@ -52,7 +59,9 @@ export class ProfileComponent implements OnInit {
     this.selectedView = 'dashboard';
     this.getUsername();
     this.getProfile();
+    // this.getRecentFavMatches();
     this.getAllGames();
+    this.getAllMatches();
     this.getProfileArticles();
   }
 
@@ -71,6 +80,9 @@ export class ProfileComponent implements OnInit {
       (profile) => {
         console.log(profile);
         this.userProfile = profile;
+        // this.favoriteTeams = profile.favoriteTeams;
+        // this.getMatchesForFavTeams();
+        // this.getRecentFavMatches();
       },
       (fail) => {
         console.error(
@@ -142,6 +154,19 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  getAllMatches() {
+    this.matchService.index().subscribe(
+      matches => {
+        console.log(matches);
+        this.allMatches = matches;
+      },
+      fail => {
+        console.error('ProfileComponent.getAllMatches(): Error retrieving list of matches:');
+        console.error(fail);
+      }
+    );
+  }
+
   setSelectedGame(game: Game) {
     console.log('Setting selected game');
     console.log(game);
@@ -179,6 +204,19 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  removeFavoriteOrg(org: Organization) {
+    this.profileService.removeOrg(org).subscribe(
+      profile => {
+        console.log(profile);
+        this.getProfile();
+      },
+      fail => {
+        console.error('ProfileComponent.removeFavoriteOrg(): Error removing organization from profile:');
+        console.error(fail);
+      }
+    )
+  }
+
   removeFavoriteTeam(team: Team) {
     this.profileService.removeTeam(team).subscribe(
       profile => {
@@ -187,6 +225,19 @@ export class ProfileComponent implements OnInit {
       },
       fail => {
         console.error('ProfileComponent.removeFavoriteTeam(): Error removing team from profile:');
+        console.error(fail);
+      }
+    )
+  }
+
+  removeFavoritePlayer(player: Player) {
+    this.profileService.removePlayer(player).subscribe(
+      profile => {
+        console.log(profile);
+        this.getProfile();
+      },
+      fail => {
+        console.error('ProfileComponent.removeFavoritePlayer(): Error removing player from profile:');
         console.error(fail);
       }
     )
@@ -223,5 +274,31 @@ export class ProfileComponent implements OnInit {
         console.error(fail);
       }
     );
+  }
+
+  getRecentFavMatches() {
+    console.log('----------'+this.userProfile.favoriteTeams);
+
+    this.userProfile.favoriteTeams.forEach((team) => {
+      let team1 = team.matchesTeam1;
+      let team2 = team.matchesTeam2;
+      for (let match of team1) {
+        this.allFavTeamMatches.push(match);
+      }
+      for (let match of team2) {
+        this.allFavTeamMatches.push(match);
+      }
+    })
+
+    // this.teamService.getAllFavTeamMatches(this.userProfile.favoriteTeams).subscribe(
+    //   matches => {
+    //     console.log(matches);
+    //     this.recentFavsMatches = matches;
+    //   },
+    //   fail => {
+    //     console.error('ProfileComponent.getRecentFavMatches(): Error retrieving favs matches:');
+    //     console.error(fail);
+    //   }
+    // );
   }
 }

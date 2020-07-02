@@ -60,7 +60,7 @@ export class PlayerComponent implements OnInit {
         this.player = data;
         this.teamService.getMatchesByTeamId(this.player.teams[this.player.teams.length - 1].id).subscribe(
           data => {
-            this.recentMatches = data
+            this.recentMatches = data;
           },
           err => {
             console.log(err);
