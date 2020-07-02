@@ -40,7 +40,7 @@
       <!-- START OF REGISTER MODAL -->
       <li class="nav-item">
         <a *ngIf="!loggedIn()" class="nav-link" tabindex="-1" (click)="open(registercontent)">Register</a>
-        <ng-template #registercontent let-modal>
+        <ng-template id="modal-bg" #registercontent let-modal>
           <app-register></app-register>
         </ng-template>
         <a *ngIf="loggedIn()" class="nav-link" href="#" tabindex="-1" [routerLink]="['/home']" (click)="logOut()">Log Out</a>
