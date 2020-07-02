@@ -1,6 +1,6 @@
 <a href="{{selected.websiteURL}}"><img src="{{selected.imgURL}}"></a>
 
-<div *ngIf="matchList != null" class="container-fluid float-right" style="width: 280px">
+<div *ngIf="matchList != null" class="container-fluid float-right sticky-top" style="width: 280px">
   <div>
     <ul id="gamesMatchList" class="list-group align-content-center" *ngFor="let match of matchList">
       <li id="gamesMatchList1" class="list-group-item ">{{match.startDate | date}} : {{match.startTime}}</li>
