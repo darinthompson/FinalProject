@@ -20,11 +20,11 @@
           <div class="card-body">
             <h2 class="card-title">{{article.title}}</h2>
             <p class="card-text">{{article.content}}</p>
-            <a class="btn btn-primary" (click)="navigateToArticle(article.id)">Read More &rarr;</a>
+            <a class="btn comment-btn" (click)="navigateToArticle(article.id)">Read More &rarr;</a>
           </div>
-          <div class="card-footer text-muted">
+          <div class="card-footer card-meta text-muted">
             Written: {{article.createDate}}
-            <a href="#">{{article.author.firstName}} {{article.author.lastName}}</a>
+            <a href="#" class="card-link">{{article.author.firstName}} {{article.author.lastName}}</a>
           </div>
         </div>
       </div>
