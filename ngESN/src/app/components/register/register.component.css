@@ -1,0 +1,17 @@
+
+.modal-content {
+  background-color: #0F292f;
+  padding: 50px;
+  border: none;
+}
+
+.comment-btn {
+  background-color: #14A098;
+  color: #fff;
+}
+
+.comment-btn:hover {
+  background-color: #fff;
+  border-color: #14A098;
+  color: #14A098;
+}
