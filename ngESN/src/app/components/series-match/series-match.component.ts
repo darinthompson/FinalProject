@@ -58,7 +58,8 @@ export class SeriesMatchComponent implements OnInit {
         this.bout = game;
         this.team1Players = this.team1StatsByMatchId(game);
         this.team2Players = this.team2StatsByMatchId(game);
-        console.log(this.bout);
+        this.dataReady = true;
+        console.log(this.dataReady);
       },
       (fail) => {
         console.log("Error retrieving match");
@@ -125,12 +126,10 @@ export class SeriesMatchComponent implements OnInit {
   checkFavoriteTeams() {
     if (!this.loggedIn) {
       this.profile = null;
-      this.dataReady = true;
     } else {
       this.profileService.getByUsername().subscribe(
         data => {
           this.profile = data;
-         this.dataReady = true;
         },
         err => {
           console.log(err);

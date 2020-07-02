@@ -1,6 +1,7 @@
 <div *ngIf="dataReady">
   <br><br>
   <h3 *ngFor="let team of player.teams">
+    <img style="width: 200px" src="{{player.imgURL}}"><br>
     {{player.handle}}  <img style="max-width: 75px" src="{{team.organization.logoURL}}">
   </h3>
   <!--Display button only if user isnt following player already-->
