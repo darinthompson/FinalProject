@@ -16,6 +16,8 @@ export class FilterTeamsPipe implements PipeTransform {
         }
     }
 
+    console.log(filteredTeams);
+
     return filteredTeams;
   }
 

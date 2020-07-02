@@ -71,3 +71,12 @@ a:hover {
   padding: 0rem 0rem;
   background-color: black;
 }
+
+.fav-team-div > img {
+  width: 70px;
+  height: 70px;
+}
+
+ul {
+  list-style-type: none;
+}

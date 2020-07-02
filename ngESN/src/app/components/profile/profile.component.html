@@ -259,10 +259,9 @@
           <div class="d-flex flex-row"><h4>Favorite Teams</h4></div>
           <div
             class="d-inline-flex flex-wrap"
-            *ngFor="
-              let team of userProfile.favoriteTeams | filterTeams: selectedGame"
+
           >
-            <div class="fav-team-div">
+            <div class="fav-team-div" *ngFor="let team of userProfile.favoriteTeams | filterTeams: selectedGame">
               <img
               src="{{ team.organization.logoURL }}"
               alt="team logo"
@@ -282,7 +281,7 @@
         <div class="d-flex flex-row"><h4>Favorite Players</h4></div>
         <div id="favorite-players-container" class="d-inline-flex flex-wrap">
           <ul *ngFor="let player of userProfile.favoritePlayers">
-            <li>{{ player.handle }}</li>
+            <li (click)="navToPlayer(player.id)">{{ player.handle }}</li>
           </ul>
         </div>
 

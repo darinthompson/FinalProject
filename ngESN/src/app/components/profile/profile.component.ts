@@ -301,4 +301,8 @@ export class ProfileComponent implements OnInit {
     //   }
     // );
   }
+
+  navToPlayer(id: number) {
+    this.router.navigateByUrl(`/player/${id}`);
+  }
 }
