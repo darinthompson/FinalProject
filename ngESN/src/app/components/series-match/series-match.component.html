@@ -7,14 +7,24 @@
     Winner:  {{bout.team2.organization.name}}
   </h3>
   <div *ngIf="loggedIn">
-    <button class="btn btn-secondary float-left" style="margin-left: 30px" *ngIf="displayFollow(bout.team1)"
+    <button class="btn float-left" style="margin-left: 30px; background-color: #0f292f; color: #14A098"
+            *ngIf="displayFollow(bout.team1)"
             (click)="addFavoriteTeam(bout.team1)">
       Follow {{bout.team1.organization.name}}
     </button>
+    <button class="btn float-left disabled" style="margin-left: 30px; background-color: #0f292f; color: #14A098"
+            *ngIf="!displayFollow(bout.team1)">
+      Already Following
+    </button>
     <div *ngIf="loggedIn">
-      <button class="btn btn-secondary float-right" style="margin-right: 35px" *ngIf="displayFollow(bout.team2)"
+      <button class="btn float-right" style="margin-right: 35px; background-color: #0f292f; color: #14A098"
+              *ngIf="displayFollow(bout.team2)"
               (click)="addFavoriteTeam(bout.team2)">
         Follow {{bout.team2.organization.name}}
+      </button>
+      <button class="btn float-right disabled" style="margin-right: 30px; background-color: #0f292f; color: #14A098"
+              *ngIf="!displayFollow(bout.team2)">
+        Already Following
       </button>
     </div>
     <div class="container-fluid" id="matchDiv">
