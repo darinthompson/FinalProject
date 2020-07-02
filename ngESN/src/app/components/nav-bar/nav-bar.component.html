@@ -1,14 +1,11 @@
 <nav class="shadow navbar navbar-expand-lg sticky-top rounded">
-  <a class="navbar-brand text-danger"  [routerLink]="['/home']">ESportsNews</a>
+  <a class="navbar-brand"  [routerLink]="['/home']">ESportsNews</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link text-success" [routerLink]="['/home']">Home <span class="sr-only">(current)</span></a>
-      </li>
 <!--      start of log in modal-->
       <li class="nav-item">
         <a *ngIf="!loggedIn()" class="nav-link" (click)="open(content)">Log In</a>
@@ -38,7 +35,7 @@
           </div>
         </ng-template>
 <!--        end of log in modal-->
-        <a *ngIf="loggedIn()" class="nav-link" [routerLink]="['/profile']">{{getUsername()}}</a>
+        <a *ngIf="loggedIn()" class="nav-link" id="user-profile-link" [routerLink]="['/profile']">{{getUsername()}}</a>
       </li>
       <!-- START OF REGISTER MODAL -->
       <li class="nav-item">
